@@ -1,0 +1,87 @@
+#############################
+## JavaScript Linter rules ##
+#############################
+
+parser: '@typescript-eslint/parser'
+
+env:
+  node: true
+  es6: true
+  jest: true
+  commonjs: true
+
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+
+ignorePatterns:
+  - '!.*'
+  - '**/node_modules/**'
+  - '**/dist/**'
+  - '**/coverage/**'
+  - '**/.github/**'
+  - '**/.vscode/**'
+  - 'README.md'
+
+parserOptions:
+  ecmaVersion: 2023
+  sourceType: module
+  project:
+    - './.github/linters/tsconfig.eslint.json'
+    - './tsconfig.json'
+  extraFileExtensions:
+    - '.json'
+    - '.mdx'
+  ecmaFeatures:
+    jsx: true
+
+plugins:
+  - '@typescript-eslint'
+  - 'jest'
+
+settings:
+  react:
+    version: 'detect'
+  import/resolver:
+    node:
+      extensions:
+        - '.js'
+        - '.jsx'
+        - '.ts'
+        - '.tsx'
+        - '.md'
+        - '.mdx'
+  import/extensions:
+    - '.js'
+    - '.jsx'
+    - '.ts'
+    - '.tsx'
+    - '.md'
+    - '.mdx'
+
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:github/recommended
+  - plugin:jest/recommended
+  - plugin:react/recommended
+  - plugin:prettier/recommended
+  - plugin:mdx/recommended
+
+rules:
+  {
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    'camelcase': 'off',
+    'i18n-text/no-en': 'off',
+    'import/no-commonjs': 'off',
+    'import/no-dynamic-require': 'off',
+    'import/no-namespace': 'off',
+    'jest/no-conditional-expect': 'off',
+    'no-console': 'off',
+    'no-shadow': 'off',
+    'no-unused-vars': 'off',
+    'prettier/prettier': 'error'
+  }

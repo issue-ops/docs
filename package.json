@@ -1,17 +1,72 @@
 {
-  "private": true,
-  "scripts": {
-    "start": "npm run -w docs develop",
-    "release": "changeset publish",
-    "build": "npm run build -ws --if-present",
-    "build:preview": "npm run -w docs build:preview"
+  "name": "gatsby-theme-doctocat-typescript-workspace",
+  "description": "Gatsby theme for GitHub documentation sites (TypeScript)",
+  "author": "Nick Alteen <ncalteen@github.com>",
+  "version": "0.0.1",
+  "homepage": "https://github.com/issue-ops/doctocat#readme",
+  "repository": "issue-ops/docs",
+  "bugs": {
+    "url": "https://github.com/issue-ops/doctocat/issues"
   },
+  "keywords": [
+    "github",
+    "gatsby"
+  ],
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "yarn-dev": "yarn workspace docs develop",
+    "develop": "npm run -w docs develop",
+    "start": "npm run -w docs develop",
+    "clean": "npm run -w docs clean",
+    "build": "npm run build -ws --if-present",
+    "serve": "npm run -w docs serve",
+    "lint": "npx eslint . -c ./.github/linters/.eslintrc.yml",
+    "format:write": "prettier --write '**/*.ts'",
+    "format:check": "prettier --check '**/*.ts'",
+    "type:check": "tsc --noEmit"
+  },
+  "license": "MIT",
   "workspaces": [
-    "theme",
+    "gatsby-theme-doctocat-typescript",
     "docs"
   ],
   "dependencies": {
-    "@changesets/changelog-github": "^0.2.7",
-    "@changesets/cli": "^2.10.3"
+    "@react-aria/ssr": "^3.8.0",
+    "deepmerge": "^4.3.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-mdx": "^2.2.0",
+    "eslint-plugin-github": "^4.10.1",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jest": "^27.4.2",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-mdx": "^2.2.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-primer-react": "^4.0.2",
+    "eslint-plugin-react": "^7.33.2",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  },
+  "overrides": {
+    "@primer/react": {
+      "styled-components": "npm:styled-components@6.0.8"
+    },
+    "@typescript-eslint/eslint-plugin": {
+      ".": "^6.7.4"
+    },
+    "gatsby": {
+      "@typescript-eslint/parser": "npm:@typescript-eslint/parser@6.7.4"
+    },
+    "react-server-dom-webpack": {
+      "react": "npm:react@18.2.0",
+      "react-dom": "npm:react-dom@18.2.0"
+    }
   }
 }

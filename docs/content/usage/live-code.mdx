@@ -2,7 +2,13 @@
 title: Live code
 ---
 
-Doctocat can render code blocks as live previews with editable code using [react-live](https://github.com/FormidableLabs/react-live). To make a code block render as an editable example, add a `live` attribute after the language:
+export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
+
+import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+
+Doctocat can render code blocks as live previews with editable code using
+[react-live](https://github.com/FormidableLabs/react-live). To make a code block
+render as an editable example, add a `live` attribute after the language:
 
 ````markdown
 ```jsx live
@@ -20,34 +26,43 @@ Doctocat supports live code examples for `jsx` and `html`.
 
 ## Scope
 
-Before you can use components or other variables in live code examples, you'll need to add them to the global scope of live previews. Otherwise, the live previews will display a `ReferenceError`, like this:
+Before you can use components or other variables in live code examples, you'll
+need to add them to the global scope of live previews. Otherwise, the live
+previews will display a `ReferenceError`, like this:
 
 ```jsx live
 // `Foo` was not added to the global scope of live previews.
 <Foo>Hello, world!</Foo>
 ```
 
-You can add variables to the global scope of live previews by [shadowing](https://www.gatsbyjs.org/blog/2019-04-29-component-shadowing/) `src/@primer/gatsby-theme-doctocat/live-code-scope.js`:
+You can add variables to the global scope of live previews by
+[shadowing](https://www.gatsbyjs.org/blog/2019-04-29-component-shadowing/)
+`src/@issue-ops/gatsby-theme-doctocat-typescript/live-code-scope.js`:
 
 ```js
-// src/@primer/gatsby-theme-doctocat/live-code-scope.js
-import {Box} from '@primer/react'
+// src/@issue-ops/gatsby-theme-doctocat-typescript/live-code-scope.js
+import { Box } from '@primer/react'
 
 export default {
   Box,
-  text: 'Hello, world!',
+  text: 'Hello, world!'
 }
+```
+
+```jsx live
+<Box p={3}>{text}</Box>
 ```
 
 <Note variant="warning">
 
-
-Make sure to place `live-code-scope.js` in the root of your `gatsby-theme-doctocat` folder. Shadowed files must be present in the same location as they exist in the theme repository.
+Make sure to place `live-code-scope.js` in the root of your
+`gatsby-theme-doctocat` folder. Shadowed files must be present in the same
+location as they exist in the theme repository.
 
 </Note>
 
-
-Every property on the object exported by `live-code-scope.js` will be available as a variable in the code:
+Every property on the object exported by `live-code-scope.js` will be available
+as a variable in the code:
 
 ````markdown
 ```jsx live
@@ -57,11 +72,14 @@ Every property on the object exported by `live-code-scope.js` will be available 
 
 ## Line highlighting
 
-If you want to emphasize a particular range of lines, use the `highlight` attribute on the code block. The expected format is `higlight=start-end`. The line highlighting will disappear when the live example is edited.
+If you want to emphasize a particular range of lines, use the `highlight`
+attribute on the code block. The expected format is `higlight="start-end"`. The
+line highlighting will disappear when the live example is edited. The `end`
+value is not inclusive.
 
-
+{/* prettier-ignore */}
 ````markdown
-``` jsx live highlight=2-4
+```jsx live highlight="2-4"
 <div>
   <p>
     This paragraph element should be higlighted.
@@ -73,7 +91,8 @@ If you want to emphasize a particular range of lines, use the `highlight` attrib
 ```
 ````
 
-``` jsx live highlight=2-4
+{/* prettier-ignore */}
+```jsx live highlight="2-4"
 <div>
   <p>
     This paragraph element should be higlighted.
@@ -86,7 +105,11 @@ If you want to emphasize a particular range of lines, use the `highlight` attrib
 
 ## Global styles
 
-Live previews are completely isolated from the rest of the page because they are rendered inside [iframes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe). This means that you can apply global styles inside live previews without affecting the rest of the page:
+Live previews are completely isolated from the rest of the page because they are
+rendered inside
+[iframes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
+This means that you can apply global styles inside live previews without
+affecting the rest of the page:
 
 ```jsx live
 <div>
@@ -97,13 +120,15 @@ Live previews are completely isolated from the rest of the page because they are
 </div>
 ```
 
-You can apply global styles to _all_ live previews on your site by [shadowing](https://www.gatsbyjs.org/blog/2019-04-29-component-shadowing/) `live-preview-wrapper.js` with a component that renders a `style` or `link` tag:
+You can apply global styles to _all_ live previews on your site by
+[shadowing](https://www.gatsbyjs.org/blog/2019-04-29-component-shadowing/)
+`live-preview-wrapper.js` with a component that renders a `style` or `link` tag:
 
 ```jsx
-// src/@primer/gatsby-theme-doctocat/components/live-preview-wrapper.js
+// src/@issue-ops/gatsby-theme-doctocat-typescript/components/live-preview-wrapper.js
 import React from 'react'
 
-export default function LivePreviewWrapper({children}) {
+export default function LivePreviewWrapper({ children }) {
   return (
     <div>
       <link href="https://unpkg.com/primer/build/build.css" rel="stylesheet" />
@@ -115,10 +140,12 @@ export default function LivePreviewWrapper({children}) {
 
 ## No-inline
 
-By default, live previews treat your code as a single JSX expression to be rendered. If you want to include more complex code, use the `noinline` attribute on the code block, and render components with the exported `render` function:
+By default, live previews treat your code as a single JSX expression to be
+rendered. If you want to include more complex code, use the `noinline` attribute
+on the code block, and render components with the exported `render` function:
 
 ````markdown
-```javascript live noinline
+```jsx live noinline
 function DemoApp() {
   const [count, setCount] = React.useState(0)
 
@@ -135,12 +162,12 @@ render(<DemoApp />)
 ```
 ````
 
-```javascript live noinline
+```jsx live noinline
 function DemoApp() {
   const [count, setCount] = React.useState(0)
 
   return (
-    <div style={{textAlign: 'center'}}>
+    <div style={{ textAlign: 'center' }}>
       <button onClick={() => setCount((n) => n - 1)}>-</button>
       {count}
       <button onClick={() => setCount((n) => n + 1)}>+</button>

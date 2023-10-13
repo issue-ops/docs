@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["DOM"],
+    "jsx": "react",
+    "noEmit": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "skipLibCheck": true
+  },
+  "include": [
+    "docs/**/*",
+    "gatsby-theme-doctocat-typescript/**/*",
+    "./types.d.ts"
+  ],
+  "exclude": [
+    "node_modules/**/*",
+    "docs/node_modules/**/*",
+    "gatsby-theme-doctocat-typescript/node_modules/**/*"
+  ]
+}

@@ -4,15 +4,22 @@ status: New
 source: https://github.com/primer/doctocat/blob/master/theme/src/components/do-dont.js
 ---
 
-Use the `Do` and `Dont` components to provide good and bad examples within documentation.
+export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
+
+Use the `Do` and `Dont` components to provide good and bad examples within
+documentation.
 
 ## Usage
 
-`Do`, `Dont` and `DoDontContainer` are a [shortcodes](https://mdxjs.com/blog/shortcodes), meaning they are globally available in all `.md` and `.mdx` files. So you can use the `Do`, `Dont`, and `DoDontContainer` components in any `.md` or `.mdx` file without importing them.
+`Do`, `Dont` and `DoDontContainer` are a
+[shortcodes](https://mdxjs.com/blog/shortcodes), meaning they are globally
+available in all `.md` and `.mdx` files. So you can use the `Do`, `Dont`, and
+`DoDontContainer` components in any `.md` or `.mdx` file without importing them.
 
 ### Side-by-side
 
-To create a side-by-side Do/Don't example, wrap the `Do` and `Dont` components with the `DoDontContainer` component:
+To create a side-by-side Do/Don't example, wrap the `Do` and `Dont` components
+with the `DoDontContainer` component:
 
 ```jsx live
 <DoDontContainer>
@@ -27,11 +34,14 @@ To create a side-by-side Do/Don't example, wrap the `Do` and `Dont` components w
 </DoDontContainer>
 ```
 
-_Note: Caption text should describe the image and be able to stand on its own. The `alt` prop should be used if a more detailed description of the image is needed._
+_Note: Caption text should describe the image and be able to stand on its own.
+The `alt` prop should be used if a more detailed description of the image is
+needed._
 
 ### Stacked
 
-The `DoDontContainer` component also accepts a `stacked` prop to create stacked Do/Don't examples:
+The `DoDontContainer` component also accepts a `stacked` prop to create stacked
+Do/Don't examples:
 
 ```jsx live
 <DoDontContainer stacked>
@@ -48,7 +58,8 @@ The `DoDontContainer` component also accepts a `stacked` prop to create stacked 
 
 ### Indented
 
-`Do` and `Dont` components can also be indented to increase the clarity of the example message within the documentation:
+`Do` and `Dont` components can also be indented to increase the clarity of the
+example message within the documentation:
 
 ```jsx live
 <DoDontContainer stacked>
