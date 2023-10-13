@@ -1,4 +1,3 @@
-import path from 'path'
 import type { GatsbyConfig } from 'gatsby'
 
 const config: GatsbyConfig = {
