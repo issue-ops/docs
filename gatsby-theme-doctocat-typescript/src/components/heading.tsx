@@ -5,7 +5,6 @@ import React, { ReactElement, ReactNode } from 'react'
 import textContent from 'react-addons-text-content'
 import { styled } from 'styled-components'
 import { HEADER_HEIGHT } from './header'
-import GithubSlugger from 'github-slugger'
 import type { KnownTarget } from 'styled-components/dist/types'
 
 const StyledHeading = styled.h2.attrs<{ as: KnownTarget }>({ as: 'h2' })`
@@ -33,6 +32,17 @@ function MarkdownHeading({
   children: ReactNode
   [key: string]: any
 }): ReactElement | null {
+  // This is terrible...
+  let GithubSlugger: any = null
+
+  import('github-slugger').then((module) => {
+    GithubSlugger = module.default
+  })
+
+  require('deasync').loopWhile(() => {
+    return GithubSlugger === null
+  })
+
   const slugger = new GithubSlugger()
   const text = children ? textContent(children) : ''
   const id = text ? slugger.slug(text) : ''
