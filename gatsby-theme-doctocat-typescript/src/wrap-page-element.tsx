@@ -25,7 +25,7 @@ const GlobalStyles = createGlobalStyle`
   }
 `
 
-export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
+const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
   element
 }: {
   element: ReactNode
@@ -37,3 +37,5 @@ export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
     </BaseStyles>
   )
 }
+
+export default wrapPageElement

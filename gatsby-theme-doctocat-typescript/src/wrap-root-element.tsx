@@ -1,6 +1,5 @@
 import { SSRProvider } from '@react-aria/ssr'
-import { MDXProvider } from '@mdx-js/react'
-import { BaseStyles, ThemeProvider, theme } from '@primer/react'
+import { ThemeProvider, theme } from '@primer/react'
 import Link from './components/link'
 import React, { ReactNode } from 'react'
 import mdxComponents from './mdx-components'
@@ -22,6 +21,8 @@ import InlineCode from './components/inline-code'
 import LiveCode from './components/live-code'
 import githubTheme from './github'
 import deepmerge from 'deepmerge'
+
+import type { GatsbyBrowser } from 'gatsby'
 
 const components = {
   // @mdx-js/react components
@@ -77,32 +78,33 @@ const components = {
   ...mdxComponents
 }
 
-// const wrapRootElement: GatsbyBrowser['wrapRootElement'] = ({
-//   element
-// }: {
-//   element: ReactNode
-// }) => {
-//   import('@mdx-js/react').then((mod) => {
-//     const MDXProvider = mod.MDXProvider
+export const wrapRootElement: GatsbyBrowser['wrapRootElement'] = ({
+  element
+}: {
+  element: ReactNode
+}) => {
+  // This is terrible...
+  let MDXProvider: any = null
 
-//     console.log('1')
-//     return (
-//       <MDXProvider components={components}>
-//         <ThemeProvider>{element}</ThemeProvider>
-//       </MDXProvider>
-//     )
-//   })
+  import('@mdx-js/react').then((module) => {
+    MDXProvider = module.MDXProvider
+  })
 
-//   console.log('2')
-//   return <ThemeProvider>{element}</ThemeProvider>
-// }
+  require('deasync').loopWhile(() => {
+    return MDXProvider === null
+  })
 
-export const wrapRootElement = ({ element }: { element: ReactNode }) => (
-  <SSRProvider>
-    <ThemeProvider theme={deepmerge(theme, githubTheme)}>
-      <BaseStyles>
-        <MDXProvider components={components}>{element}</MDXProvider>
-      </BaseStyles>
-    </ThemeProvider>
-  </SSRProvider>
-)
+  return (
+    <SSRProvider>
+      <MDXProvider components={components}>
+        <ThemeProvider
+          theme={deepmerge(theme, githubTheme)}
+          colorMode="dark"
+          dayScheme="light"
+          nightScheme="dark_dimmed">
+          {element}
+        </ThemeProvider>
+      </MDXProvider>
+    </SSRProvider>
+  )
+}
