@@ -8,7 +8,6 @@ import { styled, ThemeContext } from 'styled-components'
 import scope from '../live-code-scope'
 import ClipboardCopy from './clipboard-copy'
 import LivePreviewWrapper from './live-preview-wrapper'
-//import { themeGet } from '@styled-system/theme-get'
 import shouldForwardProp from '@styled-system/should-forward-prop'
 import deepmerge from 'deepmerge'
 
