@@ -1,3 +1,6 @@
+/**
+ * Exported components from the theme.
+ */
 export { default as Caption } from './src/components/caption'
 export { default as Container } from './src/components/container'
 export { default as Contributors } from './src/components/contributors'
