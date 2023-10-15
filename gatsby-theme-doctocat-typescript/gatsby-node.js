@@ -6,28 +6,6 @@ const path = require('path')
 
 const CONTRIBUTOR_CACHE = new Map()
 
-/** @type {import('gatsby').GatsbyNode['onCreateWebpackConfig']} */
-const onCreateWebpackConfig = ({ actions }) => {
-  actions.setWebpackConfig({
-    resolve: {
-      extensions: ['.js', '.jsx', '.mjs', '.ts', '.tsx', '.mts', '.mdx']
-    },
-    module: {
-      rules: [
-        {
-          test: /\.mdx?$/,
-          use: ['babel-loader', '@mdx-js/loader']
-        },
-        {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          exclude: /node_modules/
-        }
-      ]
-    }
-  })
-}
-
 /** @type {import('gatsby').GatsbyNode['createPages']} */
 const createPages = async ({ actions, graphql }, themeOptions) => {
   // Get the package.json for this project so we can get the repo name.
@@ -52,6 +30,7 @@ const createPages = async ({ actions, graphql }, themeOptions) => {
             }
           }
           frontmatter {
+            title
             status
           }
         }
@@ -208,7 +187,6 @@ async function fetchContributors(repo, filePath, accessToken = '') {
 }
 
 module.exports = {
-  onCreateWebpackConfig,
   createPages,
   onPostBuild
 }
