@@ -1,13 +1,12 @@
-import { Link, StyledOcticon } from '@primer/react'
+import { Heading, Link, StyledOcticon, themeGet } from '@primer/react'
 import { LinkIcon } from '@primer/octicons-react'
-import { themeGet } from '@styled-system/theme-get'
 import React, { ReactElement, ReactNode } from 'react'
 import textContent from 'react-addons-text-content'
 import { styled } from 'styled-components'
 import { HEADER_HEIGHT } from './header'
-import type { KnownTarget } from 'styled-components/dist/types'
+import GithubSlugger from 'github-slugger'
 
-const StyledHeading = styled.h2.attrs<{ as: KnownTarget }>({ as: 'h2' })`
+const StyledHeading = styled(Heading)`
   margin-top: ${themeGet('space.4')};
   margin-bottom: ${themeGet('space.3')};
   scroll-margin-top: ${HEADER_HEIGHT + 24}px;
@@ -25,24 +24,7 @@ const StyledHeading = styled.h2.attrs<{ as: KnownTarget }>({ as: 'h2' })`
   }
 `
 
-function MarkdownHeading({
-  children,
-  ...props
-}: {
-  children: ReactNode
-  [key: string]: any
-}): ReactElement | null {
-  // This is terrible...
-  let GithubSlugger: any = null
-
-  import('github-slugger').then((module) => {
-    GithubSlugger = module.default
-  })
-
-  require('deasync').loopWhile(() => {
-    return GithubSlugger === null
-  })
-
+function MarkdownHeading({ children, ...props }) {
   const slugger = new GithubSlugger()
   const text = children ? textContent(children) : ''
   const id = text ? slugger.slug(text) : ''
@@ -105,9 +87,9 @@ const StyledH6 = styled(StyledHeading).attrs({ as: 'h6' })`
   color: ${themeGet('colors.fg.muted')};
 `
 
-export const H1 = (props: any) => <MarkdownHeading as={StyledH1} {...props} />
-export const H2 = (props: any) => <MarkdownHeading as={StyledH2} {...props} />
-export const H3 = (props: any) => <MarkdownHeading as={StyledH3} {...props} />
-export const H4 = (props: any) => <MarkdownHeading as={StyledH4} {...props} />
-export const H5 = (props: any) => <MarkdownHeading as={StyledH5} {...props} />
-export const H6 = (props: any) => <MarkdownHeading as={StyledH6} {...props} />
+export const H1 = (props) => <MarkdownHeading as={StyledH1} {...props} />
+export const H2 = (props) => <MarkdownHeading as={StyledH2} {...props} />
+export const H3 = (props) => <MarkdownHeading as={StyledH3} {...props} />
+export const H4 = (props) => <MarkdownHeading as={StyledH4} {...props} />
+export const H5 = (props) => <MarkdownHeading as={StyledH5} {...props} />
+export const H6 = (props) => <MarkdownHeading as={StyledH6} {...props} />

@@ -1,12 +1,5 @@
 import componentMetadata from '@primer/component-metadata'
-import {
-  Box,
-  Breadcrumbs,
-  Heading,
-  Text,
-  ThemeProvider,
-  BaseStyles
-} from '@primer/react'
+import { Box, Breadcrumbs, Heading, Text } from '@primer/react'
 import React, { ReactElement, ReactNode } from 'react'
 import Head from './head'
 import Header, { HEADER_HEIGHT } from './header'

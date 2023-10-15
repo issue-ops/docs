@@ -11,7 +11,7 @@ import {
   Text,
   ThemeProvider,
   useTheme,
-  UnderlineNav
+  UnderlineNav2 as UnderlineNav
 } from '@primer/react'
 import VisuallyHidden from './visually-hidden'
 import { Link as GatsbyLink } from 'gatsby'
@@ -177,17 +177,18 @@ function PrimerNavItems({ siteMetadata, items, path, pathPrefix }: any) {
       </VisuallyHidden>
       <UnderlineNav aria-label="main navigation" sx={{ border: 'none' }}>
         {items.map((item: any, index: any) => {
+          const isCurrent =
+            item.url ===
+            siteMetadata.header.url + (pathPrefix || '') + (path || '')
           return (
-            <UnderlineNav.Link
+            <UnderlineNav.Item
+              as={Link}
               key={index}
+              aria-current={isCurrent ? 'page' : undefined}
               href={item.url}
-              selected={
-                item.url ===
-                siteMetadata.header.url + (pathPrefix || '') + (path || '')
-              }
               sx={{ fontSize: 2, lineHeight: 'condensed' }}>
               {item.title}
-            </UnderlineNav.Link>
+            </UnderlineNav.Item>
           )
         })}
       </UnderlineNav>
