@@ -4,8 +4,8 @@
       url: /getting-started
     - title: Gatsby CLI
       url: /getting-started/gatsby-cli
-    - title: Contributing
-      url: /contributing
+    - title: Examples
+      url: /getting-started/examples
 - title: Usage
   children:
     - title: Local development
