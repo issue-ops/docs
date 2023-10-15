@@ -1,4 +1,5 @@
 import { Text } from '@primer/react'
+
 import React from 'react'
 
 export default function Caption(props: any) {

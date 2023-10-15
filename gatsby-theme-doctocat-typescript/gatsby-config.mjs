@@ -8,6 +8,7 @@ import remarkGithub from 'remark-github'
 /** @type {import('gatsby').GatsbyConfig} */
 const config = {
   plugins: [
+    'gatsby-plugin-image',
     'gatsby-plugin-catch-links',
     {
       resolve: 'gatsby-plugin-local-search',
@@ -69,6 +70,7 @@ const config = {
       }
     },
     'gatsby-plugin-postcss',
+    'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-styled-components',
     {
@@ -78,6 +80,7 @@ const config = {
         path: path.resolve('./content')
       }
     },
+    'gatsby-transformer-sharp',
     'gatsby-transformer-yaml'
   ]
 }
