@@ -1,5 +1,6 @@
-import { Label, StyledOcticon } from '@primer/react'
 import { AccessibilityInsetIcon } from '@primer/octicons-react'
+import { Label, StyledOcticon } from '@primer/react'
+
 import React, { ReactElement } from 'react'
 
 export default function AccessibilityLabel({
