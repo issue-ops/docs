@@ -1,6 +1,8 @@
-import { BaseStyles, Box } from '@primer/react'
-import Frame from './frame'
+import { BaseStyles, Box, themeGet } from '@primer/react'
+
 import React, { ReactElement } from 'react'
+
+import Frame from './frame'
 
 // Users can shadow this file to wrap live previews.
 // This is useful for applying global styles.
@@ -12,7 +14,13 @@ export default function LivePreviewWrapper({
   return (
     <Frame>
       <BaseStyles>
-        <Box sx={{ p: 3 }}>{children}</Box>
+        <Box
+          style={{
+            padding: themeGet('space.3')({}),
+            fontFamily: themeGet('fonts.normal')({})
+          }}>
+          {children}
+        </Box>
       </BaseStyles>
     </Frame>
   )
