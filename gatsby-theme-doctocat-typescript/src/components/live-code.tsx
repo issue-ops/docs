@@ -1,39 +1,38 @@
-import { Box, Text, themeGet, theme } from '@primer/react'
+import { Box, Text, themeGet, useTheme } from '@primer/react'
+import shouldForwardProp from '@styled-system/should-forward-prop'
+
 import htmlReactParser from 'html-react-parser'
-import githubTheme from '../github'
+import { themes } from 'prism-react-renderer'
 import React, { ReactNode } from 'react'
 import reactElementToJsxString from 'react-element-to-jsx-string'
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
-import { styled, ThemeContext } from 'styled-components'
+import { styled } from 'styled-components'
+
 import scope from '../live-code-scope'
 import ClipboardCopy from './clipboard-copy'
 import LivePreviewWrapper from './live-preview-wrapper'
-import shouldForwardProp from '@styled-system/should-forward-prop'
-import deepmerge from 'deepmerge'
+
+interface LineWrapperProps {
+  range: { firstLine: number; lastLine: number }
+  children: ReactNode
+}
 
 const languageTransformers = {
   html: (html: any) => htmlToJsx(html),
-  jsx: (jsx: any) => wrapWithFragment(jsx)
+  jsx: (jsx: any) => jsx
 }
 
 function htmlToJsx(html: any) {
   try {
     const reactElement = htmlReactParser(removeNewlines(html))
-    // The output of htmlReactParser could be a single React element
-    // or an array of React elements. reactElementToJsxString does not accept arrays
-    // so we have to wrap the output in React fragment.
     return reactElementToJsxString(<>{reactElement}</>)
   } catch (error) {
-    return wrapWithFragment(html)
+    return `<React.Fragment>${html}</React.Fragment>`
   }
 }
 
 function removeNewlines(string: string) {
   return string.replace(/(\r\n|\n|\r)/gm, '')
-}
-
-function wrapWithFragment(jsx: string) {
-  return `<React.Fragment>${jsx}</React.Fragment>`
 }
 
 const getResolvedScope = (metastring: any) => {
@@ -50,22 +49,33 @@ function parseHighlightRange(highlight: string[]) {
   }
 }
 
-interface LineWrapperProps {
-  range: { firstLine: number; lastLine: number }
-  children: React.ReactNode
-}
-
-// prettier-ignore
-const LineWrapper: React.FC<LineWrapperProps> = styled.div.withConfig({
+const StyledLineWrapper: React.FC<LineWrapperProps> = styled.div.withConfig({
   shouldForwardProp
-  })`
-  pre .token-line:nth-child(n + ${props => props.range.firstLine}):nth-child(-n + ${props => props.range.lastLine}) {
-    margin: 0px -10px;
-    padding: 0px 10px;
-    background-color: ${themeGet('colorSchemes.light.colors.accent.subtle')};
-    box-shadow: inset 3px 0px 0px 0px ${themeGet('colorSchemes.light.colors.accent.fg')};
+})`
+  pre
+    .token-line:nth-child(n + ${(props) => props.range.firstLine}):nth-child(
+      -n + ${(props) => props.range.lastLine}
+    ) {
+    margin: 0px -16px;
+    padding: 0px 16px;
+    display: block;
+    background-color: ${(props) =>
+      themeGet(`colorSchemes.${props.theme.colorScheme}.colors.accent.subtle`)(
+        props
+      )};
+    box-shadow: inset 3px 0px 0px 0px
+      ${(props) =>
+        themeGet(`colorSchemes.${props.theme.colorScheme}.colors.accent.fg`)(
+          props
+        )};
   }
 `
+
+const LineWrapper = (props: any) => {
+  const theme = useTheme()
+
+  return <StyledLineWrapper {...props} theme={theme} />
+}
 
 function LineHighlighter({
   enabled,
@@ -94,7 +104,7 @@ export default function LiveCode({
   noinline: boolean
   metastring: string
 }) {
-  const combinedTheme = deepmerge(theme, githubTheme)
+  const theme = useTheme()
 
   const [liveCode, setLiveCode] = React.useState(code)
   const [pristine, setPristine] = React.useState(true)
@@ -113,10 +123,9 @@ export default function LiveCode({
   return (
     <Box sx={{ flexDirection: 'column', mb: 3, display: 'flex' }}>
       <LiveProvider
-        language={language}
         code={liveCode}
         scope={getResolvedScope(metastring)}
-        theme={combinedTheme}
+        language={language}
         transformCode={
           language === 'jsx'
             ? languageTransformers.jsx
@@ -142,16 +151,23 @@ export default function LiveCode({
             <LiveEditor
               code={liveCode}
               onChange={handleChange}
-              theme={combinedTheme}
+              theme={themes.github}
               tabMode={'indentation'}
               style={{
                 fontFamily: themeGet('fonts.mono')({}),
                 fontSize: '85%',
-                borderBottomLeftRadius: themeGet('radii')({})[2],
-                borderBottomRightRadius: themeGet('radii')({})[2],
+                borderBottomLeftRadius: themeGet('radii.2')({}),
+                borderBottomRightRadius: themeGet('radii.2')({}),
                 border: '1px solid',
                 borderTop: 0,
-                borderColor: themeGet('colors.border.default')({})
+                backgroundColor: themeGet(
+                  `colorSchemes.${theme.colorScheme}.colors.canvas.subtle`
+                )({}),
+                borderColor: themeGet(
+                  `colorSchemes.${theme.colorScheme}.colors.border.default`
+                )({}),
+                resize: 'vertical',
+                padding: 6
               }}
             />
           </LineHighlighter>
