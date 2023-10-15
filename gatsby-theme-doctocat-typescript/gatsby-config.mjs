@@ -1,8 +1,9 @@
 import path from 'path'
+import rehypeMdxCodeProps from 'rehype-mdx-code-props'
+import remarkFrontmatter from 'remark-frontmatter'
+import remarkGemoji from 'remark-gemoji'
 import remarkGfm from 'remark-gfm'
 import remarkGithub from 'remark-github'
-import remarkFrontmatter from 'remark-frontmatter'
-import rehypeMdxCodeProps from 'rehype-mdx-code-props'
 
 /** @type {import('gatsby').GatsbyConfig} */
 const config = {
@@ -57,7 +58,12 @@ const config = {
           }
         ],
         mdxOptions: {
-          remarkPlugins: [remarkGfm, remarkGithub, remarkFrontmatter],
+          remarkPlugins: [
+            remarkGfm,
+            remarkGithub,
+            remarkGemoji,
+            remarkFrontmatter
+          ],
           rehypePlugins: [rehypeMdxCodeProps]
         }
       }
