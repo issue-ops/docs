@@ -158,17 +158,32 @@ render(<DemoApp />)
 ````
 
 ```jsx live noinline
-function DemoApp() {
-  const [count, setCount] = React.useState(0)
+type Props = {
+  label: string;
+}
 
+const Counter = (props: Props) => {
+  const [count, setCount] =
+    React.useState<number>(0)
   return (
-    <div style={{ textAlign: 'center' }}>
-      <button onClick={() => setCount((n) => n - 1)}>-</button>
-      {count}
-      <button onClick={() => setCount((n) => n + 1)}>+</button>
+    <div>
+      <h3 style={{
+        background: '#6e7681',
+        color: 'white',
+        padding: 8,
+        borderRadius: 4
+      }}>
+        {props.label}: {count}
+      </h3>
+      <button
+        onClick={() =>
+          setCount(c => c + 1)
+        }>
+        Increment
+      </button>
     </div>
   )
 }
 
-render(<DemoApp />)
+render(<Counter label="Counter" />)
 ```
