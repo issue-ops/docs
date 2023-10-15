@@ -1,11 +1,18 @@
-import { styled } from 'styled-components'
-import { themeGet } from '@primer/react'
+import { themeGet, useTheme } from '@primer/react'
 
-const Blockquote = styled.blockquote`
-  margin: 0 0 ${themeGet('space.3')};
-  padding: 0 ${themeGet('space.3')};
-  color: ${themeGet('colors.fg.muted')};
-  border-left: 0.25em solid ${themeGet('colors.border.default')};
+import React from 'react'
+import { styled } from 'styled-components'
+
+const StyledBlockquote: any = styled.blockquote`
+  margin: 0 0 ${(props) => themeGet('space.3')(props)};
+  padding: 0 ${(props) => themeGet('space.3')(props)};
+  color: ${(props) =>
+    themeGet(`colorSchemes.${props.theme.colorScheme}.colors.fg.muted`)(props)};
+  border-left: 0.25em solid
+    ${(props) =>
+      themeGet(`colorSchemes.${props.theme.colorScheme}.colors.border.default`)(
+        props
+      )};
 
   > :first-child {
     margin-top: 0;
@@ -15,5 +22,11 @@ const Blockquote = styled.blockquote`
     margin-bottom: 0;
   }
 `
+
+const Blockquote = (props: any) => {
+  const theme = useTheme()
+
+  return <StyledBlockquote {...props} theme={theme} />
+}
 
 export default Blockquote
