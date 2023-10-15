@@ -1,7 +1,8 @@
 import { Box, Text } from '@primer/react'
-import { Highlight } from 'prism-react-renderer'
+
+import { Highlight, themes } from 'prism-react-renderer'
 import React from 'react'
-import githubTheme from '../github'
+
 import ClipboardCopy from './clipboard-copy'
 import LiveCode from './live-code'
 import InlineCode from './inline-code'
@@ -42,7 +43,7 @@ export default function Code({
       <Box sx={{ top: 0, right: 0, p: 2, position: 'absolute' }}>
         <ClipboardCopy value={codeBlock} />
       </Box>
-      <Highlight code={codeBlock} language={className} theme={githubTheme}>
+      <Highlight code={codeBlock} language={className} theme={themes.github}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <Box
             as="pre"

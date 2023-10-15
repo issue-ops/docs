@@ -1,36 +1,45 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
-import { StyleSheetManager } from 'styled-components'
 import Measure from 'react-measure'
+import { StyleSheetManager } from 'styled-components'
 
 export default function Frame({ children }: { children: any }) {
-  const [height, setHeight] = React.useState('auto')
-  // const [contentRef, setContentRef] = React.useState(null)
-  const contentRef = React.useRef<HTMLIFrameElement>(null)
+  const [height, setHeight] = React.useState<string | number>('auto')
+  const ref = React.useRef<HTMLIFrameElement>(null)
+  const contentDocument = ref.current
+    ? ref.current.contentWindow?.document
+    : null
 
-  const mountNode = contentRef.current?.contentWindow?.document?.body
-  const mountHead = contentRef.current?.contentWindow?.document?.head
+  React.useEffect(() => {
+    if (ref.current) {
+      const iframeBody = ref.current.contentWindow?.document.body
+
+      if (iframeBody) {
+        iframeBody.style.margin = '0'
+      }
+    }
+  }, [])
 
   return (
-    <Measure
-      bounds={true}
-      onResize={(rect) => {
-        const h = (rect.bounds?.height ?? 0) + 20
-        setHeight(`${h}px`)
+    <iframe
+      ref={ref}
+      style={{
+        width: '100%',
+        border: 0,
+        borderRadius: 6,
+        height: height
       }}>
-      {({ measureRef }) => (
-        <iframe
-          ref={contentRef}
-          style={{ width: '100%', border: 0, borderRadius: 6, height: height }}>
-          {mountNode &&
-            createPortal(
-              <StyleSheetManager target={mountHead}>
-                <div ref={measureRef}>{children}</div>
-              </StyleSheetManager>,
-              mountNode
-            )}
-        </iframe>
-      )}
-    </Measure>
+      {contentDocument &&
+        createPortal(
+          <StyleSheetManager target={contentDocument.head}>
+            <Measure
+              bounds={true}
+              onResize={(rect) => setHeight(rect.bounds?.height || 'auto')}>
+              {({ measureRef }) => <div ref={measureRef}>{children}</div>}
+            </Measure>
+          </StyleSheetManager>,
+          contentDocument.body
+        )}
+    </iframe>
   )
 }
