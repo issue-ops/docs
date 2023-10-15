@@ -1,31 +1,46 @@
-import { BaseStyles, themeGet } from '@primer/react'
+import { BaseStyles, themeGet, useTheme } from '@primer/react'
 import React, { ReactNode } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import { GatsbyBrowser } from 'gatsby'
 
-const GlobalStyles = createGlobalStyle`
+const StyledGlobalStyles = createGlobalStyle`
   body {
-    color: ${themeGet('colors.fg.default')};
-    background-color: ${themeGet('colors.canvas.default')};
+    color: ${(props) =>
+      themeGet(`colorSchemes.${props.theme.colorScheme}.colors.fg.default`)(
+        props
+      )};
+    background-color: ${(props) =>
+      themeGet(`colorSchemes.${props.theme.colorScheme}.colors.canvas.default`)(
+        props
+      )};
   }
 
   .footnotes {
-    font-size: ${themeGet('fontSizes.1')};
-    color: ${themeGet('colors.fg.subtle')};
+    font-size: ${(props) => themeGet('fontSizes.1')(props)};
+    color: ${(props) =>
+      themeGet(`colorSchemes.${props.theme.colorScheme}.colors.fg.subtle`)(
+        props
+      )};
 
     ol {
-      padding-left: ${themeGet('space.3')};
+      padding-left: ${(props) => themeGet('space.3')(props)}
     }
 
   .footnote-backref {
-      font-family: ${themeGet('fonts.mono')};
+      font-family: ${(props) => themeGet('fonts.mono')(props)};
       margin-left: 2px;
       text-decoration: none;
     }
   }
 `
 
-const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
+const GlobalStyles = (props: any) => {
+  const theme = useTheme()
+
+  return <StyledGlobalStyles {...props} theme={theme} />
+}
+
+export const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
   element
 }: {
   element: ReactNode
@@ -37,5 +52,3 @@ const wrapPageElement: GatsbyBrowser['wrapPageElement'] = ({
     </BaseStyles>
   )
 }
-
-export default wrapPageElement
