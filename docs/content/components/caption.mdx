@@ -25,12 +25,16 @@ component in any `.md` or `.mdx` file without importing it.
 ## Example
 
 ```jsx live
-<Box display="flex" alignItems="center" flexDirection="column">
+<Box style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
   <img
     alt=""
-    src="https://s3.us-west-2.amazonaws.com/photos.puppyspot.com/breeds/245/card/500000291_medium.jpg"
+    src="https://brand.github.com/assets/images/brand-assets/octocat.png"
+    style={{
+      width: 400,
+      alignItems: 'center'
+    }}
   />
-  <Caption>A beautiful husky puppy.</Caption>
+  <Caption>Mona the octocat.</Caption>
 </Box>
 ```
 

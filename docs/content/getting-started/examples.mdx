@@ -4,7 +4,9 @@ title: Examples
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
 
-import { Table } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import { Box } from '@primer/react'
+
+import { Caption, Table } from '@issue-ops/gatsby-theme-doctocat-typescript'
 
 This page contains examples of usage of each of the various components so that
 you can see how they present on your page (also so they can be copy-pasted
@@ -15,3 +17,17 @@ you can see how they present on your page (also so they can be copy-pasted
 > This is a blockquote
 >
 > > This has a nested blockquote. That's pretty cool!
+
+## Caption
+
+<Box style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+  <img
+    alt=""
+    src="https://brand.github.com/assets/images/brand-assets/octocat.png"
+    style={{
+      width: 400,
+      alignItems: 'center'
+    }}
+  />
+  <Caption>Mona the octocat.</Caption>
+</Box>
