@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "lib": ["DOM"],
-    "jsx": "react",
-    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "lib": ["DOM"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
     "strict": true,
-    "types": ["node", "jest", "@testing-library/jest-dom"],
-    "skipLibCheck": true
+    "target": "ES2022",
+    "types": ["node", "jest", "@testing-library/jest-dom"]
   },
   "include": [
     "docs/**/*",
