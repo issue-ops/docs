@@ -1,7 +1,7 @@
 import { SSRProvider } from '@react-aria/ssr'
 import { ThemeProvider, theme } from '@primer/react'
 import Link from './components/link'
-import React, { ReactNode } from 'react'
+import React from 'react'
 import mdxComponents from './mdx-components'
 import Blockquote from './components/blockquote'
 import Caption from './components/caption'
@@ -19,18 +19,17 @@ import Superscript from './components/superscript'
 import Table from './components/table'
 import InlineCode from './components/inline-code'
 import LiveCode from './components/live-code'
-import githubTheme from './github'
+import githubTheme from './github-theme'
 import deepmerge from 'deepmerge'
+import { MDXProvider } from '@mdx-js/react'
 
-import type { GatsbyBrowser } from 'gatsby'
+//import type { GatsbyBrowser } from 'gatsby'
 
 const components = {
   // @mdx-js/react components
   a: Link,
   blockquote: Blockquote,
-  code: (props: any) => (
-    <Code codeBlock={props.children.trim()} inlineCode={true} />
-  ),
+  code: (props) => <Code codeBlock={props.children.trim()} inlineCode={true} />,
   h1: H1,
   h2: H2,
   h3: H3,
@@ -39,9 +38,9 @@ const components = {
   h6: H6,
   hr: HorizontalRule,
   img: Image,
-  ol: (props: any) => <List as="ol" {...props} />,
+  ol: (props) => <List as="ol" {...props} />,
   p: Paragraph,
-  pre: (props: any) => {
+  pre: (props) => {
     const className = props.children.props.className
       ? props.children.props.className.replace(/language-/, '')
       : ''
@@ -77,34 +76,23 @@ const components = {
   ImageContainer,
   ...mdxComponents
 }
-
-export const wrapRootElement: GatsbyBrowser['wrapRootElement'] = ({
-  element
-}: {
-  element: ReactNode
-}) => {
-  // This is terrible...
-  let MDXProvider: any = null
-
-  import('@mdx-js/react').then((module) => {
-    MDXProvider = module.MDXProvider
-  })
-
-  require('deasync').loopWhile(() => {
-    return MDXProvider === null
-  })
+//: GatsbyBrowser['wrapRootElement']
+//: {
+//  element: ReactNode
+//}
+export const wrapRootElement = ({ element }) => {
+  // TODO: Color switcher?
+  const colorSchemes = Object.keys(theme.colorSchemes)
 
   return (
     <SSRProvider>
-      <MDXProvider components={components}>
-        <ThemeProvider
-          theme={deepmerge(theme, githubTheme)}
-          colorMode="dark"
-          dayScheme="light"
-          nightScheme="dark_dimmed">
-          {element}
-        </ThemeProvider>
-      </MDXProvider>
+      <ThemeProvider
+        theme={theme}
+        colorMode="day"
+        dayScheme="light"
+        nightScheme="dark">
+        <MDXProvider components={components}>{element}</MDXProvider>
+      </ThemeProvider>
     </SSRProvider>
   )
 }
