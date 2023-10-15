@@ -1,21 +1,29 @@
-import { styled } from 'styled-components'
-import { themeGet } from '@primer/react'
+import { themeGet, useTheme } from '@primer/react'
 
-const DescriptionList = styled.dl`
+import React from 'react'
+import { styled } from 'styled-components'
+
+const StyledDescriptionList = styled.dl`
   padding: 0;
 
   dt {
     padding: 0;
-    margin-top: ${themeGet('space.3')};
+    margin-top: ${themeGet('space.3')({})};
     font-size: 1em;
     font-style: italic;
-    font-weight: ${themeGet('fontWeights.bold')};
+    font-weight: ${themeGet('fontWeights.bold')({})};
   }
 
   dd {
-    padding: 0 ${themeGet('space.3')};
-    margin: 0 0 ${themeGet('space.3')};
+    padding: 0 ${themeGet('space.3')({})};
+    margin: 0 0 ${themeGet('space.3')({})};
   }
 `
+
+const DescriptionList = (props: any) => {
+  const theme = useTheme()
+
+  return <StyledDescriptionList {...props} theme={theme} />
+}
 
 export default DescriptionList

@@ -1,5 +1,10 @@
 import { Box, Text } from '@primer/react'
+
 import React, { ReactElement, ReactNode } from 'react'
+
+DoDontContainer.defaultProps = {
+  stacked: false
+}
 
 export function DoDontContainer({
   stacked,
@@ -21,10 +26,6 @@ export function DoDontContainer({
   )
 }
 
-DoDontContainer.defaultProps = {
-  stacked: false
-}
-
 export function Do(props: any): ReactElement {
   return (
     <DoDontBase
@@ -40,7 +41,7 @@ export function Dont(props: any): ReactElement {
   return (
     <DoDontBase
       {...props}
-      title="Don’t"
+      title="Don't"
       bg="danger.fg"
       borderColor="danger.muted"
     />
@@ -68,14 +69,13 @@ function DoDontBase({
           alignSelf: 'start',
           flexDirection: 'row',
           alignItems: 'center',
-          mb: '2',
+          mb: 2,
           backgroundColor: bg,
-          borderRadius: '2',
+          borderRadius: 2,
           color: 'fg.onEmphasis',
-          paddingX: '2'
+          paddingX: 2
         }}>
-        <Text
-          sx={{ fontWeight: 'bold', fontSize: '1', color: 'fg.onEmphasis' }}>
+        <Text sx={{ fontWeight: 'bold', fontSize: 1, color: 'fg.onEmphasis' }}>
           {title}
         </Text>
       </Box>
@@ -90,11 +90,11 @@ function DoDontBase({
           <Box
             as="blockquote"
             sx={{
-              margin: '0',
+              margin: 0,
               borderLeftWidth: '4px',
               borderLeftStyle: 'solid',
               borderLeftColor: borderColor,
-              paddingLeft: '3'
+              paddingLeft: 3
             }}>
             {children}
           </Box>
