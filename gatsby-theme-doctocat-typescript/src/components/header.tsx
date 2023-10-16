@@ -9,37 +9,32 @@ import {
   Link,
   StyledOcticon,
   Text,
-  ThemeProvider,
-  useTheme,
-  UnderlineNav2 as UnderlineNav
+  themeGet,
+  ThemeProvider
 } from '@primer/react'
-import VisuallyHidden from './visually-hidden'
+
 import { Link as GatsbyLink } from 'gatsby'
-import React from 'react'
-import primerNavItems from '../primer-nav.yml'
-import useSiteMetadata from '../use-site-metadata'
-import usePathPrefix from '../use-path-prefix'
+import React, { ReactElement } from 'react'
+
 import MobileSearch from './mobile-search'
 import NavDrawer, { useNavDrawerState } from './nav-drawer'
 import Search from './search'
 import SkipLink from './skip-link'
+import useSiteMetadata from '../use-site-metadata'
 
 export const HEADER_HEIGHT = 56
 
 export default function Header({
-  isSearchEnabled,
-  path
+  isSearchEnabled
 }: {
   isSearchEnabled: boolean
-  path?: string
-}) {
-  const { theme } = useTheme()
+}): ReactElement {
   const [isNavDrawerOpen, setIsNavDrawerOpen] = useNavDrawerState(
-    theme?.breakpoints[2]
+    themeGet('breakpoints.2')({})
   )
   const [isMobileSearchOpen, setIsMobileSearchOpen] = React.useState(false)
+
   const siteMetadata = useSiteMetadata()
-  const pathPrefix = usePathPrefix()
 
   return (
     <ThemeProvider>
@@ -114,12 +109,6 @@ export default function Header({
                 display: ['none', null, null, 'flex'],
                 alignItems: 'center'
               }}>
-              <PrimerNavItems
-                path={path}
-                siteMetadata={siteMetadata}
-                pathPrefix={pathPrefix}
-                items={primerNavItems}
-              />
               {isSearchEnabled ? (
                 <Box sx={{ display: ['none', null, null, 'block'], ml: 3 }}>
                   <Search />
@@ -167,31 +156,4 @@ export default function Header({
 
 Header.defaultProps = {
   isSearchEnabled: true
-}
-
-function PrimerNavItems({ siteMetadata, items, path, pathPrefix }: any) {
-  return (
-    <>
-      <VisuallyHidden>
-        <h3 aria-labelledby="site-header">{siteMetadata.header.title} </h3>
-      </VisuallyHidden>
-      <UnderlineNav aria-label="main navigation" sx={{ border: 'none' }}>
-        {items.map((item: any, index: any) => {
-          const isCurrent =
-            item.url ===
-            siteMetadata.header.url + (pathPrefix || '') + (path || '')
-          return (
-            <UnderlineNav.Item
-              as={Link}
-              key={index}
-              aria-current={isCurrent ? 'page' : undefined}
-              href={item.url}
-              sx={{ fontSize: 2, lineHeight: 'condensed' }}>
-              {item.title}
-            </UnderlineNav.Item>
-          )
-        })}
-      </UnderlineNav>
-    </>
-  )
 }

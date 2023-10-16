@@ -1,5 +1,6 @@
-import { Label, StyledOcticon } from '@primer/react'
 import { DotFillIcon } from '@primer/octicons-react'
+import { Label, StyledOcticon } from '@primer/react'
+
 import React, { ReactElement } from 'react'
 import type Record from 'ts-toolbelt'
 
@@ -45,7 +46,9 @@ export default function StatusLabel({
       }}>
       <StyledOcticon
         icon={DotFillIcon}
-        sx={{ color: getStatusColor(status) }}
+        sx={{
+          color: getStatusColor(status)
+        }}
       />
       {status}
     </Label>

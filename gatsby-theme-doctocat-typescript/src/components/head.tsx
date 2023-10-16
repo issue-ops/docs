@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import { Helmet } from 'react-helmet'
+
 import useSiteMetadata from '../use-site-metadata'
 
 export default function Head(props: {
@@ -19,7 +20,6 @@ export default function Head(props: {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={siteMetadata.imageUrl} />
-      <meta property="twitter:card" content="summary_large_image" />
     </Helmet>
   )
 }

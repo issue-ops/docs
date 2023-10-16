@@ -1,17 +1,25 @@
-import { TextInput as PrimerTextInput, themeGet } from '@primer/react'
+import { TextInput as PrimerTextInput, themeGet, useTheme } from '@primer/react'
+
+import React from 'react'
 import { styled } from 'styled-components'
 
-const TextInput = styled(PrimerTextInput)`
-  /* The font-size of inputs should never be less than 16px.
-   * Otherwise, iOS browsers will zoom in when the input is focused.
-   * TODO: Update font-size of TextInput in @primer/react.
-   */
+const StyledTextInput = styled(PrimerTextInput)`
   input {
-    font-size: ${themeGet('fontSizes.2')} !important;
+    font-size: ${(props) => themeGet('fontSizes.2')(props)} !important;
   }
 
   input::placeholder {
-    color: ${themeGet('colors.fg.muted')} !important;
+    color: ${(props) =>
+      themeGet('colorSchemes.${props.theme.colorScheme}.colors.fg.muted')(
+        props
+      )} !important;
   }
 `
+
+const TextInput = (props: any) => {
+  const theme = useTheme()
+
+  return <StyledTextInput {...props} theme={theme} />
+}
+
 export default TextInput

@@ -1,5 +1,6 @@
-import { Link, Text, Box } from '@primer/react'
 import { MarkGithubIcon } from '@primer/octicons-react'
+import { Link, Text, Box } from '@primer/react'
+
 import React, { ReactElement } from 'react'
 
 export default function SourceLink({ href }: { href: string }): ReactElement {
@@ -7,8 +8,8 @@ export default function SourceLink({ href }: { href: string }): ReactElement {
     <li>
       <Link href={href} target="_blank">
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-          <MarkGithubIcon />
-          <Text>Source</Text>
+          <MarkGithubIcon size={16} />
+          <Text>Source Code</Text>
         </Box>
       </Link>
     </li>

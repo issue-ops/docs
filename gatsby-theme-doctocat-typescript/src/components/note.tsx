@@ -5,7 +5,7 @@ import React from 'react'
 import { styled } from 'styled-components'
 import { variant } from 'styled-system'
 
-const StyledNote: any = styled.div.withConfig({ shouldForwardProp })`
+const StyledNote = styled.div.withConfig({ shouldForwardProp })`
   padding: ${(props) => themeGet('space.3')(props)};
   margin-bottom: ${(props) => themeGet('space.3')(props)};
   border-radius: ${(props) => themeGet('radii.2')(props)};
@@ -49,9 +49,11 @@ const StyledNote: any = styled.div.withConfig({ shouldForwardProp })`
 const Note = (props: any) => {
   const theme = useTheme()
 
-  if (!props.variant) props.variant = 'info'
-
   return <StyledNote {...props} theme={theme} />
+}
+
+Note.defaultProps = {
+  variant: 'info'
 }
 
 export default Note

@@ -1,7 +1,9 @@
-import { styled } from 'styled-components'
 import { themeGet } from '@primer/react'
 
-const List = styled.ul`
+import React from 'react'
+import { styled } from 'styled-components'
+
+const StyledList = styled.ul`
   padding-left: 2em;
 
   ul,
@@ -15,12 +17,14 @@ const List = styled.ul`
   }
 
   li > p {
-    margin-top: ${themeGet('space.3')};
+    margin-top: ${themeGet('space.3')({})};
   }
 
   li + li {
-    margin-top: ${themeGet('space.1')};
+    margin-top: ${themeGet('space.1')({})};
   }
 `
+
+const List = (props: any) => <StyledList {...props} />
 
 export default List

@@ -7,7 +7,7 @@ export default function NavDropdown({
   children
 }: {
   title: string
-  children: ReactNode[]
+  children: ReactNode
 }): ReactElement {
   const { getDetailsProps } = useDetails({ closeOnOutsideClick: true })
   return (

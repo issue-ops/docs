@@ -1,8 +1,9 @@
-import { Link, Text, Box } from '@primer/react'
 import { RubyIcon } from '@primer/octicons-react'
+import { Link, Text, Box } from '@primer/react'
+
 import React, { ReactElement } from 'react'
 
-export default function SourceLink({ href }: { href: string }): ReactElement {
+export default function RailsLink({ href }: { href: string }): ReactElement {
   return (
     <li>
       <Link href={href} target="_blank">

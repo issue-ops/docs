@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+
 import { HEADER_HEIGHT } from './header'
 
 const Superscript = styled.sup`

@@ -11,10 +11,10 @@ import ReactLink from './react-link'
 import StatusLabel from './status-label'
 import LookbookLink from './lookbook-link'
 import StorybookLink from './storybook-link'
-import FigmaLink from './figma-link'
 import TableOfContents from './table-of-contents'
 import navItems from '../nav.yml'
 import { withPrefix } from 'gatsby'
+import Contributors from './contributors'
 
 const getPageAncestry = (url: string, object: any) => {
   const result: { title: string; url: string }[] = []
@@ -213,7 +213,6 @@ export default function Layout({
                       {storybook ? <StorybookLink href={storybook} /> : null}
                       {react ? <ReactLink href={react} /> : null}
                       {rails ? <RailsLink href={rails} /> : null}
-                      {figma ? <FigmaLink href={figma} /> : null}
                     </Box>
                   ) : null}
                 </Box>

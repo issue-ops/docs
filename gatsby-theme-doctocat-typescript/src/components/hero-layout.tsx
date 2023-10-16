@@ -1,5 +1,7 @@
 import { Box } from '@primer/react'
-import React, { ReactNode } from 'react'
+
+import React, { ReactElement, ReactNode } from 'react'
+
 import Container from './container'
 import Head from './head'
 import Header from './header'
@@ -7,18 +9,15 @@ import Hero from './hero'
 import PageFooter from './page-footer'
 import Sidebar from './sidebar'
 
-function HeroLayout({
+export default function HeroLayout({
   children,
   pageContext
 }: {
   children: ReactNode
   pageContext: any
-}) {
-  let { additionalContributors } = pageContext.frontmatter
-
-  if (!additionalContributors) {
-    additionalContributors = []
-  }
+}): ReactElement {
+  const additionalContributors =
+    pageContext.frontmatter.additionalContributors ?? []
 
   return (
     <Box sx={{ flexDirection: 'column', minHeight: '100vh', display: 'flex' }}>
@@ -44,5 +43,3 @@ function HeroLayout({
     </Box>
   )
 }
-
-export default HeroLayout

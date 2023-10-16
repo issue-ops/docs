@@ -1,5 +1,6 @@
-import React from 'react'
-import { NavList } from '@primer/react/drafts'
+import { NavList } from '@primer/react'
+
+import React, { ReactElement } from 'react'
 
 export default function TableOfContents({
   'aria-labelledby': ariaLabelledBy,
@@ -7,7 +8,7 @@ export default function TableOfContents({
 }: {
   'aria-labelledby': string
   items: any[]
-}) {
+}): ReactElement {
   return (
     <NavList aria-labelledby={ariaLabelledBy}>
       {items.map((item) => (

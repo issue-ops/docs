@@ -1,6 +1,6 @@
 import { BaseStyles, Box, themeGet } from '@primer/react'
 
-import React, { ReactElement } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 
 import Frame from './frame'
 
@@ -9,7 +9,7 @@ import Frame from './frame'
 export default function LivePreviewWrapper({
   children
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }): ReactElement {
   return (
     <Frame>

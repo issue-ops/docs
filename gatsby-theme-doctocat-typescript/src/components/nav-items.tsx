@@ -1,9 +1,9 @@
-import { LinkExternalIcon } from '@primer/octicons-react'
-import { NavList } from '@primer/react/drafts'
 import { useLocation } from '@gatsbyjs/reach-router'
+import { NavList } from '@primer/react'
+
 import { Link, withPrefix } from 'gatsby'
-import preval from 'preval.macro'
 import React, { ReactElement, ReactNode } from 'react'
+
 import VisuallyHidden from './visually-hidden'
 
 type NavItemType = {
@@ -11,22 +11,6 @@ type NavItemType = {
   url?: string
   children?: NavItemType[]
 }
-
-// This code needs to run at build-time so it can access the file system.
-const repositoryUrl = preval`
-  import('get-pkg-repo').then((getPkgRepo) => {
-    import('read-pkg-up').then((readPkgUp) => {
-      try {
-        const repo = getPkgRepo.default(
-          readPkgUp.readPackageUpSync()?.packageJson
-        )
-        module.exports = \`https://github.com/\${repo.user}/\${repo.project}\`
-      } catch (error) {
-        module.exports = ''
-      }
-    })
-  })
-`
 
 function NavItem({
   href,
@@ -37,6 +21,7 @@ function NavItem({
 }): ReactElement {
   const location = useLocation()
   const isCurrent = withPrefix(href) === location.pathname
+
   return (
     <NavList.Item
       as={Link}
@@ -84,17 +69,6 @@ export default function NavItems({
             )}
           </React.Fragment>
         ))}
-        {repositoryUrl ? (
-          <>
-            <NavList.Divider />
-            <NavList.Item href={repositoryUrl}>
-              GitHub
-              <NavList.TrailingVisual>
-                <LinkExternalIcon />
-              </NavList.TrailingVisual>
-            </NavList.Item>
-          </>
-        ) : null}
       </NavList>
     </>
   )

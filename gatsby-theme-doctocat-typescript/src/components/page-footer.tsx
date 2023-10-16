@@ -1,13 +1,22 @@
 import { PencilIcon } from '@primer/octicons-react'
 import { Box, Link, StyledOcticon } from '@primer/react'
+
 import React, { ReactElement } from 'react'
+
 import Contributors from './contributors'
 import VisuallyHidden from './visually-hidden'
 
 export default function PageFooter({
   editUrl,
   contributors
-}: any): ReactElement | null {
+}: {
+  editUrl?: string
+  contributors: {
+    avatar_url: string
+    href: string
+    login: string
+  }[]
+}): ReactElement | null {
   return editUrl || contributors.length > 0 ? (
     <Box
       as="footer"

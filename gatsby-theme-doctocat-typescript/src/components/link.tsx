@@ -1,10 +1,21 @@
-import { styled } from 'styled-components'
-import { themeGet } from '@primer/react'
+import { themeGet, useTheme } from '@primer/react'
 
-const Link = styled.a`
+import React from 'react'
+import { styled } from 'styled-components'
+
+const StyledLink = styled.a`
   text-decoration: underline;
   text-underline-offset: 25%;
-  color: ${themeGet('colors.accent.fg')};
+  color: ${(props) =>
+    themeGet(`colorSchemes.${props.theme.colorScheme}.colors.accent.fg`)(
+      props
+    )};
 `
+
+const Link = (props: any) => {
+  const theme = useTheme()
+
+  return <StyledLink {...props} theme={theme} />
+}
 
 export default Link

@@ -1,7 +1,9 @@
 import { Box, Heading, Text, ThemeProvider } from '@primer/react'
+
 import React, { ReactElement } from 'react'
-import useSiteMetadata from '../use-site-metadata'
+
 import Container from './container'
+import useSiteMetadata from '../use-site-metadata'
 
 export default function Hero(): ReactElement {
   const { title, description } = useSiteMetadata()

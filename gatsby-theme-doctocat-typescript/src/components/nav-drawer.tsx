@@ -4,7 +4,6 @@ import { Link as GatsbyLink } from 'gatsby'
 import debounce from 'lodash.debounce'
 import React from 'react'
 import navItems from '../nav.yml'
-import primerNavItems from '../primer-nav.yml'
 import useSiteMetadata from '../use-site-metadata'
 import Details from './details'
 import Drawer from './drawer'
@@ -101,9 +100,6 @@ function NavDrawer({
               </Button>
             </Box>
           </Box>
-          <Box sx={{ flexDirection: 'column', display: 'flex' }}>
-            <PrimerNavItems items={primerNavItems} />
-          </Box>
         </Box>
         {navItems.length > 0 ? (
           <ThemeProvider colorMode="day">
@@ -136,64 +132,6 @@ function NavDrawer({
       </Box>
     </Drawer>
   )
-}
-
-function PrimerNavItems({ items }: any) {
-  return items.map((item: any, index: number) => {
-    return (
-      <Box
-        key={item.title}
-        sx={{
-          borderWidth: 0,
-          borderRadius: 0,
-          borderTopWidth: index !== 0 ? 1 : 0,
-          borderColor: 'border.muted',
-          px: 4,
-          py: 3,
-          borderStyle: 'solid'
-        }}>
-        {item.children ? (
-          <Details
-            key={index}
-            overlay={true}
-            // eslint-disable-next-line react/no-children-prop
-            children={item.children}
-            render={({ open, toggle }: { open: any; toggle: any }) => (
-              <>
-                <summary onClick={toggle} style={{ cursor: 'pointer' }}>
-                  <Box
-                    sx={{
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      display: 'flex'
-                    }}>
-                    <Text>{item.title}</Text>
-                    {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
-                  </Box>
-                </summary>
-                <Box sx={{ flexDirection: 'column', mt: 2, display: 'flex' }}>
-                  {item.children.map((child: any) => (
-                    <Link
-                      key={child.title}
-                      href={child.url}
-                      sx={{ py: 1, mt: 2, fontSize: 1, color: 'inherit' }}>
-                      {child.title}
-                    </Link>
-                  ))}
-                </Box>
-              </>
-            )}></Details>
-        ) : (
-          <Link
-            key={index}
-            href={item.url}
-            sx={{ color: 'inherit', display: 'block' }}>
-            {item.title}
-          </Link>
-        )}
-      </Box>
-    )
-  })
 }
 
 export default NavDrawer

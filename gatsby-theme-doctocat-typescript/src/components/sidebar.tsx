@@ -1,18 +1,27 @@
 import { Box } from '@primer/react'
-import React, { ReactElement } from 'react'
-import navItems from '../nav.yml'
+
+import React, {
+  ReactElement,
+  RefObject,
+  UIEvent,
+  useCallback,
+  useLayoutEffect,
+  useRef
+} from 'react'
+
 import { HEADER_HEIGHT } from './header'
+import navItems from '../nav.yml'
 import NavItems from './nav-items'
 
 function usePersistentScroll(id: string): {
-  ref: React.RefObject<HTMLDivElement>
-  onScroll: (event: React.UIEvent<HTMLDivElement>) => void
+  ref: RefObject<HTMLDivElement>
+  onScroll: (event: UIEvent<HTMLDivElement>) => void
 } {
-  const ref = React.useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
 
-  const handleScroll = React.useCallback(
+  const handleScroll = useCallback(
     // Save scroll position in session storage on every scroll change
-    (event: React.UIEvent<HTMLDivElement>) =>
+    (event: UIEvent<HTMLDivElement>) =>
       // eslint-disable-next-line no-undef
       window.sessionStorage.setItem(
         id,
@@ -21,10 +30,11 @@ function usePersistentScroll(id: string): {
     [id]
   )
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     // Restore scroll position when component mounts
     // eslint-disable-next-line no-undef
     const scrollPosition = window.sessionStorage.getItem(id)
+
     if (scrollPosition && ref.current) {
       ref.current.scrollTop = Number(scrollPosition)
     }

@@ -1,14 +1,17 @@
 import { SearchIcon } from '@primer/octicons-react'
 import { Box, ThemeProvider } from '@primer/react'
+
 import Downshift from 'downshift'
-import type { DownshiftState, StateChangeOptions } from 'downshift'
 import { navigate, useStaticQuery, graphql } from 'gatsby'
 import React, { ReactElement } from 'react'
-import useSiteMetadata from '../use-site-metadata'
+import { useFlexSearch } from 'react-use-flexsearch'
+
 import SearchResults from './search-results'
 import TextInput from './text-input'
+import useSiteMetadata from '../use-site-metadata'
+
+import type { DownshiftState, StateChangeOptions } from 'downshift'
 import type Partial from 'ts-toolbelt'
-import { useFlexSearch } from 'react-use-flexsearch'
 
 function stateReducer(
   state: DownshiftState<{ path: string; title: string }>,

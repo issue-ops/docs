@@ -1,8 +1,9 @@
-import { Link, Text, Box } from '@primer/react'
 import { BookIcon } from '@primer/octicons-react'
-import React from 'react'
+import { Link, Text, Box } from '@primer/react'
 
-export default function SourceLink({ href }: { href: string }) {
+import React, { ReactElement } from 'react'
+
+export default function SourceLink({ href }: { href: string }): ReactElement {
   return (
     <li>
       <Link href={href} target="_blank">

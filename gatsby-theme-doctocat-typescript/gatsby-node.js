@@ -30,6 +30,8 @@ const createPages = async ({ actions, graphql }, themeOptions) => {
             }
           }
           frontmatter {
+            componentId
+            description
             title
             source
             status

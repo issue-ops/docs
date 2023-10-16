@@ -1,7 +1,8 @@
 import { Link, Text, Box } from '@primer/react'
+
 import React, { ReactElement } from 'react'
 
-export default function SourceLink({ href }: { href: string }): ReactElement {
+export default function ReactLink({ href }: { href: string }): ReactElement {
   return (
     <li>
       <Link href={href} target="_blank">
