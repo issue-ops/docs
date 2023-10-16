@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { createPortal } from 'react-dom'
 import Measure from 'react-measure'
 import { StyleSheetManager } from 'styled-components'
 
-export default function Frame({ children }: { children: any }) {
+export default function Frame({ children }: { children: any }): ReactElement {
   const [height, setHeight] = React.useState<string | number>('auto')
   const ref = React.useRef<HTMLIFrameElement>(null)
   const contentDocument = ref.current
