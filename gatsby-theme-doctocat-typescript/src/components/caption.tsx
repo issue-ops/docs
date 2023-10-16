@@ -1,8 +1,8 @@
 import { Text } from '@primer/react'
 
-import React from 'react'
+import React, { ReactElement } from 'react'
 
-export default function Caption(props: any) {
+export default function Caption(props: any): ReactElement {
   return (
     <Text
       as="p"

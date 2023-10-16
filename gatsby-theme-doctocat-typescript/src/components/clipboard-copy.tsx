@@ -2,9 +2,13 @@ import { CheckIcon, CopyIcon } from '@primer/octicons-react'
 import { Button, StyledOcticon } from '@primer/react'
 
 import copy from 'copy-to-clipboard'
-import React from 'react'
+import React, { ReactElement } from 'react'
 
-export default function ClipboardCopy({ value }: { value: string }) {
+export default function ClipboardCopy({
+  value
+}: {
+  value: string
+}): ReactElement {
   const [copied, setCopied] = React.useState(false)
 
   React.useEffect(() => {

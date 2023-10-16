@@ -1,7 +1,7 @@
 import { Box, Text } from '@primer/react'
 
 import { Highlight, themes } from 'prism-react-renderer'
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import ClipboardCopy from './clipboard-copy'
 import LiveCode from './live-code'
@@ -15,7 +15,7 @@ export default function Code({
   inlineCode,
   noinline,
   metastring
-}: any) {
+}: any): ReactElement {
   if (inlineCode === true) {
     return <InlineCode>{codeBlock}</InlineCode>
   }
