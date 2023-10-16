@@ -1,16 +1,23 @@
-import { Box, Button } from '@primer/react'
 import { SearchIcon, XIcon } from '@primer/octicons-react'
+import { Box, Button } from '@primer/react'
+
 import Downshift from 'downshift'
-import type { StateChangeOptions } from 'downshift'
-import { AnimatePresence, motion } from 'framer-motion'
 import { navigate, useStaticQuery, graphql } from 'gatsby'
-import React from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import React, { ReactElement } from 'react'
 import { FocusOn } from 'react-focus-on'
-import SearchResults from './search-results'
-import TextInput from './text-input'
 import { useFlexSearch } from 'react-use-flexsearch'
 
-function stateReducer(state: any, changes: StateChangeOptions<any>) {
+import SearchResults from './search-results'
+import TextInput from './text-input'
+
+import type { DownshiftState, StateChangeOptions } from 'downshift'
+import type Partial from 'ts-toolbelt'
+
+function stateReducer(
+  state: DownshiftState<{ path: string; title: string }>,
+  changes: StateChangeOptions<any>
+): Partial<StateChangeOptions<{ path: string; title: string }>> {
   switch (changes.type) {
     case Downshift.stateChangeTypes.changeInput:
       if (!changes.inputValue) {
@@ -32,7 +39,7 @@ export default function MobileSearch({
 }: {
   isOpen: boolean
   onDismiss: () => void
-}) {
+}): ReactElement {
   const data = useStaticQuery(graphql`
     query {
       localSearchPages {
@@ -47,7 +54,7 @@ export default function MobileSearch({
   const [query, setQuery] = React.useState('')
   const results = useFlexSearch(query, index, store)
 
-  function handleDismiss() {
+  function handleDismiss(): void {
     setQuery('')
     onDismiss()
   }
@@ -87,7 +94,7 @@ export default function MobileSearch({
               selectedItem={null}
               onSelect={(item) => {
                 if (item) {
-                  navigate(item.path)
+                  navigate(`/${item.path}`)
                   handleDismiss()
                 }
               }}

@@ -49,10 +49,6 @@ export default function Search(): ReactElement {
     <Downshift<{ path: string; title: string }>
       inputValue={query}
       onInputValueChange={(inputValue) => setQuery(inputValue)}
-      // We don't need Downshift to keep track of a selected item because as
-      // soon as an item is selected we navigate to a new page.
-      // Let's avoid any unexpected states related to the selected item
-      // by setting it to always be `null`.
       selectedItem={null}
       onSelect={(item) => {
         if (item) {
