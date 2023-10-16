@@ -1,6 +1,8 @@
 import { Box, Text } from '@primer/react'
+
 import React, { ReactElement } from 'react'
 import { sentenceCase } from 'sentence-case'
+
 import useSiteMetadata from '../use-site-metadata'
 
 export default function SearchResults({
@@ -39,7 +41,7 @@ export default function SearchResults({
       })}
       sx={{ display: 'flex' }}>
       <Text sx={{ fontSize: 0, color: 'fg.muted' }}>
-        {getBreadcrumbs(siteMetadata.shortName, item.title).join(' / ')}
+        {getBreadcrumbs(siteMetadata.shortName, item.path).join(' / ')}
       </Text>
       {item.title}
     </Box>
