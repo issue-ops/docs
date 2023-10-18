@@ -3,7 +3,6 @@ title: Live code
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-
 import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
 
 Doctocat can render code blocks as live previews with editable code using
@@ -96,41 +95,6 @@ line highlighting will disappear when the live example is edited.
     This paragraph element should not be higlighted.
   </p>
 </div>
-```
-
-## Global styles
-
-Live previews are completely isolated from the rest of the page because they are
-rendered inside
-[iframes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
-This means that you can apply global styles inside live previews without
-affecting the rest of the page:
-
-```jsx live
-<div>
-  <style>{`p { color: red; }`}</style>
-  <p>
-    This text should be red. All other text on the page should be unaffected.
-  </p>
-</div>
-```
-
-You can apply global styles to _all_ live previews on your site by
-[shadowing](https://www.gatsbyjs.org/blog/2019-04-29-component-shadowing/)
-`live-preview-wrapper.js` with a component that renders a `style` or `link` tag:
-
-```jsx
-// src/@issue-ops/gatsby-theme-doctocat-typescript/components/live-preview-wrapper.js
-import React from 'react'
-
-export default function LivePreviewWrapper({ children }) {
-  return (
-    <div>
-      <link href="https://unpkg.com/primer/build/build.css" rel="stylesheet" />
-      {children}
-    </div>
-  )
-}
 ```
 
 ## No-inline
