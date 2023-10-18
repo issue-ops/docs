@@ -5,11 +5,8 @@ source: https://github.com/primer/doctocat/blob/master/theme/src/components/imag
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-
-import {
-  Caption,
-  ImageContainer
-} from '@issue-ops/gatsby-theme-doctocat-typescript'
+import { Box } from '@primer/react'
+import { ImageContainer } from '@issue-ops/gatsby-theme-doctocat-typescript'
 
 Use the `ImageContainer` component to contain images in documentation pages.
 
@@ -20,22 +17,14 @@ it's globally available in all `.md` and `.mdx` files. So you can use the
 `ImageContainer` component in any `.md` or `.mdx` file without importing it.
 
 ```jsx live
-<ImageContainer>
-  <img
-    width="290"
-    src="https://user-images.githubusercontent.com/4608155/104243682-cc166c00-5415-11eb-889b-9abe9997481a.png"
-    alt="Star and Unstar buttons"
-  />
-</ImageContainer>
-<Caption>Star and Unstar buttons</Caption>
+<Box style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+  <ImageContainer>
+    <img
+      width="290"
+      src="https://user-images.githubusercontent.com/4608155/104243682-cc166c00-5415-11eb-889b-9abe9997481a.png"
+      alt="Star and Unstar buttons"
+    />
+  </ImageContainer>
+  <Caption>Star and Unstar buttons</Caption>
+</Box>
 ```
-
-<ImageContainer>
-  <img
-    width="290"
-    src="https://user-images.githubusercontent.com/4608155/104243682-cc166c00-5415-11eb-889b-9abe9997481a.png"
-    alt="Star and Unstar buttons"
-  />
-</ImageContainer>
-
-<Caption>Star and Unstar buttons</Caption>
