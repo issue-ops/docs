@@ -17,13 +17,7 @@ import Note from './components/note'
 import Paragraph from './components/paragraph'
 import Superscript from './components/superscript'
 import Table from './components/table'
-import InlineCode from './components/inline-code'
-import LiveCode from './components/live-code'
-import githubTheme from './github-theme'
-import deepmerge from 'deepmerge'
 import { MDXProvider } from '@mdx-js/react'
-
-//import type { GatsbyBrowser } from 'gatsby'
 
 const components = {
   // @mdx-js/react components
@@ -76,14 +70,8 @@ const components = {
   ImageContainer,
   ...mdxComponents
 }
-//: GatsbyBrowser['wrapRootElement']
-//: {
-//  element: ReactNode
-//}
-export const wrapRootElement = ({ element }) => {
-  // TODO: Color switcher?
-  const colorSchemes = Object.keys(theme.colorSchemes)
 
+export const wrapRootElement = ({ element }) => {
   return (
     <SSRProvider>
       <ThemeProvider
