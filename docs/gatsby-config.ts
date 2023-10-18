@@ -15,6 +15,7 @@ const config: GatsbyConfig = {
     }
   },
   pathPrefix: '/docs',
+  trailingSlash: 'never',
   plugins: [
     {
       resolve: '@issue-ops/gatsby-theme-doctocat-typescript',
