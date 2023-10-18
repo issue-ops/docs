@@ -1,6 +1,6 @@
 import { themeGet, useTheme } from '@primer/react'
 
-import React from 'react'
+import React, { ReactElement } from 'react'
 import styled from 'styled-components'
 
 const StyledBlockquote = styled.blockquote`
@@ -23,7 +23,7 @@ const StyledBlockquote = styled.blockquote`
   }
 `
 
-const Blockquote = (props: any) => {
+const Blockquote = (props: any): ReactElement => {
   const theme = useTheme()
 
   return <StyledBlockquote {...props} theme={theme} />

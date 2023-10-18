@@ -1,13 +1,14 @@
-import { Box, Button, Link, Text, ThemeProvider } from '@primer/react'
-import { ChevronDownIcon, ChevronUpIcon, XIcon } from '@primer/octicons-react'
+import { Box, Button, Link, ThemeProvider } from '@primer/react'
+import { XIcon } from '@primer/octicons-react'
+
 import { Link as GatsbyLink } from 'gatsby'
 import debounce from 'lodash.debounce'
-import React from 'react'
-import navItems from '../nav.yml'
-import useSiteMetadata from '../use-site-metadata'
-import Details from './details'
+import React, { ReactElement } from 'react'
+
 import Drawer from './drawer'
+import navItems from '../nav.yml'
 import NavItems from './nav-items'
+import useSiteMetadata from '../use-site-metadata'
 
 export function useNavDrawerState(
   breakpoint: number | string
@@ -47,13 +48,13 @@ export function useNavDrawerState(
   return [isOpen, setOpen]
 }
 
-function NavDrawer({
+export default function NavDrawer({
   isOpen,
   onDismiss
 }: {
   isOpen: boolean
   onDismiss: () => void
-}) {
+}): ReactElement {
   const siteMetadata = useSiteMetadata()
   return (
     <Drawer isOpen={isOpen} onDismiss={onDismiss}>
@@ -133,5 +134,3 @@ function NavDrawer({
     </Drawer>
   )
 }
-
-export default NavDrawer

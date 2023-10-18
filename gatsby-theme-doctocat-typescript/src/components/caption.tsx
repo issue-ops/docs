@@ -7,7 +7,12 @@ export default function Caption(props: any): ReactElement {
     <Text
       as="p"
       {...props}
-      sx={{ mt: 2, mb: 3, fontSize: 1, color: 'gray.5' }}
+      sx={{
+        mt: 2,
+        mb: 3,
+        fontSize: 1,
+        color: 'gray.5'
+      }}
     />
   )
 }

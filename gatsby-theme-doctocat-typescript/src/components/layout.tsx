@@ -89,7 +89,7 @@ export default function Layout({
   return (
     <Box sx={{ flexDirection: 'column', minHeight: '100vh', display: 'flex' }}>
       <Head title={title} description={description} />
-      <Header path={path} />
+      <Header />
       <Box
         style={{ zIndex: 0 }}
         sx={{ flex: '1 1 auto', flexDirection: 'row', display: 'flex' }}>

@@ -1,7 +1,7 @@
 import { themeGet, useTheme } from '@primer/react'
 import shouldForwardProp from '@styled-system/should-forward-prop'
 
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { styled } from 'styled-components'
 import { variant } from 'styled-system'
 
@@ -10,6 +10,7 @@ const StyledNote = styled.div.withConfig({ shouldForwardProp })`
   margin-bottom: ${(props) => themeGet('space.3')(props)};
   border-radius: ${(props) => themeGet('radii.2')(props)};
   border-left: ${(props) => themeGet('radii.2')(props)} solid;
+  width: 100%;
 
   & *:last-child {
     margin-bottom: 0;
@@ -46,7 +47,7 @@ const StyledNote = styled.div.withConfig({ shouldForwardProp })`
     })(props)}
 `
 
-const Note = (props: any) => {
+const Note = (props: any): ReactElement => {
   const theme = useTheme()
 
   return <StyledNote {...props} theme={theme} />

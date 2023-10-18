@@ -21,11 +21,11 @@ const STATUS_BACKGROUND: Record<Status, string> = {
 }
 
 function getStatusColor(status: Status): string {
-  return STATUS_COLORS[status] || 'fg.muted'
+  return STATUS_COLORS[status.toLowerCase()] || 'fg.muted'
 }
 
 function getStatusBackgroundColor(status: Status): string {
-  return STATUS_BACKGROUND[status] || 'neutral.subtle'
+  return STATUS_BACKGROUND[status.toLowerCase()] || 'neutral.subtle'
 }
 
 export default function StatusLabel({
@@ -33,6 +33,7 @@ export default function StatusLabel({
 }: {
   status: Status
 }): ReactElement {
+  console.log(status)
   return (
     <Label
       size="large"

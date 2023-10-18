@@ -6,6 +6,7 @@ import React, { ReactElement } from 'react'
 import ClipboardCopy from './clipboard-copy'
 import LiveCode from './live-code'
 import InlineCode from './inline-code'
+import Prism from '../prism'
 
 export default function Code({
   className,
@@ -15,7 +16,15 @@ export default function Code({
   inlineCode,
   noinline,
   metastring
-}: any): ReactElement {
+}: {
+  className: string
+  codeBlock: string
+  live: boolean
+  highlight: string[]
+  inlineCode: boolean
+  noinline: boolean
+  metastring?: string
+}): ReactElement {
   if (inlineCode === true) {
     return <InlineCode>{codeBlock}</InlineCode>
   }
@@ -27,7 +36,7 @@ export default function Code({
         highlight={highlight}
         language={className}
         noinline={noinline}
-        metastring={metastring}
+        metastring={metastring ?? ''}
       />
     )
   }
@@ -43,7 +52,11 @@ export default function Code({
       <Box sx={{ top: 0, right: 0, p: 2, position: 'absolute' }}>
         <ClipboardCopy value={codeBlock} />
       </Box>
-      <Highlight code={codeBlock} language={className} theme={themes.github}>
+      <Highlight
+        code={codeBlock}
+        prism={Prism}
+        language={className}
+        theme={themes.github}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <Box
             as="pre"

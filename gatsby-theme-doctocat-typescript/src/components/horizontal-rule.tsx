@@ -1,6 +1,6 @@
 import { themeGet, useTheme } from '@primer/react'
 
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { styled } from 'styled-components'
 
 const StyledHorizontalRule = styled.hr`
@@ -14,7 +14,7 @@ const StyledHorizontalRule = styled.hr`
   border: 0;
 `
 
-const HorizontalRule = (props: any) => {
+const HorizontalRule = (props: any): ReactElement => {
   const theme = useTheme()
 
   return <StyledHorizontalRule {...props} theme={theme} />

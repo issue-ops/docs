@@ -1,6 +1,6 @@
 import { themeGet, useTheme } from '@primer/react'
 
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { styled } from 'styled-components'
 
 const StyledDescriptionList = styled.dl`
@@ -20,7 +20,7 @@ const StyledDescriptionList = styled.dl`
   }
 `
 
-const DescriptionList = (props: any) => {
+const DescriptionList = (props: any): ReactElement => {
   const theme = useTheme()
 
   return <StyledDescriptionList {...props} theme={theme} />

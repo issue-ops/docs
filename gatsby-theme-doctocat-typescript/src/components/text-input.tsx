@@ -1,6 +1,6 @@
 import { TextInput as PrimerTextInput, themeGet, useTheme } from '@primer/react'
 
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { styled } from 'styled-components'
 
 const StyledTextInput = styled(PrimerTextInput)`
@@ -16,7 +16,7 @@ const StyledTextInput = styled(PrimerTextInput)`
   }
 `
 
-const TextInput = (props: any) => {
+const TextInput = (props: any): ReactElement => {
   const theme = useTheme()
 
   return <StyledTextInput {...props} theme={theme} />

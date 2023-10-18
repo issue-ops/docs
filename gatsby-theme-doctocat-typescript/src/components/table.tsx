@@ -1,6 +1,6 @@
 import { themeGet, useTheme } from '@primer/react'
 
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { styled } from 'styled-components'
 
 const StyledTable = styled.table`
@@ -63,7 +63,7 @@ const StyledTable = styled.table`
   }
 `
 
-const Table = (props: any) => {
+const Table = (props: any): ReactElement => {
   const theme = useTheme()
 
   return <StyledTable {...props} theme={theme} />

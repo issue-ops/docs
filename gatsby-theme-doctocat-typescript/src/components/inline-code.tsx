@@ -1,6 +1,6 @@
 import { themeGet, useTheme } from '@primer/react'
 
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { styled } from 'styled-components'
 
 const StyledInlineCode = styled.code`
@@ -14,7 +14,7 @@ const StyledInlineCode = styled.code`
   border-radius: ${(props) => themeGet('radii.2')(props)};
 `
 
-const InlineCode = (props: any) => {
+const InlineCode = (props: any): ReactElement => {
   const theme = useTheme()
 
   return <StyledInlineCode {...props} theme={theme} />

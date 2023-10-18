@@ -1,6 +1,6 @@
 import { themeGet, useTheme } from '@primer/react'
 
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { styled } from 'styled-components'
 
 const StyledLink = styled.a`
@@ -12,7 +12,7 @@ const StyledLink = styled.a`
     )};
 `
 
-const Link = (props: any) => {
+const Link = (props: any): ReactElement => {
   const theme = useTheme()
 
   return <StyledLink {...props} theme={theme} />
