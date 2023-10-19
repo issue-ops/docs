@@ -6,6 +6,7 @@ on:
       - closed
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -17,8 +18,10 @@ jobs:
     name: Release Version
     runs-on: ubuntu-latest
 
-    # Only run this job if the PR was merged
-    if: ${{ github.event.pull_request.merged == true }}
+    # Only run this job if it was done manually or the PR was merged
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      github.event.pull_request.merged == true
 
     steps:
       # Checkout the repository with fetch-tags set to true
