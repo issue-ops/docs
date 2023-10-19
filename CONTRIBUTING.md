@@ -13,35 +13,26 @@ All contributions are welcome and greatly appreciated!
 > version automatically.
 
 1. Fork this repository
-1. Commit your changes
-1. Test your changes
-1. Make sure to run `npm run all` before committing your final changes!
+1. Work on your changes
+1. Preview your changes (`npm run develop`)
 1. Open a pull request back to this repository
 1. Notify the maintainers of this repository for peer review and approval
 1. Merge :tada:
 
-The maintainers of this repository will create a new release with your changes
-so that everyone can use the new release and enjoy the awesome features of
-branch deployments!
+The maintainers of this repository will review your changes and provide any
+feedback. Once approved, they will be merged in and a new version of the site
+will be deployed. You'll also be able to see your GitHub profile tagged in the
+contributors list for any pages you contribute to!
 
-## Testing
+## Theme
 
-This project requires **100%** test coverage.
+This repository uses [Gatsby](https://www.gatsbyjs.com/), along with the
+following themes and components:
 
-> [!IMPORTANT]
->
-> It is critical that we have 100% test coverage to ensure that we are not
-> introducing any regressions. All changes will be throughly tested by
-> maintainers of this repository before a new release is created.
+- [Primer Design System](https://primer.style/design/)
+- [Primer React](https://primer.style/react/)
+- [Doctocat](https://primer.style/doctocat/)
 
-### Running the Test Suite
-
-Simply run the following command to execute the entire test suite:
-
-```bash
-npm run test
-```
-
-> [!NOTE]
->
-> This requires that you have already run `npm install`
+A modified version of the Doctocat theme is used to build the documentation from
+`.mdx` files in the `docs` directory. Make sure to check out the above links to
+get familiarized with Gatsby, Primer, and React :smile:

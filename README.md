@@ -1,6 +1,11 @@
 # Doctocat
 
-[![npm](https://img.shields.io/npm/v/@primer/gatsby-theme-doctocat)](https://www.npmjs.com/package/@primer/gatsby-theme-doctocat)
-[![Publish workflow](https://github.com/primer/doctocat/workflows/Publish/badge.svg)](https://github.com/primer/doctocat/actions)
+Issue the ops, and ops the docs!
 
-Doctocat makes it easy to set up a documentation site so you can focus on what's important: _writing docs_. Check out [primer.style/doctocat](https://primer.style/doctocat) to get started.
+![Continuous Integration](https://github.com/issue-ops/docs/actions/workflows/continuous-delivery.yml/badge.svg)
+![Continuous Delivery](https://github.com/issue-ops/docs/actions/workflows/continuous-delivery.yml/badge.svg)
+![Super Linter](https://github.com/issue-ops/docs/actions/workflows/super-linter.yml/badge.svg)
+
+This repository hosts the
+[IssueOps documentation page](https://issue-ops.github.io/docs) and everything
+you need to get started building your own awesome IssueOps workflows!
