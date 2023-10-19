@@ -1,6 +1,5 @@
 import { MDXProvider } from '@mdx-js/react'
 import { ThemeProvider, theme } from '@primer/react'
-import { SSRProvider } from '@react-aria/ssr'
 
 import React from 'react'
 
@@ -75,14 +74,12 @@ const components = {
 
 export const wrapRootElement = ({ element }) => {
   return (
-    <SSRProvider>
-      <ThemeProvider
-        theme={theme}
-        colorMode="day"
-        dayScheme="light"
-        nightScheme="dark">
-        <MDXProvider components={components}>{element}</MDXProvider>
-      </ThemeProvider>
-    </SSRProvider>
+    <ThemeProvider
+      theme={theme}
+      colorMode="day"
+      dayScheme="light"
+      nightScheme="dark">
+      <MDXProvider components={components}>{element}</MDXProvider>
+    </ThemeProvider>
   )
 }
