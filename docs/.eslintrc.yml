@@ -1,0 +1,19 @@
+parser: 'eslint-mdx'
+
+extends:
+  - plugin:mdx/recommended
+  - plugin:prettier/recommended
+  - plugin:react/recommended
+
+parserOptions:
+  extensions:
+    - 'mdx'
+  markdownExtensions:
+    - 'md'
+  ignoreRemarkConfig: false
+
+settings:
+  mdx/code-blocks: true
+  mdx/remark: true
+  react:
+    version: detect

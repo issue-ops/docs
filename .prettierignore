@@ -11,3 +11,8 @@ node_modules/
 dist/
 coverage/
 fixtures/
+CODEOWNERS
+LICENSE
+.gitignore
+.prettierignore
+*.png
