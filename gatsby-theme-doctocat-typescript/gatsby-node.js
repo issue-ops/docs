@@ -184,9 +184,9 @@ async function fetchContributors(repo, filePath, accessToken = '') {
   } catch (error) {
     console.error(`[ERROR] Unable to fetch contributors for ${filePath}.`)
     console.error(error.message)
-  } finally {
-    return []
   }
+
+  return []
 }
 
 module.exports = {

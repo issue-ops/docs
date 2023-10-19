@@ -31,7 +31,7 @@ export default function Frame({
         width: '100%',
         border: 0,
         borderRadius: 6,
-        height: height
+        height
       }}>
       {contentDocument &&
         createPortal(

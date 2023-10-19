@@ -1,7 +1,7 @@
 import { themeGet, useTheme } from '@primer/react'
 
 import React, { ReactElement } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 const StyledBlockquote = styled.blockquote`
   margin: 0 0 ${(props) => themeGet('space.3')(props)};
