@@ -33,7 +33,6 @@ export default function StatusLabel({
 }: {
   status: Status
 }): ReactElement {
-  console.log(status)
   return (
     <Label
       size="large"
