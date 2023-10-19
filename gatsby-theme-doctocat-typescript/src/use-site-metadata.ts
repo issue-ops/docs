@@ -13,7 +13,6 @@ export default function useSiteMetadata() {
             logoUrl
           }
           description
-          imageUrl
         }
       }
     }
