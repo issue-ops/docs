@@ -79,7 +79,7 @@ jobs:
       - name: Create Artifact
         id: artifact
         run: |
-          tar --dereference --directory public/ -cvf artifact.tar .
+          tar --dereference --directory ${{ github.workspace }}/docs/public/ -cvf artifact.tar .
 
       - name: Upload artifact
         id: upload
