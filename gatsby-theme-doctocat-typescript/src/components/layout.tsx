@@ -1,20 +1,21 @@
 import componentMetadata from '@primer/component-metadata'
 import { Box, Breadcrumbs, Heading, Text } from '@primer/react'
+
+import { withPrefix } from 'gatsby'
 import React, { ReactElement, ReactNode } from 'react'
+
 import Head from './head'
 import Header, { HEADER_HEIGHT } from './header'
+import LookbookLink from './lookbook-link'
+import navItems from '../nav.yml'
 import PageFooter from './page-footer'
 import Sidebar from './sidebar'
 import SourceLink from './source-link'
 import RailsLink from './rails-link'
 import ReactLink from './react-link'
 import StatusLabel from './status-label'
-import LookbookLink from './lookbook-link'
 import StorybookLink from './storybook-link'
 import TableOfContents from './table-of-contents'
-import navItems from '../nav.yml'
-import { withPrefix } from 'gatsby'
-import Contributors from './contributors'
 
 const getPageAncestry = (url: string, object: any) => {
   const result: { title: string; url: string }[] = []

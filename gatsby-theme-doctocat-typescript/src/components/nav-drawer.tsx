@@ -2,6 +2,7 @@ import { Box, Button, Link, ThemeProvider } from '@primer/react'
 import { XIcon } from '@primer/octicons-react'
 
 import { Link as GatsbyLink } from 'gatsby'
+// eslint-disable-next-line import/no-unresolved
 import debounce from 'lodash.debounce'
 import React, { ReactElement } from 'react'
 

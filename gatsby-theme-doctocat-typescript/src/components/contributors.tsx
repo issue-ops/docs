@@ -1,6 +1,7 @@
 import { Avatar, Box, Link, Text, Tooltip } from '@primer/react'
 
 import { format } from 'date-fns'
+// eslint-disable-next-line import/no-unresolved
 import uniqBy from 'lodash.uniqby'
 import pluralize from 'pluralize'
 import React, { ReactElement } from 'react'

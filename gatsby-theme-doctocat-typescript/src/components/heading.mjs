@@ -26,6 +26,7 @@ const StyledHeading = styled(Heading)`
   }
 `
 
+// eslint-disable-next-line react/prop-types
 function MarkdownHeading({ children, ...props }) {
   const slugger = new GithubSlugger()
   const text = children ? textContent(children) : ''

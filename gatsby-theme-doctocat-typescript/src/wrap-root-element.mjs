@@ -1,23 +1,25 @@
-import { SSRProvider } from '@react-aria/ssr'
+import { MDXProvider } from '@mdx-js/react'
 import { ThemeProvider, theme } from '@primer/react'
-import Link from './components/link'
+import { SSRProvider } from '@react-aria/ssr'
+
 import React from 'react'
-import mdxComponents from './mdx-components'
+
 import Blockquote from './components/blockquote'
 import Caption from './components/caption'
 import Code from './components/code'
 import DescriptionList from './components/description-list'
 import { Do, DoDontContainer, Dont } from './components/do-dont'
-import { H1, H2, H3, H4, H5, H6 } from './components/heading'
+import { H1, H2, H3, H4, H5, H6 } from './components/heading.mjs'
 import HorizontalRule from './components/horizontal-rule'
 import Image from './components/image'
 import ImageContainer from './components/image-container'
+import Link from './components/link'
 import List from './components/list'
 import Note from './components/note'
 import Paragraph from './components/paragraph'
 import Superscript from './components/superscript'
 import Table from './components/table'
-import { MDXProvider } from '@mdx-js/react'
+import mdxComponents from './mdx-components'
 
 const components = {
   // @mdx-js/react components
