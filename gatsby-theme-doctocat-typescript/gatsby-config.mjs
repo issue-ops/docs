@@ -80,15 +80,6 @@ const config = {
         path: path.resolve('./content')
       }
     },
-    {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        resolve: 'gatsby-remark-images',
-        options: {
-          maxWidth: 600
-        }
-      }
-    },
     'gatsby-transformer-sharp',
     'gatsby-transformer-yaml'
   ]
