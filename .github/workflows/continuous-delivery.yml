@@ -1,0 +1,104 @@
+name: Continuous Delivery
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+permissions:
+  contents: write
+  id-token: write
+  pages: write
+
+jobs:
+  release:
+    name: Release Version
+    runs-on: ubuntu-latest
+
+    # Only run this job if the PR was merged
+    if: ${{ github.event.pull_request.merged == true }}
+
+    steps:
+      # Checkout the repository with fetch-tags set to true
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+
+      # Get the version and update the tags to use in the release
+      - name: Tag
+        id: tag
+        uses: issue-ops/semver@v0.1.0
+        with:
+          manifest-path: package.json
+          workspace: ${{ github.workspace }}
+          ref: main
+
+      # Use the version output from the previous step for the release
+      # Prepend a 'v' to the beginning (e.g. 'v1.2.3')
+      - name: Create Release
+        id: release
+        uses: issue-ops/releaser@v0.1.2
+        with:
+          tag: v${{ steps.tag.outputs.version }}
+
+  build:
+    name: Build Gatsby Site
+    runs-on: ubuntu-latest
+
+    needs: release
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Dependencies
+        id: install
+        run: npm ci
+
+      - name: Build
+        id: build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run build
+
+      - name: Create Artifact
+        id: artifact
+        run: |
+          tar --dereference --directory public/ -cvf artifact.tar .
+
+      - name: Upload artifact
+        id: upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: github-pages
+          path: artifact.tar
+
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v2
+        with:
+          artifact_name: github-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
