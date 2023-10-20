@@ -2,12 +2,10 @@ import type { GatsbyConfig } from 'gatsby'
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: 'Doctocat',
-    shortName: 'Doctocat',
-    description: 'A Gatsby theme for creating Primer documentation sites',
+    title: 'IssueOps Docs',
+    shortName: 'IssueOps Docs',
+    description: 'The one-stop shop for all things IssueOps',
     siteUrl: 'https://issueops.github.io/docs',
-    imageUrl:
-      'https://user-images.githubusercontent.com/10384315/53922681-2f6d3100-402a-11e9-9719-5d1811c8110a.png',
     header: {
       title: 'GitHub',
       url: 'https://github.com/issue-ops/docs',
