@@ -89,7 +89,7 @@
     "worker-loader": "^3.0.8"
   },
   "devDependencies": {
-    "@types/gatsbyjs__reach-router": "^2.0.1",
+    "@types/gatsbyjs__reach-router": "^2.0.2",
     "@types/lodash.debounce": "^4.0.8",
     "@types/lodash.uniqby": "^4.7.7",
     "@types/node": "^20.8.3",
