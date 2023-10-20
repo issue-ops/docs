@@ -40,7 +40,7 @@ jobs:
         id: install
         run: npm ci
 
-      - name: Install Dependencies
+      - name: Install Playwright
         id: playwright
         run: npx playwright install
 
