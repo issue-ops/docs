@@ -1,32 +1,28 @@
 - title: Introduction
   children:
-    - title: Getting started
-      url: /getting-started
-    - title: Gatsby CLI
-      url: /getting-started/gatsby-cli
-    - title: Examples
-      url: /getting-started/examples
-- title: Usage
+    - title: Overview
+      url: /introduction
+    - title: Issues and PRs
+      url: /introduction/issues-and-prs
+    - title: Best Practices
+      url: /introduction/best-practices
+- title: IssueOps Workflow
   children:
-    - title: Local development
-      url: /usage/local-development
-    - title: Customization
-      url: /usage/customization
-    - title: Front matter
-      url: /usage/front-matter
-    - title: Live code
-      url: /usage/live-code
-    - title: Deployment
-      url: /usage/deployment
-    - title: Using images
-      url: /usage/using-images
-- title: Components
+    - title: About
+      url: /workflow
+    - title: Create
+      url: /workflow/create
+    - title: Validate
+      url: /workflow/validate
+    - title: Submit
+      url: /workflow/submit
+    - title: Approve
+      url: /workflow/approve
+    - title: Close
+      url: /workflow/close
+- title: Reference
   children:
-    - title: Caption
-      url: /components/caption
-    - title: Do/Don't
-      url: /components/do-dont
-    - title: ImageContainer
-      url: /components/image-container
-    - title: Note
-      url: /components/note
+    - title: Branch Deployments
+      url: /reference/branch-deployments
+    - title: GitHub Apps
+      url: /reference/github-apps

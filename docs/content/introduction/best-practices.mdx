@@ -1,0 +1,55 @@
+---
+title: Best practices
+description: The dos and dont's of IssueOps
+status: Alpha
+---
+
+export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import {
+  Do,
+  Dont,
+  DoDontContainer,
+  Note
+} from '@issue-ops/gatsby-theme-doctocat-typescript'
+import { StateLabel, Timeline } from '@primer/react'
+import { PersonIcon } from '@primer/octicons-react'
+
+## GitHub APIs
+
+<DoDontContainer stacked>
+  <Do indented>
+    <Caption>Use GitHub Apps for accessing organization-level APIs</Caption>
+  </Do>
+  <Dont indented>
+    <Caption>Use personal access tokens</Caption>
+  </Dont>
+</DoDontContainer>
+
+## Sensitive information
+
+<DoDontContainer stacked>
+  <Do indented>
+    <Caption>
+      Use issue forms inputs that accept references to sensitive information in
+      secure locations
+    </Caption>
+  </Do>
+  <Dont indented>
+    <Caption>Accept sensitive information directly in issues</Caption>
+  </Dont>
+</DoDontContainer>
+
+## Validation
+
+<DoDontContainer stacked>
+  <Do indented>
+    <Caption>
+      Validate issue and comment text at every step in the IssueOps workflow
+    </Caption>
+  </Do>
+  <Dont indented>
+    <Caption>
+      Rely on labels to determine if an issue has been validated or approved
+    </Caption>
+  </Dont>
+</DoDontContainer>

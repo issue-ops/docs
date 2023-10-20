@@ -1,0 +1,27 @@
+---
+title: Branch deployments
+description: Reliably ship code using IssueOps in PRs
+status: Alpha
+---
+
+export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
+
+One interesting topic to include when talking about IssueOps is branch
+deployments. High-level, branch deployments let you run and control deployments
+from your PRs.
+
+If you don't already know what they are, the easiest way to explain them is to
+compare them to the traditional merge deploy model. In the merge deploy model:
+
+A developer creates a feature branch and commits changes.
+
+The developer opens a PR to get feedback from others.
+
+Once approved, the PR is merged and a deployment starts from the main branch.
+
+This works fine, but if there are bugs in the PR, you have to either merge in
+fixes or revert the commits and redeploy. In the branch deploy model, changes
+are deployed from the feature branch and validated before being merged into the
+main branch. This ensures that whatever is in main can be deployed at any time.
+If there is a problem with the deployment from the feature branch, you can
+simply redeploy main as-is.
