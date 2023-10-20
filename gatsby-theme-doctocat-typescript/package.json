@@ -93,7 +93,7 @@
     "@types/lodash.debounce": "^4.0.8",
     "@types/lodash.uniqby": "^4.7.7",
     "@types/node": "^20.8.3",
-    "@types/path-browserify": "^1.0.0",
+    "@types/path-browserify": "^1.0.1",
     "@types/pluralize": "^0.0.31",
     "@types/preval.macro": "^3.0.0",
     "@types/prismjs": "^1.26.2",
