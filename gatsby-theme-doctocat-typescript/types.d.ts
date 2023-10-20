@@ -54,7 +54,12 @@ type CreatePagesMDXResult = {
           name: string
         }
         frontmatter: {
-          status: string
+          status?: string
+          componentId?: string
+          description?: string
+          title?: string
+          source?: string
+          status?: string
         }
       }[]
     }
@@ -68,8 +73,12 @@ type PostBuildSitePageResult = {
         path: string
         context: {
           frontmatter: {
-            componentId: string
-            status: string
+            status?: string
+            componentId?: string
+            description?: string
+            title?: string
+            source?: string
+            status?: string
           }
         }
       }[]

@@ -2,9 +2,23 @@ const axios = require('axios')
 const uniqBy = require('lodash.uniqby')
 const fs = require('fs')
 const getPkgRepo = require('get-pkg-repo')
+const { GraphQLObjectType, GraphQLString } = require('graphql')
 const path = require('path')
 
 const CONTRIBUTOR_CACHE = new Map()
+
+/** @type {import('gatsby').GatsbyNode['createSchemaCustomization']}*/
+const createSchemaCustomization = ({ actions }) => {
+  actions.createTypes(`
+    type MdxFrontmatter implements Node {
+      componentId: String
+      description: String
+      source: String
+      status: String
+      title: String
+    }
+    `)
+}
 
 /** @type {import('gatsby').GatsbyNode['createPages']} */
 const createPages = async ({ actions, graphql }, themeOptions) => {
@@ -110,6 +124,9 @@ const onPostBuild = async ({ graphql }) => {
             context {
               frontmatter {
                 componentId
+                description
+                title
+                source
                 status
               }
             }
@@ -191,5 +208,6 @@ async function fetchContributors(repo, filePath, accessToken = '') {
 
 module.exports = {
   createPages,
+  createSchemaCustomization,
   onPostBuild
 }
