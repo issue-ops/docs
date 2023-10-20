@@ -6,7 +6,6 @@ status: Alpha
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
 import {
-  Caption,
   Do,
   Dont,
   DoDontContainer,
@@ -18,39 +17,27 @@ import { PersonIcon } from '@primer/octicons-react'
 ## GitHub APIs
 
 <DoDontContainer stacked>
-  <Do indented>
-    <Caption>Use GitHub Apps for accessing organization-level APIs</Caption>
-  </Do>
-  <Dont indented>
-    <Caption>Use personal access tokens</Caption>
-  </Dont>
+  <Do indented>Use GitHub Apps for accessing organization-level APIs</Do>
+  <Dont indented>Use personal access tokens</Dont>
 </DoDontContainer>
 
 ## Sensitive information
 
 <DoDontContainer stacked>
   <Do indented>
-    <Caption>
-      Use issue forms inputs that accept references to sensitive information in
-      secure locations
-    </Caption>
+    Use issue forms inputs that accept references to sensitive information in
+    secure locations
   </Do>
-  <Dont indented>
-    <Caption>Accept sensitive information directly in issues</Caption>
-  </Dont>
+  <Dont indented>Accept sensitive information directly in issues</Dont>
 </DoDontContainer>
 
 ## Validation
 
 <DoDontContainer stacked>
   <Do indented>
-    <Caption>
-      Validate issue and comment text at every step in the IssueOps workflow
-    </Caption>
+    Validate issue and comment text at every step in the IssueOps workflow
   </Do>
   <Dont indented>
-    <Caption>
-      Rely on labels to determine if an issue has been validated or approved
-    </Caption>
+    Rely on labels to determine if an issue has been validated or approved
   </Dont>
 </DoDontContainer>
