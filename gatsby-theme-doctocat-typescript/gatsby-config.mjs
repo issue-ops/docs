@@ -1,5 +1,6 @@
 import path from 'path'
 import rehypeMdxCodeProps from 'rehype-mdx-code-props'
+import rehypeMermaid from 'rehype-mermaid'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGemoji from 'remark-gemoji'
 import remarkGfm from 'remark-gfm'
@@ -65,7 +66,7 @@ const config = {
             remarkGemoji,
             remarkFrontmatter
           ],
-          rehypePlugins: [rehypeMdxCodeProps]
+          rehypePlugins: [rehypeMdxCodeProps, rehypeMermaid]
         }
       }
     },
