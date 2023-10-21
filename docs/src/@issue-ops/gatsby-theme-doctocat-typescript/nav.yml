@@ -4,27 +4,39 @@
       url: /introduction
     - title: Issues and PRs
       url: /introduction/issues-and-prs
+    - title: Workflow Security
+      url: /introduction/workflow-security
     - title: Best Practices
       url: /introduction/best-practices
-- title: IssueOps Workflow
+- title: Setup
+  children:
+    - title: Repository
+      url: /setup/repository
+    - title: GitHub App
+      url: /setup/github-app
+    - title: Issue Form
+      url: /setup/issue-form
+    - title: Issue Create Workflow
+      url: /setup/issue-create
+    - title: Issue Comment Workflow
+      url: /setup/issue-comment
+- title: IssueOps States
   children:
     - title: About
-      url: /workflow
-    - title: Create
-      url: /workflow/create
-    - title: Validate
-      url: /workflow/validate
-    - title: Submit
-      url: /workflow/submit
-    - title: Approve
-      url: /workflow/approve
-    - title: Close
-      url: /workflow/close
+      url: /states
+    - title: Created
+      url: /states/created
+    - title: Validated
+      url: /states/validated
+    - title: Submitted
+      url: /states/submitted
+    - title: Approved
+      url: /states/approved
+    - title: Closed
+      url: /states/closed
 - title: Reference
   children:
     - title: IssueOps Actions
       url: /reference/issueops-actions
     - title: Branch Deployments
       url: /reference/branch-deployments
-    - title: GitHub Apps
-      url: /reference/github-apps
