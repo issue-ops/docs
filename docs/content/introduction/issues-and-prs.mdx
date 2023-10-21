@@ -15,6 +15,10 @@ throughout an IssueOps workflow.
 
 ## Issues
 
+### Permissions
+
+Any user with read access to a repository can create an issue.
+
 ### Issue structure
 
 | Component    | Description                                            |
@@ -284,28 +288,62 @@ body:
     <FormControl.Caption>
       The name of the team you would like to join.
     </FormControl.Caption>
-    <TextInput
-      required={true}
-      block={true}
-      disabled={true}
-      placeholder={'octoteam'}
-    />
+    <TextInput required={true} disabled={true} placeholder={'octoteam'} />
   </FormControl>
 </Box>
 
 ## Pull requests
 
-Pull requests have are additional features that can be used as part of an
-IssueOps workflow. In addition to the features available in issues, pull
-requests include:
+Pull requests add extra features and metadata on top of issues. Many GitHub APIs
+support interacting with both at the same time! These additional features, along
+with examples of how to use them in IssueOps workflows, are listed in the
+following sections.
+
+### Permissions
+
+In order to create a pull request, the required permissions will differ based on
+the location of the branch you wish to merge.
+
+| Location                    | Permissions  |
+| --------------------------- | ------------ |
+| Same repository (branch)    | Write access |
+| Different repository (fork) | Read access  |
 
 ### Reviews and approvals
 
-Currently, issues don't include an approval functionality. If you want to
-implement this in an issue, you will need to do so using comments. In a PR,
-however, you can define specific users or teams that need to approve a request
-before it is completed.
+Unlike issues, PRs support reviews and approvals out of the box. When changes
+are ready to be merged, you can assign individuals or teams as reviewers.
+[Branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches)
+can also be used to enforce required reviewers and other checks before a PR can
+be merged.
+
+When your IssueOps workflow includes changes to the contents of a repository,
+using PRs instead of issues is a great option to enforce specific approval
+settings without having to include additional workflows for tracking approvals
+as comments.
 
 ### Status checks
 
-### Deployments
+Status checks run any time a PR is created or updated. These can range from code
+quality checks to security scans and more. You can use status checks to ensure
+that the changes in a PR meet your organization's standards before they are
+merged.
+
+In an IssueOps workflow, there are two ways you can use status checks: to
+validate the contents of the PR, and to validate the contents of the issue.
+
+Validation is a **critical** aspect to consider when designing your workflow. If
+your workflow is best suited for PRs, status checks can be used to run your
+validation workflow any time the PR is updated. Combined with branch protection
+rules specifying required status checks, you can ensure that validation rules
+pass before a PR can change states.
+
+### Deployments and Environments
+
+When a GitHub Actions workflow runs that specifies an environment, a deployment
+is created. Deployments track the successful/failed status of a workflow run,
+and link it to the targeted environment.
+
+A great example of an IssueOps workflow that uses PRs, deployments, and
+environments is the branch deploy model. A detailed explanation can be found in
+the [reference](/reference/branch-deployments).
