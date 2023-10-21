@@ -22,6 +22,8 @@
       url: /workflow/close
 - title: Reference
   children:
+    - title: IssueOps Actions
+      url: /reference/issueops-actions
     - title: Branch Deployments
       url: /reference/branch-deployments
     - title: GitHub Apps
