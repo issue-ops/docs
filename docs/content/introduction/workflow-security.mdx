@@ -1,0 +1,40 @@
+---
+title: Workflow security
+description: Important notes about securing IssueOps workflows
+status: Alpha
+---
+
+export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+
+## GitHub Actions workflows
+
+The IssueOps model makes heavy use of the `issue` and `issue_comment` triggers
+in GitHub Actions workflows.
+
+```yaml
+on:
+  issue_comment:
+    types:
+      - created
+```
+
+These triggers will only act on workflow files in the _default_ branch of your
+repository. This means that pull requests cannot introduce changes to your
+IssueOps workflows that would be run as part of that PR (e.g. creating a
+workflow that dumps secrets to the logs). Any changes to the workflow files can
+be protected with branch protection rules to ensure only verified changes make
+it into your default branch.
+
+## Workflow permissions
+
+To further harden your workflow files, you should always restrict them to the
+base permissions needed to run. For information about the available permissions,
+see
+[Assigning permissions to jobs](https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs).
+
+<Note>
+  Permissions can be assigned for the entire workflow, as well as for individual
+  jobs. If one job needs additional permissions, make sure to scope them to that
+  job only.
+</Note>
