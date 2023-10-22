@@ -10,6 +10,8 @@
       url: /introduction/best-practices
 - title: Setup
   children:
+    - title: About
+      url: /setup
     - title: Repository
       url: /setup/repository
     - title: GitHub App
@@ -17,15 +19,17 @@
     - title: Issue Form
       url: /setup/issue-form
     - title: Issue Create Workflow
-      url: /setup/issue-create
+      url: /setup/issue-create-workflow
     - title: Issue Comment Workflow
-      url: /setup/issue-comment
+      url: /setup/issue-comment-workflow
 - title: IssueOps States
   children:
     - title: About
       url: /states
     - title: Created
       url: /states/created
+    - title: Parsed
+      url: /states/parsed
     - title: Validated
       url: /states/validated
     - title: Submitted
