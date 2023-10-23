@@ -5,8 +5,192 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
 
-If your IssueOps workflow requires access to anything outside of the repository,
-you will need to provide it with a token. This token is used to authenticate
-with the GitHub API and should be scoped to the minimum permissions needed to do
-the job.
+If your IssueOps workflow requires access to anything outside of the repository
+it is running in, you will need to provide it with a token. This token is used
+to authenticate with the GitHub API and should be scoped to the minimum
+permissions needed to do the job. Tokens can be provided two ways:
+
+- [Personal access tokens (PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+- [GitHub App installation tokens](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app-installation)
+
+Since PATs are scoped to a single user, they are not recommended for use in
+IssueOps workflows. GitHub Apps are a better choice because they can be scoped
+to a repository or organization to provide access to the APIs you need.
+
+<Note variant="warning">
+  GitHub Apps cannot currently be created at the enterprise level for access to
+  administrative APIs. If you need access to these APIs, you will need to use a
+  PAT. In these cases, creating a "machine user" account is recommended over a
+  personal account.
+</Note>
+
+## Ownership
+
+When creating a GitHub App, you have the option to specify your personal account
+or an organization as the owner. Choosing an organization as the owner allows
+you to grant access to multiple repositories in the organization and simplifies
+permissions management.
+
+## Setup
+
+### Create a GitHub App
+
+For instructions on how to create a GitHub App, see
+[Creating GitHub Apps](https://docs.github.com/en/apps/creating-github-apps/about-creating-github-apps/about-creating-github-apps).
+
+The following settings are a good starting point for IssueOps workflows:
+
+| Setting      | Value                                                       |
+| ------------ | ----------------------------------------------------------- |
+| Name         | A clear name that describes its purpose and permissions     |
+| Description  | A description of what the app does and what it can access   |
+| Homepage URL | The URL to the repository with your IssueOps code           |
+| Webhook      | Disable webhooks                                            |
+| Permissions  | Select the **minimum** permissions needed for your workflow |
+
+### Create a private key
+
+For instructions on how to create a private key, see
+[Managing private keys for GitHub Apps](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps).
+
+<Note variant="danger">
+  Make sure to save the private key in a secure location!
+</Note>
+
+### Create GitHub Actions secrets
+
+After creating your GitHub App, you will need to create secrets that your
+IssueOps workflows can use to authenticate with the GitHub API. You can create
+these at the organization, repository, or environment level depending on your
+needs.
+
+You will need to create the following secrets. Make sure to note the names you
+give them as you will need to reference them in your workflows.
+
+| Name        | Description                 |
+| ----------- | --------------------------- |
+| App ID      | The ID of your GitHub App   |
+| Private Key | The private key you created |
+
+<Note>
+  The GitHub App ID is not a sensitive value and can be stored as a variable
+  instead of a secret. It can be found on the settings page for your GitHub App.
+</Note>
+
+For instructions on how to create secrets, see the following links:
+
+- [Creating secrets for a repository](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository)
+- [Creating secrets for an environment](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-an-environment)
+- [Creating secrets for an organization](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-an-organization)
+
+## Usage
+
+### Update the workflow permissions
+
+In any workflow that needs to authenticate as a GitHub App, the following
+permissions **must** be specified at the workflow or job level.
+
+```yaml
+permissions:
+  contents: read
+  id-token: write
+```
+
+### Generate the installation access token
+
+There are various examples and open source actions available to create
+installation access tokens for GitHub Actions workflows. In this documentation,
+we will use the
+[`actions/create-github-app-token`](https://github.com/actions/create-github-app-token)
+action.
+
+Within any workflow job that needs to authenticate as your GitHub App, you will
+need to include the following step.
+
+```yaml
+steps:
+  - uses: actions/create-github-app-token@vX.X.X
+    id: token
+    with:
+      app_id: ${{ secrets.MY_GITHUB_APP_ID }}
+      private_key: ${{ secrets.MY_GITHUB_APP_PEM }}
+      owner: ${{ github.repository_owner }}
+```
+
+Make sure to update the following:
+
+- Set the version (`vX.X.X`) of the action to the latest published version.
+- Update the secret names to match the ones you created previously.
+
+<Note>
+  In the previous example, the `owner` property is set to the owner of the
+  repository where this workflow is defined. If your GitHub App is installed
+  under another owner, you will need to specify that instead.
+</Note>
+
+### Use the token in your workflow
+
+Now that the token is being generated, you can reference it in your workflows as
+an output from the token generation step! This can be referenced as
+`${{ steps.<step-id>.outputs.token }}` (e.g.
+`${{ steps.token.outputs.token }}`).
+
+```yaml
+steps:
+  - uses: actions/github-script@vX.X.X
+    id: create-org-project
+    with:
+      github-token: ${{ steps.token.outputs.token }}
+      script: |
+        await github.rest.projects.createForOrg({
+          org: 'octo-org',
+          name: 'My awesome project'
+        })
+```
+
+<Note variant="warning">
+  Make sure to check which steps in your workflow will need to use the GitHub
+  App token versus the workflow token. For example, if you add the `issues:
+  write` permission to your workflow, you do not need to use the GitHub App
+  token to update issues in the _same_ repository as your workflows. However,
+  you will need to use the GitHub App token to update issues in _other_
+  repositories!
+</Note>
+
+## Example
+
+The following can be used as a starting point for your own workflows. Make sure
+to update the following information:
+
+```yaml
+name: Example Workflow
+
+# This workflow runs any time an issue is opened or edited.
+on:
+  issues:
+    types:
+      - opened
+      - edited
+
+jobs:
+  example-job:
+    name: Example Job
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      # Get the GitHub App installation access token.
+      - uses: actions/create-github-app-token@vX.X.X
+        id: token
+        with:
+          app_id: ${{ secrets.MY_GITHUB_APP_ID }}
+          private_key: ${{ secrets.MY_GITHUB_APP_PEM }}
+          owner: ${{ github.repository_owner }}
+
+      - run: echo "Add your custom steps here!"
+```
