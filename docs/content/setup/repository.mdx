@@ -120,3 +120,47 @@ than `main`.
 
 This is also a good opportunity to further restrict access to secrets and
 variables by defining them at the environment level!
+
+## Other considerations
+
+A few common questions and answers about repository setup. Most of the time, the
+answer is "it depends!", but these are some things to consider.
+
+### Multiple IssueOps workflows in one repository
+
+There are some tradeoffs to consider when using one or multiple repositories to
+host different IssueOps workflows. For example, suppose you have the following
+workflows:
+
+- Team membership requests
+- New repository creation requests
+
+If you use a single repository, one challenge you may run into is ensuring that
+jobs for the team membership requests don't affect new repository requests. This
+is where labels are particularly helpful! You can use labels to scope jobs to
+specific requests.
+
+```yaml
+name: Issue Opened/Edited
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+
+jobs:
+  new-repo-request:
+    name: New Repo Request
+    runs-on: ubuntu-latest
+
+    # Only run for issues with the `issueops:new-repo-request` label.
+    if: contains(github.event.issue.labels.*.name, 'issueops:new-repo')
+
+  team-membership-request:
+    name: Team Membership Request
+    runs-on: ubuntu-latest
+
+    # Only run for issues with the `issueops:team-add` label.
+    if: contains(github.event.issue.labels.*.name, 'issueops:team-add')
+```
