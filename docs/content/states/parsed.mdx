@@ -5,5 +5,61 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
 
-{/* Transitions: Validate the parsed body */}
+## Definition
+
+The `Parsed` state is usually the next immediate state after `Created`. In this
+state, the issue body has been read and converted to machine-readable JSON. The
+issue body is now available for further processing.
+
+## Example transitions
+
+### Validate
+
+The parsed issue body can now be validated against the issue form template and
+any custom rules that you require. Issue form templates do include some
+validation rules such as required fields, selection options, and more. However,
+you may have additional validation rules that apply to your specific use case.
+For example, issue form templates are not able to validate if a value provided
+by a user is a valid team in your GitHub organization.
+
+The [`issue-ops/validator`](https://github.com/issue-ops/validator) action takes
+the parsed output of the issue body and validates it against the issue form
+template and any custom rules you define.
+
+```yaml
+- name: Validate Issue
+  id: validate
+  uses: issue-ops/validator@vX.X.X
+  with:
+    issue-form-template: example-request.yml
+    parsed-issue-body: ${{ steps.parse.outputs.json }}
+```
+
+<Note>
+  If you want to run custom validators that access GitHub APIs, you will need to
+  provide a value for the `github-token` input. This is another good scenario
+  for GitHub App authentication!
+</Note>
+
+#### Validate transition failure
+
+If the validation fails, the issue is updated with a comment that includes the
+validation errors. The issue is then transitioned back to the `Created` state.
+When the user updates the issue body, it will be parsed and validated again.
+
+```markdown
+:no_entry: There were errors validating the issue body:
+
+- Error message
+```
+
+#### Validate transition success
+
+If the validation is successful, the issue is updated with a relevant comment.
+At this point, the issue is transitioned to the `Validated` state.
+
+```markdown
+:tada: Issue validated successfully!
+```
