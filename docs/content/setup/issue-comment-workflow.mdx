@@ -5,3 +5,428 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import { ActionList, Box } from '@primer/react'
+import { CheckCircleIcon } from '@primer/octicons-react'
+
+After the issue has been created and any initial processing has been run, the
+issue comment workflow becomes the main driver of the rest of the process. This
+workflow is triggered by users commenting on issues and will do any further
+processing throughout the lifecycle of the issue.
+
+## Event triggers
+
+The issue comment workflow should, at minimum, be triggered by creation of new
+comments. The `issue_comment` trigger also supports editing and deleting
+comments, which may be useful for your use-case.
+
+```yaml
+on:
+  issue_comment:
+    - created
+```
+
+The flexibility with the `issue_comment` trigger lies in the comments
+themselves. You can take a limitless number of actions based on user input!
+
+<Box style={{ alignItems: 'center', textAlign: 'center' }}>
+  _With great power comes great responsibility!_
+</Box>
+
+Be careful to not make your workflow _too_ complex. Otherwise, parsing comments
+becomes particularly challenging.
+
+<Note>
+  The `issue_comment` trigger may seem misleading. This trigger applies to
+  comments on both issues and PRs. If you want to trigger workflows on comments
+  that are part of a PR _review_, use the `pull_request_comment` trigger
+  instead.
+</Note>
+
+## Commands
+
+Good IssueOps workflows make use of _commands_ to trigger actions. These
+commands are typically prefixed with a symbol, such as `.` or `/`, and are
+descriptive of the action that will be taken when the command is processed. In
+general, any workflow that involves processing issue comments should start by
+looking for the specific command being run.
+
+| Keyword    | Description                   |
+| ---------- | ----------------------------- |
+| `.submit`  | Submit a request for approval |
+| `.approve` | Approve a request             |
+| `.deny`    | Deny a request                |
+
+The examples you will see throughout this documentation make heavy use of the
+[`github/command`](https://github.com/github/command) action. This action makes
+it easy to define your actions, who can run them, and what happens when they are
+run.
+
+The following code block shows a basic implementation of this action as part of
+a IssueOps workflow to lint a pull request. In this example, the `Lint Command`
+step will run any time a user comments with `.lint` on a PR.
+
+```yaml
+name: IssueOps Linter
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  lint:
+    name: Lint Codebase
+    runs-on: ubuntu-latest
+
+    # Only run on PR comments, not issue comments
+    if: ${{ github.event.pull_request }}
+
+    # Minimum required permissions for the `github/command` action
+    permissions:
+      pull-requests: write
+      issues: write
+      checks: read
+
+    steps:
+      - name: Lint Command
+        id: command
+        uses: github/command@vX.X.X
+        with:
+          command: .lint
+
+      - if: ${{ steps.command.outputs.continue == 'true' }}
+        name: Checkout
+        id: checkout
+        uses: actions/checkout@vX.X.X
+
+      - if: ${{ steps.command.outputs.continue == 'true' }}
+        name: Run Linter
+        id: run-linter
+        run: npm run lint
+```
+
+As you can see, the `Checkout` and `Run Linter` steps only proceed if the
+`Lint Command` step's `continue` output is `'true'`. The `github/command` action
+provides the `continue` output to act as a gate for the rest of the workflow.
+
+The high-level flow of the `github/command` action is:
+
+1. Check the comment body for the command keyword (`.lint`)
+1. Add a reaction to the comment to indicate it was received
+1. Confirm the command is allowed to run
+   1. The user is authorized to run the command
+   1. Required checks have passed
+   1. Required reviews have been submitted
+1. Collect any arguments passed to the command
+
+## Workflow steps
+
+Most issue comment workflows can be broken down into the following steps.
+Depending on your workflow, some of these may not be required.
+
+1. Parse and validate the command and input(s)
+1. Parse and validate the issue body
+1. Check the current state
+1. Check the user's permissions
+1. Process the command
+1. Update the issue state
+1. Provide feedback to the user
+
+### Parse and validate the command and input(s)
+
+Depending on your workflow, you may need users to be able to provide additional
+inputs in their comments. For example, you may want to allow users to specify a
+specific branch to lint, or a specific file to run tests on. Input arguments can
+also be passed into the comment body as part of a command.
+
+The `github/command` action can be extended to support input parameters.
+Parameters must be added after the separator specified by the `param_separator`
+argument (default: `|`). Suppose you want to also allow users to provide a
+branch name to run linting on. Users would enter a comment like this:
+
+```plain
+.lint | main
+```
+
+Within your workflow, you would need to parse the parameter value and use it to
+checkout the correct branch:
+
+```yaml
+name: IssueOps Linter
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  lint:
+    name: Lint Codebase
+    runs-on: ubuntu-latest
+
+    # Only run on PR comments, not issue comments
+    if: ${{ github.event.pull_request }}
+
+    # Minimum required permissions for the `github/command` action
+    permissions:
+      pull-requests: write
+      issues: write
+      checks: read
+
+    steps:
+      - name: Lint Command
+        id: command
+        uses: github/command@vX.X.X
+        with:
+          command: .lint
+          param_separator: '|' # This is the default value
+
+      - if: ${{ steps.command.outputs.continue == 'true' }}
+        name: Checkout
+        id: checkout
+        uses: actions/checkout@vX.X.X
+        with:
+          ref: ${{ steps.command.outputs.params }}
+
+      - if: ${{ steps.command.outputs.continue == 'true' }}
+        name: Run Linter
+        id: run-linter
+        run: npm run lint
+```
+
+<Note variant="warning">
+  The `params` output is a string, not an array or object. If you need to pass
+  multiple parameters, you will need to include additional logic for parsing the
+  string.
+</Note>
+
+### Parse and validate the issue body
+
+<ActionList>
+  <ActionList.Item disabled>
+    <ActionList.LeadingVisual>
+      <CheckCircleIcon size={24} />
+    </ActionList.LeadingVisual>
+    Validate Early
+  </ActionList.Item>
+  <ActionList.Item disabled>
+    <ActionList.LeadingVisual>
+      <CheckCircleIcon size={24} />
+    </ActionList.LeadingVisual>
+    Validate Often
+  </ActionList.Item>
+</ActionList>
+
+Any time you interact with an issue, make sure to validate the body! Users can
+edit the issue body at any time, so it's important to make sure you're working
+with the latest information. The
+[`issue-ops/parser`](https://github.com/issue-ops/parser) and
+[`issue-ops/validator`](https://github.com/issue-ops/validator) actions can take
+care of this for you. All you need to do is make sure they are included in your
+comment processing workflows.
+
+```yaml
+steps:
+  - name: Parse Issue Body
+    id: parse
+    uses: issue-ops/parser@vX.X.X
+    with:
+      body: ${{ github.event.issue.body }}
+      issue-form-template: my-issue-form.yml
+
+  - name: Validate Issue Body
+    id: validate
+    uses: issue-ops/validator@vX.X.X
+    with:
+      issue-form-template: my-issue-form.yml
+      issue-number: ${{ github.event.issue.number }}
+      parsed-issue-body: ${{ steps.parse.outputs.json }}
+```
+
+### Check the current state
+
+As an issue is processed, it will move through a series of [states](/states).
+The current state of an issue can be tracked via labels.
+
+For example, suppose you have a workflow that requires users to submit their
+request after is has been validated and confirmed. You could use the following
+logic to check if the issue has already been submitted. That way, the processing
+that would transition the issue from `validated` to `submitted` state does not
+run again.
+
+```yaml
+# This will only run if the request has already been submitted.
+if: contains(github.event.issue.labels.*.name, 'issueops:submitted') == true
+
+steps:
+  - name: Post Comment
+    id: comment
+    uses: peter-evans/create-or-update-comment@vX.X.X
+    with:
+      issue-number: ${{ github.event.issue.number }}
+      body: |
+        ':clock1: It looks like this issue has already been submitted. Sit tight!'
+```
+
+<Note>
+  Labels can be edited at any time! You want to consider checking if the state
+  indicated by the issue labels matches the expected state of the issue.
+</Note>
+
+### Check the user's permissions
+
+By default, any user with read access to a repository can create issues and add
+comments. If your IssueOps workflow involves certain authorized users being able
+to perform actions (e.g. approving or denying requests), this can be a problem!
+Instead, you should use the `allowlist` option in the `github/command` action to
+restrict who has the ability to run certain commands.
+
+For example, suppose you want to only allow certain administrators to approve
+requests for new repositories. The following step would only allow @octocat and
+@mona to run the `.approve` command. Any other users who comment on the issue
+with `.approve` will not be able to push the request through to the next state.
+
+```yaml
+- name: Approve Command
+  id: approve
+  uses: github/command@vX.X.X
+  with:
+    command: .approve
+    allowlist: octocat,mona
+```
+
+If you want to use teams to control access, you will also need to provide a
+token with `read:org` scope for the `allowlist_pat` property. For information on
+creating a GitHub App and using it to generate a token in a GitHub Actions
+workflow, see [GitHub App setup](/setup/github-app).
+
+```yaml
+- uses: actions/create-github-app-token@vX.X.X
+  id: token
+  with:
+    app_id: ${{ secrets.MY_GITHUB_APP_ID }}
+    private_key: ${{ secrets.MY_GITHUB_APP_PEM }}
+    owner: ${{ github.repository_owner }}
+
+- name: Approve Command
+  id: approve
+  uses: github/command@vX.X.X
+  with:
+    command: .approve
+    allowlist: octo-org/admin-team
+    allowlist_pat: ${{ steps.token.outputs.token }}
+```
+
+Alternatively, you can restrict access to specific roles in your IssueOps
+repository using the `permissions` property. By default, anyone with write,
+maintain, or administrator access to the repository can run commands.
+
+```yaml
+- name: Approve Command
+  id: approve
+  uses: github/command@vX.X.X
+  with:
+    command: .approve
+    permissions: admin,maintain # Restrict users with write access
+```
+
+### Process the command
+
+This is where the magic happens! You can use any series of actions to process
+your request. For example, the
+[`actions/github-script`](https://github.com/actions/github-script) action is a
+great choice for interacting with GitHub APIs.
+
+Make sure to gate these steps using the `continue` output from the
+`github/command` action!
+
+```yaml
+- if: ${{ steps.command.outputs.continue == 'true' }}
+  name: Add User to Team
+  id: add-user
+  uses: actions/github-script@vX.X.X
+  with:
+    token: ${{ steps.token.outputs.token }}
+    script: |
+      const request = JSON.parse('${{ steps.parse.outputs.json }}')
+
+      await github.rest.teams.addOrUpdateMembershipForUserInOrg({
+        org: context.repo.owner,
+        team_slug: request.team_name,
+        username: '${{ github.event.issue.user.login }}',
+        role: 'member'
+      })
+```
+
+### Update the issue state
+
+Once any processing has been completed, the issue can be transitioned to the
+next state. This is done by adding or removing labels from the issue.
+
+For example, suppose you have a workflow that requires users to submit their
+request after is has been validated and confirmed. You can use the
+[`issue-ops/labeler`](https://github.com/issue-ops/labeler) action to transition
+the issue from `validated` to `submitted` state.
+
+```yaml
+- if: ${{ steps.command.outputs.continue == 'true' }}
+  name: Set Submitted State
+  id: set-submitted
+  uses: issue-ops/labeler@vX.X.X
+  with:
+    action: add
+    issue_number: ${{ github.event.issue.number }}
+    labels: |
+      issueops:submitted
+```
+
+### Provide feedback to the user
+
+Any time processing is done on an issue, its helpful to let users know:
+
+1. The command has been received
+1. The command is being processed
+1. The outcome of the processing
+
+The `github/command` action takes care of the first part for you. It will
+automatically add a reaction to any issue comments that contain a command.
+
+```yaml
+- uses: github/command@vX.X.X
+  id: command
+  with:
+    command: .lint
+    reaction: eyes
+```
+
+Any of the following reactions can be added:
+
+| Value      | Emoji      |
+| ---------- | ---------- |
+| `+1`       | :+1:       |
+| `-1`       | :-1:       |
+| `laugh`    | :smile:    |
+| `confused` | :confused: |
+| `heart`    | :heart:    |
+| `hooray`   | :tada:     |
+| `rocket`   | :rocket:   |
+| `eyes`     | :eyes:     |
+
+After the command has been received, adding comments to the issue to indicate
+work is being done is a great way to keep users informed. Once processing is
+complete, a comment can be added to the issue to indicate the outcome.
+
+```yaml
+- if: ${{ steps.command.outputs.continue == 'true' }}
+  name: Add Complete Comment
+  id: comment-complete
+  uses: peter-evans/create-or-update-comment@vX.X.X
+  with:
+    issue-number: ${{ github.event.issue.number }}
+    body: |
+      Your request has been processed! Here are the details of the request:
+
+      - **Team:** ${{ steps.parse.outputs.json.team_name }}
+      - **Role:** `member`
+```
