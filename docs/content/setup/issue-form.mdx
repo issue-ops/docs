@@ -19,14 +19,11 @@ For more information on the supported options, see
 
 The top-level syntax of the issue form template is used to define the title and
 description that users will see when they go to create an issue in your
-repository.
+repository. From a usability perspective, make sure to include a description and
+title that clearly explains what the user is requesting and what will happen
+once they submit their issue.
 
-From a usability perspective, make sure to include a description and title that
-clearly explains what the user is requesting and what will happen once they
-submit their issue.
-
-To ensure smooth operation, make sure to set the `label` and `projects`
-properties so that your workflows are properly triggered.
+<Note>Make sure to label your issues and assign them to projects!</Note>
 
 ```yaml
 name: Create a new repository
@@ -145,16 +142,4 @@ octocat, issueops
 ```
 
 You can see that certain inputs look the same, but are actually different types
-and, depending on their values, may be processed differently. The
-[`issue-ops/parser`](https://github.com/issue-ops/parser) action provides
-specific output formats based on the `type` property of the input.
-
-| Input type   | Example parsed output                               |
-| ------------ | --------------------------------------------------- |
-| `input`      | `"octorepo"`                                        |
-| `textarea`   | `"This is a description!\n\nIt is multiline, too!"` |
-| `dropdown`   | `["octocat", "issueops"]`                           |
-| `checkboxes` | `{ "selected": ["Yes"], "unselected": ["No"] }`     |
-
-Depending on how you're processing the input data, different types may be more
-helpful than others!
+and, depending on their values, may be processed differently.

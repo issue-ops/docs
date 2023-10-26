@@ -5,7 +5,10 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import {
+  ImageContainer,
+  Note
+} from '@issue-ops/gatsby-theme-doctocat-typescript'
 import { Avatar, Box, FormControl, TextInput, Timeline } from '@primer/react'
 import { MarkGithubIcon, TagIcon } from '@primer/octicons-react'
 
@@ -270,27 +273,29 @@ body:
 
 #### Rendered output
 
-<Box as="form">
-  <FormControl>
-    <FormControl.Label>Add a title</FormControl.Label>
-    <TextInput
-      required={true}
-      block={true}
-      disabled={true}
-      value={'[Request] Team Membership: TEAM_NAME'}
-    />
-  </FormControl>
-  Welcome to GitHub! Please fill out the information below to request to be added
-  to a GitHub Team. Once submitted, your request will be reviewed by the admin team.
-  Once approved, you will be added automatically!
-  <FormControl>
-    <FormControl.Label>Team name</FormControl.Label>
-    <FormControl.Caption>
-      The name of the team you would like to join.
-    </FormControl.Caption>
-    <TextInput required={true} disabled={true} placeholder={'octoteam'} />
-  </FormControl>
-</Box>
+<ImageContainer>
+  <Box as="form">
+    <FormControl>
+      <FormControl.Label>Add a title</FormControl.Label>
+      <TextInput
+        required={true}
+        block={true}
+        disabled={true}
+        value={'[Request] Team Membership: TEAM_NAME'}
+      />
+    </FormControl>
+    Welcome to GitHub! Please fill out the information below to request to be added
+    to a GitHub Team. Once submitted, your request will be reviewed by the admin
+    team. Once approved, you will be added automatically!
+    <FormControl>
+      <FormControl.Label>Team name</FormControl.Label>
+      <FormControl.Caption>
+        The name of the team you would like to join.
+      </FormControl.Caption>
+      <TextInput required={true} disabled={true} placeholder={'octoteam'} />
+    </FormControl>
+  </Box>
+</ImageContainer>
 
 ## Pull requests
 
