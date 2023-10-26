@@ -1,0 +1,37 @@
+---
+title: Approved
+description: An issue is approved and processing may begin
+status: Alpha
+---
+
+export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
+
+The validation step is where you can perform any checks to ensure that the
+request is valid. This is a great place to check for things like:
+
+Inputs for drop-down fields are one of the available options
+
+Inputs for text fields are in the correct format
+
+Inputs for checkboxes are valid
+
+Validation should be done early and often! After a request is initially
+validated, there is nothing stopping a user from editing the issue and
+submitting it with invalid inputs. Consider re-running validation logic any time
+the following events happen:
+
+The issue is created
+
+The issue body is edited
+
+The issue is closed and reopened
+
+The request is submitted for provisioning/creation
+
+After a request is validated successfully, it's helpful to provide a summary of
+the actions that will be taken when the user submits the request. However, if
+you have good validation logic in place, you can probably remove this step and
+move straight to requesting approval after the issue is created. However you’ll
+still need to consider how to handle situations such as an admin approving the
+request and the user updating the issue body (this is simple to do by checking
+the comment timestamps).

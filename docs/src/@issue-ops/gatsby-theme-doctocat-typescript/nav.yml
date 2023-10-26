@@ -22,22 +22,22 @@
       url: /setup/issue-create-workflow
     - title: Issue Comment Workflow
       url: /setup/issue-comment-workflow
-- title: IssueOps States
+- title: States and Transitions
   children:
     - title: About
-      url: /states
-    - title: Created
-      url: /states/created
-    - title: Parsed
-      url: /states/parsed
-    - title: Validated
-      url: /states/validated
-    - title: Submitted
-      url: /states/submitted
-    - title: Approved
-      url: /states/approved
-    - title: Closed
-      url: /states/closed
+      url: /states-transitions
+    - title: Parse
+      url: /states-transitions/parse
+    - title: Validate
+      url: /states-transitions/validate
+    - title: Submit
+      url: /states-transitions/submit
+    - title: Approve
+      url: /states-transitions/approve
+    - title: Deny
+      url: /states-transitions/deny
+    - title: Close
+      url: /states-transitions/close
 - title: Reference
   children:
     - title: IssueOps Actions
