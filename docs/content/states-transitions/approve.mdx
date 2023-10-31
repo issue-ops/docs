@@ -6,32 +6,96 @@ status: Alpha
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
 
-The validation step is where you can perform any checks to ensure that the
-request is valid. This is a great place to check for things like:
+## Overview
 
-Inputs for drop-down fields are one of the available options
+In the `Approved` state, we know that the issue has been approved and we can
+begin processing it. This is one of the first states in the workflow where we
+can perform an _unguarded transition_.
 
-Inputs for text fields are in the correct format
+In our repository workflow, a request is transitioned to the `Approved` state
+when an authorized user comments on the request with `.approve`. However,
+immediately after reaching this state, we know we can create the repository and
+close the issue (moving it to the `Closed` state). This is called an _unguarded
+transition_ because there is no condition that must be met before the transition
+occurs.
 
-Inputs for checkboxes are valid
+The actual implementation of this transition is up to you! There are a few
+recommendations to keep in mind:
 
-Validation should be done early and often! After a request is initially
-validated, there is nothing stopping a user from editing the issue and
-submitting it with invalid inputs. Consider re-running validation logic any time
-the following events happen:
+- Communication to users is always helpful! Consider leaving a comment on the
+  issue to let the user know that their request has been approved and what is
+  going to happen next. Or, comment on the issue with a summary of the changes
+  that have taken place.
+- Even after an issue is closed, users can interact with it. If you want to
+  prevent this, you can
+  [lock the issue](https://docs.github.com/en/communities/moderating-comments-and-conversations/locking-conversations).
+- Labels are a great way to organize issues. Consider adding a label to the
+  issue to indicate that it has been approved.
+- When closing an issue, choosing an appropriate reason is useful for future
+  reporting. For approved requests, closing an issue as `not_planned` may be
+  misleading. Consider `completed` instead.
 
-The issue is created
+## New repository request
 
-The issue body is edited
+When a new repository request is approved, we need to do the following:
 
-The issue is closed and reopened
+1. Create the repository
+1. Comment on the issue
+1. Close the issue
 
-The request is submitted for provisioning/creation
+```yaml
+# This job is responsible for handling approved requests.
+deny:
+  name: Approve Request
+  runs-on: ubuntu-latest
 
-After a request is validated successfully, it's helpful to provide a summary of
-the actions that will be taken when the user submits the request. However, if
-you have good validation logic in place, you can probably remove this step and
-move straight to requesting approval after the issue is created. However you’ll
-still need to consider how to handle situations such as an admin approving the
-request and the user updating the issue body (this is simple to do by checking
-the comment timestamps).
+  # Only run after validation has completed.
+  needs: validate
+
+  steps:
+    - name: Approve Command
+      id: approve
+      uses: github/command@vX.X.X
+      with:
+        allowed_contexts: issue
+        allowlist: octo-org/approvers
+        allowlist_pat: ${{ secrets.MY_TOKEN }}
+        command: .approve
+
+    # Create the repository.
+    - if: ${{ steps.approve.outputs.continue == 'true' }}
+      name: Create Repository
+      id: create
+      uses: actions/github-script@vX.X.X
+      with:
+        github-token: ${{ secrets.MY_TOKEN }}
+        script: |
+          const request = JSON.parse('${{ needs.validate.outputs.request }}')
+          await github.rest.repos.createInOrg({
+            org: '${{ github.repository_owner }}',
+            name: request.name,
+          })
+
+    # Comment on the issue to let the user know their request was denied.
+    - if: ${{ steps.approve.outputs.continue == 'true' }}
+      name: Post Comment
+      id: comment
+      uses: peter-evans/create-or-update-comment@vX.X.X
+      with:
+        issue-number: ${{ github.event.issue.number }}
+        body:
+          ':tada: This request has been approved! Your repository has been
+          created.'
+
+    # Close the issue.
+    - if: ${{ steps.approve.outputs.continue == 'true' }}
+      name: Close Issue
+      id: close
+      run: gh issue close ${{ github.event.issue.number }} --reason completed
+```
+
+## Next steps
+
+Your IssueOps workflow is officially complete! For the complete workflow files,
+check out the
+[`new-repository-request-example` directory](https://github.com/issue-ops/docs/tree/main/new-repository-request-example).
