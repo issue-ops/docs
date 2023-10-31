@@ -2,7 +2,7 @@ name: New Repository Request
 description: Submit a request to create a new GitHub repository
 title: '[Request] New Repository'
 labels:
-  - issueops:new-repo
+  - issueops:new-repository
 
 body:
   - type: markdown

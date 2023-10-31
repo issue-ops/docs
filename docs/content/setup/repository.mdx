@@ -150,12 +150,12 @@ on:
       - edited
 
 jobs:
-  new-repo-request:
-    name: New Repo Request
+  new-repository-request:
+    name: New Repository Request
     runs-on: ubuntu-latest
 
-    # Only run for issues with the `issueops:new-repo` label.
-    if: contains(github.event.issue.labels.*.name, 'issueops:new-repo')
+    # Only run for issues with the `issueops:new-repository` label.
+    if: contains(github.event.issue.labels.*.name, 'issueops:new-repository')
 
   team-membership-request:
     name: Team Membership Request

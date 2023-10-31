@@ -73,7 +73,7 @@ name: New Repository Request
 description: Submit a request to create a new GitHub repository
 title: '[Request] New Repository'
 labels:
-  - issueops:new-repo
+  - issueops:new-repository
 
 body:
   - type: markdown
@@ -243,13 +243,13 @@ on:
       - reopened
 
 jobs:
-  new-repo-request:
-    name: New Repo Request
+  new-repository-request:
+    name: New Repository Request
     runs-on: ubuntu-latest
 
     # Assign labels for different types of requests, and use those labels to
     # trigger different workflows, jobs, and steps.
-    if: contains(github.event.issue.labels.*.name, 'issueops:new-repo')
+    if: contains(github.event.issue.labels.*.name, 'issueops:new-repository')
 
     # Initially, this workflow only needs permissions to read issues. This will
     # be expanded later as we build additional functionality.
@@ -263,15 +263,14 @@ jobs:
         id: checkout
         uses: actions/checkout@vX.X.X
 
-      # Parse the issue body.
       - name: Parse Issue
         id: parser
         uses: issue-ops/parser@vX.X.X
         with:
           body: ${{ github.event.issue.body }}
-          issue-form-template: new-repo-request.yml
+          issue-form-template: new-repository-request.yml
 
-      - name: Output the JSON
+      - name: Output the Parsed Issue
         id: output
         run: echo ${{ steps.parser.outputs.json }}
 ```
