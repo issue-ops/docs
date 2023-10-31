@@ -109,7 +109,7 @@ jobs:
     steps:
       - name: Add User to Team
         id: add
-        uses: actions/github-script@v6
+        uses: actions/github-script@vX.X.X
         with:
           github-token: ${{ secrets.MY_TOKEN }}
           script: |
@@ -134,7 +134,7 @@ jobs:
     steps:
       - name: Remove User from Team
         id: remove
-        uses: actions/github-script@v6
+        uses: actions/github-script@vX.X.X
         with:
           github-token: ${{ secrets.MY_TOKEN }}
           script: |
