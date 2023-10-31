@@ -73,7 +73,7 @@ name: New Repo Request
 description: Submit a request to create a new GitHub repository
 title: '[Request] New Repository'
 labels:
-  - issueops:new-repo-request
+  - issueops:new-repo
 
 body:
   - type: markdown
@@ -99,7 +99,7 @@ body:
       multiple: false
       options:
         - private
-        - internal
+        - public
     validations:
       required: true
   - type: input
@@ -223,11 +223,11 @@ something like this:
 
 ### GitHub Actions workflow
 
-This will be the start of the IssueOps workflow. In order to do anything with
-the request, we need to parse the issue body and extract the information we need
-to get approval and create a repository.
+Creating an issue will kick off the start of the IssueOps process. However, in
+order to do anything with the request, we need to parse the issue body and
+extract the information we need to get approval and create a repository.
 
-<Note>Check the workflow comments for useful tips and tricks!</Note>
+<Note>Check the workflow comments for useful tips!</Note>
 
 ```yaml
 name: Issue Opened/Edited/Reopened
@@ -249,7 +249,7 @@ jobs:
 
     # Assign labels for different types of requests, and use those labels to
     # trigger different workflows, jobs, and steps.
-    if: contains(github.event.issue.labels.*.name, 'issueops:new-repo-request')
+    if: contains(github.event.issue.labels.*.name, 'issueops:new-repo')
 
     # Initially, this workflow only needs permissions to read issues. This will
     # be expanded later as we build additional functionality.
@@ -258,7 +258,7 @@ jobs:
 
     steps:
       # Get the repository contents. This lets the workflow reference files in
-      # the repository.
+      # the repository such as custom validation scripts.
       - name: Checkout
         id: checkout
         uses: actions/checkout@vX.X.X
@@ -275,3 +275,13 @@ jobs:
         id: output
         run: echo ${{ steps.parser.outputs.json }}
 ```
+
+## Next steps
+
+At this point, our issue has successfully transitioned into the `Parsed` state.
+This means that we have a machine-readable representation of the request that
+can be further processed by our workflows. However, we don't know if the request
+actually contains valid information! The next transition involves validating the
+parsed request against a set of rules to make sure it's ready to be processed.
+
+[Continue to the next section to learn about validation.](/states-transitions/validate)
