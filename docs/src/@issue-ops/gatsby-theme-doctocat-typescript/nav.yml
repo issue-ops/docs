@@ -36,8 +36,6 @@
       url: /states-transitions/approve
     - title: Deny
       url: /states-transitions/deny
-    - title: Close
-      url: /states-transitions/close
 - title: Reference
   children:
     - title: IssueOps Actions
