@@ -44,12 +44,12 @@ in the same workflow.
 
 ```yaml
 jobs:
-  new-repo-request:
-    name: New Repo Request
+  new-repository-request:
+    name: New Repository Request
     runs-on: ubuntu-latest
 
-    # Only run for issues with the `issueops:new-repo-request` label.
-    if: contains(github.event.issue.labels.*.name, 'issueops:new-repo')
+    # Only run for issues with the `issueops:new-repository` label.
+    if: contains(github.event.issue.labels.*.name, 'issueops:new-repository')
 
   team-membership-request:
     name: Team Membership Request
@@ -79,27 +79,22 @@ jobs:
       contains(github.event.issue.labels.*.name, 'issueops:team-remove')
 
     outputs:
-      request: ${{ steps.validate.outputs.request }}
+      request: ${{ steps.parse.outputs.json }}
 
     steps:
-      - name: Parse Issue Body
+      - name: Parse Issue
         id: parse
-        uses: actions/github-script@v6
+        uses: issue-ops/parser@vX.X.X
         with:
-          script: |
-            const parse = require('./src/new-repo-request/parse.js')
-            await parse(github, context, core)
+          body: ${{ github.event.issue.body }}
+          issue-form-template: team-add-remove-request.yml
 
-      - if: ${{ steps.parse.outputs.success == 'true' }}
-        name: Validate Issue Body
+      - name: Validate Issue
         id: validate
-        uses: actions/github-script@v6
+        uses: issue-ops/validator@vX.X.X
         with:
-          github-token: ${{ steps.token.outputs.token }}
-          script: |
-            const validate = require('./src/new-repo-request/validate.js')
-            const request = JSON.parse('${{ steps.parse.outputs.request }}')
-            await validate(github, context, core, request)
+          issue-form-template: team-add-remove-request.yml
+          parsed-issue-body: ${{ steps.parse.outputs.json }}
 
   team-add:
     name: Team Add Request
@@ -116,12 +111,10 @@ jobs:
         id: add
         uses: actions/github-script@v6
         with:
-          github-token: ${{ steps.token.outputs.token }}
+          github-token: ${{ secrets.MY_TOKEN }}
           script: |
-            // Get the request data from the `team-request` job
             const request = JSON.parse('${{ needs.team-request.outputs.request }}')
 
-            // Add the user to the team
             await github.rest.teams.addOrUpdateMembershipForUserInOrg({
               org: request.org,
               team_slug: request.team,
@@ -143,12 +136,10 @@ jobs:
         id: remove
         uses: actions/github-script@v6
         with:
-          github-token: ${{ steps.token.outputs.token }}
+          github-token: ${{ secrets.MY_TOKEN }}
           script: |
-            // Get the request data from the `team-request` job
             const request = JSON.parse('${{ needs.team-request.outputs.request }}')
 
-            // Add the user to the team
             await github.rest.teams.removeMembershipForUserInOrg({
               org: request.org,
               team_slug: request.team,
