@@ -281,6 +281,107 @@ module.exports = async (field) => {
 }
 ```
 
+### Update the workflow
+
+Now that issue validation has been configured, you can add it as a step to your
+workflow. Additional updates are noted with comments.
+
+```yaml
+name: Issue Opened/Edited/Reopened
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - reopened
+
+jobs:
+  new-repository-request:
+    name: New Repository Request
+    runs-on: ubuntu-latest
+
+    if: contains(github.event.issue.labels.*.name, 'issueops:new-repository')
+
+    # Since the validation step involves adding comments to issues, you will
+    # need to give it write permissions. If you are using a GitHub App to call
+    # other GitHub APIs, you will also need to add the appropriate permissions.
+    permissions:
+      contents: read
+      id-token: write
+      issues: write
+
+    steps:
+      # Always remove the validated/submitted labels first! This ensures that
+      # the validation logic runs any time the issue body is edited. It also
+      # ensures the issue must be re-submitted after editing.
+      - name: Remove Labels
+        id: remove-label
+        uses: issue-ops/labeler@vX.X.X
+        with:
+          action: remove
+          issue_number: ${{ github.event.issue.number }}
+          labels: |
+            issueops:validated
+            issueops:submitted
+
+      # If your validation script checks things beyond the scope of the
+      # repository it is running in, you will need to create a GitHub App and
+      # generate an installation access token in your workflow.
+      - name: Get App Token
+        id: token
+        uses: actions/create-github-app-token@vX.X.X
+        with:
+          app_id: ${{ secrets.MY_GITHUB_APP_ID }}
+          private_key: ${{ secrets.MY_GITHUB_APP_PEM }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@vX.X.X
+
+      # Install Node.js so the workflow can add npm packages that are used by
+      # the custom validator scripts (e.g. '@octokit/rest').
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@vX.X.X
+        with:
+          node-version: 20
+          cache: npm
+
+      # Install NPM packages needed by the validator scripts.
+      - name: Install Packages
+        id: npm
+        run: npm ci
+
+      - name: Parse Issue
+        id: parse
+        uses: issue-ops/parser@vX.X.X
+        with:
+          body: ${{ github.event.issue.body }}
+          issue-form-template: new-repository-request.yml
+
+      # Add a step to validate the issue.
+      - name: Validate Issue
+        id: validate
+        uses: issue-ops/validator@vX.X.X
+        with:
+          issue-form-template: new-repository-request.yml
+          github-token: ${{ steps.token.outputs.token }}
+          parsed-issue-body: ${{ steps.parse.outputs.json }}
+
+      # Add a label to mark the request as validated.
+      - if: ${{ steps.validate.outputs.result == 'success' }}
+        name: Add Validated Label
+        id: add-label
+        uses: issue-ops/labeler@vX.X.X
+        with:
+          action: add
+          issue_number: ${{ github.event.issue.number }}
+          labels: |
+            issueops:validated
+```
+
 ## Next steps
 
 Congratulations! Your request has been successfully transitioned to the

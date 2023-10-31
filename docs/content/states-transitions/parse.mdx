@@ -243,6 +243,11 @@ on:
       - reopened
 
 jobs:
+  # Different request types may have different inputs. For example, a new
+  # repository request may have different inputs than a repository transfer
+  # request. You can create multiple jobs to parse different types of requests
+  # in the same workflow. Labels can be used to control which jobs run for
+  # which types of requests.
   new-repository-request:
     name: New Repository Request
     runs-on: ubuntu-latest
@@ -251,20 +256,22 @@ jobs:
     # trigger different workflows, jobs, and steps.
     if: contains(github.event.issue.labels.*.name, 'issueops:new-repository')
 
-    # Initially, this workflow only needs permissions to read issues. This will
-    # be expanded later as we build additional functionality.
+    # Initially, this workflow only needs permissions to read issues and
+    # contents. This will be expanded later as we build additional
+    # functionality.
     permissions:
-      issues: write
+      contents: read
+      issues: read
 
     steps:
       # Get the repository contents. This lets the workflow reference files in
-      # the repository such as custom validation scripts.
+      # the repository such as the issue form template.
       - name: Checkout
         id: checkout
         uses: actions/checkout@vX.X.X
 
       - name: Parse Issue
-        id: parser
+        id: parse
         uses: issue-ops/parser@vX.X.X
         with:
           body: ${{ github.event.issue.body }}
@@ -272,7 +279,7 @@ jobs:
 
       - name: Output the Parsed Issue
         id: output
-        run: echo ${{ steps.parser.outputs.json }}
+        run: echo ${{ steps.parse.outputs.json }}
 ```
 
 ## Next steps
