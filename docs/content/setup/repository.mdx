@@ -154,7 +154,7 @@ jobs:
     name: New Repo Request
     runs-on: ubuntu-latest
 
-    # Only run for issues with the `issueops:new-repo-request` label.
+    # Only run for issues with the `issueops:new-repo` label.
     if: contains(github.event.issue.labels.*.name, 'issueops:new-repo')
 
   team-membership-request:
