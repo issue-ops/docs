@@ -1,32 +1,39 @@
 ---
 title: Validate
-description: Are they asking for the right thing?
+description: Validate Early. Validate Often.
 status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+
+## Overview
 
 Once an issue has been parsed, it can be validated against any rules that you
-require. Validation should be done early and often! After a request is initially
-validated, there is nothing stopping a user from editing the issue and
-submitting it with invalid inputs. Consider re-running validation logic any time
-the following events happen:
+require. When used in public repositories, issue form templates do enforce some
+[validation rules](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema#keys)
+such as required fields, selection options, and more. However, you may have
+additional needs that apply to your specific use case. For example, if you are
+creating an IssueOps workflow for users to request membership to GitHub teams,
+the issue form template is not able to validate if a value provided by a user is
+in fact a team in your organization.
+
+The [`issue-ops/validator`](https://github.com/issue-ops/validator) action takes
+the parsed output of the issue body and validates it against the issue form
+template and any custom rules you define.
+
+<Note variant="danger">
+
+After a request is initially validated, there is nothing stopping a user from
+editing the issue and submitting it with invalid inputs. You should run your
+validation logic any time the following events occur:
 
 - The issue is created
 - The issue body is edited
 - The issue is closed and reopened
 - The request is submitted for provisioning/creation
 
-When used in public repositories, issue form templates do enforce some
-validation rules such as required fields, selection options, and more. However,
-you may have additional validation rules that apply to your specific use case.
-For example, if you are creating an IssueOps workflow for users to request
-membership to GitHub teams, the issue form template is not able to validate if a
-value provided by a user is in fact a team in your GitHub organization.
-
-The [`issue-ops/validator`](https://github.com/issue-ops/validator) action takes
-the parsed output of the issue body and validates it against the issue form
-template and any custom rules you define.
+</Note>
 
 ### Basic validation
 
@@ -43,27 +50,64 @@ message.
     parsed-issue-body: ${{ steps.parse.outputs.json }}
 ```
 
+For example, if you have an input field for users to select the visibility of
+their new repository, you can specify that the field is required and only one
+option can be chosen.
+
+```yaml
+- type: dropdown
+    id: visibility
+    attributes:
+      label: Repository Visibility
+      description: The visibility of the repository.
+      multiple: false
+      options:
+        - private
+        - public
+    validations:
+      required: true
+```
+
+When run against an issue submitted with this template, the validator will
+comment on the issue with an error message if any of the following occur:
+
+- The field is empty
+- The field is missing from the issue body
+- An option other than `private` or `public` is present
+
 ### Custom validation
 
-For each form field, you can specify custom validation logic to run. To do so,
-add the following files to your IssueOps repository.
+For each form field, you can also specify custom validation logic. This is done
+using several files in your repository:
 
-#### `.github/validator/config.yml`
+- The validator configuration file (`.github/validator/config.yml`)
+- One or more validator scripts (`.github/validator/<script-name>.js`)
+
+#### Configuration file
 
 This file defines the mapping of validator scripts to form fields. For example,
-if your issue form has an input field named `Team Name`, you can specify a
-validator script to run against that field.
+if your issue form has input fields named `Read Team` and `Write Team`, you can
+specify a validator script (`check_team_exists.js`) to run against those fields.
 
 ```yaml
 validators:
-  - field: team_name
-    script: check_team_name
+  - field: read_team
+    script: check_team_exists
+  - field: write_team
+    script: check_team_exists
 ```
 
-#### `.github/validator/<script-name>.js`
+#### Validator scripts
 
-This is the validation script that will be run on the field. The script must
-specify a default export of a function with the following behavior:
+<Note>
+  If you want to run custom validators that access GitHub APIs, you will need to
+  provide a value for the `github-token` input. This is another good scenario
+  for GitHub App authentication!
+</Note>
+
+Validator scripts are run on the associated fields in the configuration file.
+The script must specify a default export of a function with the following
+behavior:
 
 - Accept inputs of the following types:
   - `string` (Input and Textarea)
@@ -72,12 +116,175 @@ specify a default export of a function with the following behavior:
 - Return `'success'` for successful validation
 - Return an error message (`string`) for unsuccessful validation
 
-See
-[this example](https://github.com/issue-ops/validator/blob/main/.github/validator/team.js)
-for reference.
+The following is an example of a validator script that checks if a team exists.
+This can also be found in the
+[`issue-ops/validator` repository](https://github.com/issue-ops/validator/blob/main/.github/validator/team.js).
 
-<Note>
-  If you want to run custom validators that access GitHub APIs, you will need to
-  provide a value for the `github-token` input. This is another good scenario
-  for GitHub App authentication!
-</Note>
+```js
+module.exports = async (field) => {
+  if (typeof field !== 'string') return 'Field type is invalid'
+
+  const { getOctokit } = require('@actions/github')
+  const core = require('@actions/core')
+  const octokit = getOctokit(core.getInput('github-token', { required: true }))
+
+  try {
+    await octokit.rest.teams.getByName({
+      org: process.env.ORGANIZATION ?? '',
+      team_slug: field
+    })
+
+    core.info(`Team '${field}' exists`)
+    return 'success'
+  } catch (error) {
+    if (error.status === 404) {
+      core.error(`Team '${field}' does not exist`)
+      return `Team '${field}' does not exist`
+    }
+  }
+}
+```
+
+## New repository request
+
+Recall from the
+[issue form template](https://github.com/issue-ops/docs/blob/main/examples/ISSUE_TEMPLATE/new-repository-request.yml)
+that the new repository request expects the following inputs:
+
+| Input           | Required           | Options             |
+| --------------- | ------------------ | ------------------- |
+| Repository Name | :white_check_mark: |                     |
+| Visibility      | :white_check_mark: | `private`, `public` |
+| Read Team       | :white_check_mark: |                     |
+| Write Team      | :white_check_mark: |                     |
+| Auto Init       | :white_check_mark: | `true`, `false`     |
+| Topics          | :x:                |                     |
+
+Since the _Visibility_ and _Auto Init_ inputs must be one of several predefined
+values, they can be handled by basic validation. The other fields, however, must
+meet additional requirements:
+
+| Field           | Requirement                                                |
+| --------------- | ---------------------------------------------------------- |
+| Repository Name | Must not be an existing repository                         |
+| Read Team       | Must be a team in the organization                         |
+| Write Team      | Must be a team in the organization                         |
+| Topics          | Must be a list of 20 or fewer                              |
+|                 | Each topic must be lowercase                               |
+|                 | Each topic must be 50 or fewer characters                  |
+|                 | Each topic must contain only letters, numbers, and hyphens |
+
+### Create a configuration file
+
+In order to configure custom validation, first create a configuration file in
+the repository.
+
+**File path:** `.github/validator/config.yml`
+
+```yaml
+validators:
+  - field: repository_name
+    script: repo_doesnt_exist
+  - field: read_team
+    script: team_exists
+  - field: write_team
+    script: team_exists
+  - field: topics
+    script: topics_valid
+```
+
+### Create validator scripts
+
+The following scripts can be used to validate the new repository request.
+
+#### `.github/validator/repo_doesnt_exist.js`
+
+```js
+module.exports = async (field) => {
+  if (typeof field !== 'string') return 'Field type is invalid'
+
+  const { getOctokit } = require('@actions/github')
+  const core = require('@actions/core')
+  const octokit = getOctokit(core.getInput('github-token', { required: true }))
+
+  try {
+    // This should throw a 404 error
+    await octokit.rest.repos.get({
+      org: '<org-name>',
+      repo: field
+    })
+
+    core.error(`Repository '${field}' already exists`)
+    return `Repository '${field}' already exists`
+  } catch (error) {
+    if (error.status === 404) {
+      core.info(`Repository '${field}' does not exist`)
+      return 'success'
+    }
+  }
+}
+```
+
+#### `.github/validator/team_exists.js`
+
+```js
+module.exports = async (field) => {
+  if (typeof field !== 'string') return 'Field type is invalid'
+
+  const { getOctokit } = require('@actions/github')
+  const core = require('@actions/core')
+  const octokit = getOctokit(core.getInput('github-token', { required: true }))
+
+  try {
+    await octokit.rest.teams.getByName({
+      org: process.env.ORGANIZATION ?? '',
+      team_slug: field
+    })
+
+    core.info(`Team '${field}' exists`)
+    return 'success'
+  } catch (error) {
+    if (error.status === 404) {
+      core.error(`Team '${field}' does not exist`)
+      return `Team '${field}' does not exist`
+    }
+  }
+}
+```
+
+#### `.github/validator/topics_valid.js`
+
+For details about the requirements for repository topics, see
+[About topics](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics#about-topics).
+
+```js
+module.exports = async (field) => {
+  if (typeof field !== 'string') return 'Field type is invalid'
+
+  const topics = field.split(/[\r\n]+/)
+
+  if (topics.length > 20)
+    return `There are ${request.topics.length} topics (max: 20)`
+
+  const invalidTopics = []
+  for (const topic of topics) {
+    if (
+      topic !== topic.toLowerCase() ||
+      topic.length > 50 ||
+      !topic.match(/^[a-z0-9-]+$/)
+    )
+      invalidTopics.push(topic)
+  }
+
+  if (invalidTopics.length > 0)
+    return `The following topics are invalid: ${JSON.stringify(invalidTopics)}`
+}
+```
+
+## Next steps
+
+Congratulations! Your request has been successfully transitioned to the
+`Validated` state. Next, we're going to submit the request for approval.
+
+[Continue to the next section](/states-transitions/submit) to learn how to
+submit the request for approval by an authorized user.

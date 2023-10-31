@@ -1,0 +1,72 @@
+name: New Repository Request
+description: Submit a request to create a new GitHub repository
+title: '[Request] New Repository'
+labels:
+  - issueops:new-repo
+
+body:
+  - type: markdown
+    attributes:
+      value:
+        Welcome to GitHub! Please fill out the information below to request a
+        new repository. Once submitted, your request will be reviewed by the
+        IssueOps team. If approved, the repository will be created and you will
+        be notified via a comment on this issue.
+  - type: input
+    id: name
+    attributes:
+      label: Repository Name
+      description: The name of the repository you would like to create.
+      placeholder: octorepo
+    validations:
+      required: true
+  - type: dropdown
+    id: visibility
+    attributes:
+      label: Repository Visibility
+      description: The visibility of the repository.
+      multiple: false
+      options:
+        - private
+        - public
+    validations:
+      required: true
+  - type: input
+    id: read-team
+    attributes:
+      label: Read Team
+      description: The GitHub Team that will get read access to the repository.
+      placeholder: octocat-readers
+    validations:
+      required: true
+  - type: input
+    id: write-team
+    attributes:
+      label: Write Team
+      description: The GitHub Team that will get write access to the repository.
+      placeholder: octocat-writers
+    validations:
+      required: true
+  - type: dropdown
+    id: auto-init
+    attributes:
+      label: Auto Init
+      description: Select `true` to initialize the repository with a `README`.
+      multiple: false
+      options:
+        - 'true'
+        - 'false'
+    validations:
+      required: true
+  - type: textarea
+    id: topics
+    attributes:
+      label: Topics
+      description:
+        (Optional) A list of topics to add to the repository. Separate each
+        topic with a new line.
+      placeholder: |
+        octocat
+        octodog
+    validations:
+      required: false
