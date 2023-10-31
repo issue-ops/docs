@@ -6,32 +6,78 @@ status: Alpha
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
 
-The validation step is where you can perform any checks to ensure that the
-request is valid. This is a great place to check for things like:
+## Overview
 
-Inputs for drop-down fields are one of the available options
+In the `Denied` state, we know that the issue has been denied and there is no
+further action to take. This is one of the first states in the workflow where we
+can perform an _unguarded transition_.
 
-Inputs for text fields are in the correct format
+In our repository workflow, a request is transitioned to the `Denied` state when
+an authorized user comments on the request with `.deny`. However, immediately
+after reaching this state, we want to close the issue (moving it to the `Closed`
+state). This is called an _unguarded transition_ because there is no condition
+that must be met before the transition occurs.
 
-Inputs for checkboxes are valid
+The actual implementation of this transition is up to you! There are a few
+recommendations to keep in mind:
 
-Validation should be done early and often! After a request is initially
-validated, there is nothing stopping a user from editing the issue and
-submitting it with invalid inputs. Consider re-running validation logic any time
-the following events happen:
+- Communication to users is always helpful! Consider leaving a comment on the
+  issue to let the user know that their request has been denied and what steps,
+  if any, they can take next.
+- Even after an issue is closed, users can interact with it. If you want to
+  prevent this, you can
+  [lock the issue](https://docs.github.com/en/communities/moderating-comments-and-conversations/locking-conversations).
+- Labels are a great way to organize issues. Consider adding a label to the
+  issue to indicate that it has been denied.
+- When closing an issue, choosing an appropriate reason is useful for future
+  reporting. For denied requests, closing an issue as `completed` may be
+  misleading. Consider `not_planned` instead.
 
-The issue is created
+## New repository request
 
-The issue body is edited
+When a new repository request is denied, we want to close the issue and leave a
+comment for the user. We should also add an appropriate label so we know the
+request was closed as denied.
 
-The issue is closed and reopened
+```yaml
+# This job is responsible for handling denied requests.
+deny:
+  name: Deny Request
+  runs-on: ubuntu-latest
 
-The request is submitted for provisioning/creation
+  # Only run after validation has completed.
+  needs: validate
 
-After a request is validated successfully, it's helpful to provide a summary of
-the actions that will be taken when the user submits the request. However, if
-you have good validation logic in place, you can probably remove this step and
-move straight to requesting approval after the issue is created. However you’ll
-still need to consider how to handle situations such as an admin approving the
-request and the user updating the issue body (this is simple to do by checking
-the comment timestamps).
+  steps:
+    - name: Deny Command
+      id: deny
+      uses: github/command@vX.X.X
+      with:
+        allowed_contexts: issue
+        allowlist: octo-org/approvers
+        allowlist_pat: ${{ secrets.MY_TOKEN }}
+        command: .deny
+
+    # Comment on the issue to let the user know their request was denied.
+    - if: ${{ steps.deny.outputs.continue == 'true' }}
+      name: Post Comment
+      id: comment
+      uses: peter-evans/create-or-update-comment@vX.X.X
+      with:
+        issue-number: ${{ github.event.issue.number }}
+        body:
+          ':no_entry_sign: This request has been denied! This issue will be
+          closed shortly.'
+
+    # Close the issue.
+    - if: ${{ steps.deny.outputs.continue == 'true' }}
+      name: Close Issue
+      id: close
+      run: gh issue close ${{ github.event.issue.number }} --reason not_planned
+```
+
+## Next steps
+
+Your IssueOps workflow is officially complete! For the complete workflow files,
+check out the
+[`new-repository-request-example` directory](https://github.com/issue-ops/docs/tree/main/new-repository-request-example).
