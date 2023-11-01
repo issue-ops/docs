@@ -1,9 +1,9 @@
 ---
-title: Overview
+title: About
 description:
   IssueOps is a framework for using GitHub issues and pull requests as part of
   workflows
-status: Beta
+status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
@@ -122,7 +122,7 @@ rendered as a state diagram.
 
 ```mermaid
 stateDiagram-v2
-  1 : Created
+  1 : Opened
   2 : Submitted
   3 : Approved
   4 : Denied
@@ -265,9 +265,9 @@ itself, so they may not apply to your workflow. You will generally use the
 `issue => labeled` event instead.
 
 <Note variant="warning">
-  Anyone with access to create issues can also change labels! Labels are good
-  for state tracking, but should not be used to determine if a request is valid!
-  For more information, see the [Validate](/workflow/validate) step.
+  Anyone with access to open issues can also change labels! Labels are good for
+  state tracking, but should not be used to determine if a request is valid! For
+  more information, see the [Validate](/workflow/validate) step.
 </Note>
 
 ## GitHub features
@@ -291,7 +291,7 @@ Keeping track of requests, especially when you have an approval process in
 place, is important.
 [Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects)
 make it easy to track requests throughout their lifecycle. You can automatically
-add issues as they are created, and use lifecycle rules to keep track of the
+add issues as they are opened, and use lifecycle rules to keep track of the
 state of requests without having to manually move them around your project
 board.
 
