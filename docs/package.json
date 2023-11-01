@@ -20,7 +20,7 @@
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "clean": "gatsby clean",
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
     "serve": "gatsby serve",
     "lint": "npx eslint . -c .eslintrc.yml --ext md,mdx"
   },
