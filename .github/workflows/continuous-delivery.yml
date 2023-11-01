@@ -40,6 +40,13 @@ jobs:
           node-version: 20
           cache: npm
 
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v3
+        with:
+          static_site_generator: gatsby
+          generator_config_file: docs/gatsby-config.ts
+
       - name: Install Dependencies
         id: install
         run: npm ci
