@@ -25,10 +25,10 @@ critical to ensure that the right processing occurs at the right time!
 
 | State       | Description                                                                             |
 | ----------- | --------------------------------------------------------------------------------------- |
-| `Created`   | The initial state for a new issue that has been opened.                                 |
+| `Opened`    | The initial state for a new issue that has been opened.                                 |
 |             | Typically the first state in the lifecycle of an issue.                                 |
 | `Parsed`    | The issue body has been read and converted to machine-readable JSON                     |
-|             | Usually the next immediate state after `Created`.                                       |
+|             | Usually the next immediate state after `Opened`.                                        |
 | `Validated` | The issue body has been deemed valid based on any custom rules.                         |
 |             | Usually the next immediate state after `Parsed`.                                        |
 |             | The next transitions depend on the type of request and any rules that must be followed. |
@@ -41,7 +41,7 @@ critical to ensure that the right processing occurs at the right time!
 
 ```mermaid
 stateDiagram-v2
-  1 : Created
+  1 : Opened
   2 : Parsed
   3 : Validated
   4 : Submitted
@@ -115,18 +115,18 @@ state.
 Of course! In state diagrams, its common for each state to have multiple
 transitions. States can even transition back into themselves!
 
-When an issue is first opened it will be in the `Created` state. Typically, the
+When an issue is first opened it will be in the `Opened` state. Typically, the
 first step after an issue is opened is to parse the body and prepare for further
 processing. If this is successful, the issue would transition into the `Parsed`
 state. If there is a problem during parsing, the workflow can add a comment with
-a descriptive error and return the issue to the `Created` state. When the user
+a descriptive error and return the issue to the `Opened` state. When the user
 edits the issue to fix the error, parsing would run again.
 
 <Box style={{ alignItems: 'center', textAlign: 'center' }}>
 
 ```mermaid
 stateDiagram-v2
-  1 : Created
+  1 : Opened
   2 : Parsed
   [*] --> 1
   1 --> 2 : Parse success

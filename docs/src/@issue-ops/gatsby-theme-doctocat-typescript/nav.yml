@@ -1,6 +1,6 @@
 - title: Introduction
   children:
-    - title: Overview
+    - title: About
       url: /introduction
     - title: Issues and PRs
       url: /introduction/issues-and-prs
@@ -18,24 +18,24 @@
       url: /setup/github-app
     - title: Issue Form
       url: /setup/issue-form
-    - title: Issue Create Workflow
-      url: /setup/issue-create-workflow
-    - title: Issue Comment Workflow
-      url: /setup/issue-comment-workflow
+    - title: Issue Workflow
+      url: /setup/issue-workflow
+    - title: Comment Workflow
+      url: /setup/comment-workflow
 - title: States and Transitions
   children:
     - title: About
-      url: /states-transitions
+      url: /states-and-transitions
     - title: Parse
-      url: /states-transitions/parse
+      url: /states-and-transitions/parse
     - title: Validate
-      url: /states-transitions/validate
+      url: /states-and-transitions/validate
     - title: Submit
-      url: /states-transitions/submit
+      url: /states-and-transitions/submit
     - title: Approve
-      url: /states-transitions/approve
+      url: /states-and-transitions/approve
     - title: Deny
-      url: /states-transitions/deny
+      url: /states-and-transitions/deny
 - title: Reference
   children:
     - title: IssueOps Actions

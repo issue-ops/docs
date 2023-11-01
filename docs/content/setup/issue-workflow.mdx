@@ -1,6 +1,6 @@
 ---
-title: Issue create workflow setup
-description: Perform initial processing of new issues
+title: Issue workflow setup
+description: Perform initial processing of issues
 status: Alpha
 ---
 
@@ -8,19 +8,17 @@ export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
 import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
 
 Once a user submits your issue form, its time for GitHub Actions to run the
-show! The create workflow is responsible for performing any initial processing
-of the issue, such as adding labels, validating the contents, adding comments,
-etc.
-
-The following sections will walk through the core structure of a create
-workflow. For more detailed information, refer to the
-[Created state](/states/created) documentation.
+show! The issue workflow is responsible for performing any initial processing of
+the issue such as adding labels, validating the contents, adding comments, etc.
+The following sections will walk through the core structure of an issue
+workflow.
 
 ## Event triggers
 
-The term "create workflow" is a misnomer. This workflow should, at minimum, be
-run any time an issue is opened, edited, or reopened. However, most of the time
-this workflow will only be run when an issue is created.
+This workflow should, at minimum, be run any time an issue is opened, edited, or
+reopened. Most of the time, this workflow will only be run when an issue is
+opened or edited, however there are some cases where you may want to run this
+workflow when an issue is reopened.
 
 ```yaml
 on:

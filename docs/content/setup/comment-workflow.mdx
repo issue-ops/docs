@@ -1,5 +1,5 @@
 ---
-title: Issue comment workflow setup
+title: Comment workflow setup
 description: Respond to comments on IssueOps-driven issues
 status: Alpha
 ---
@@ -9,14 +9,14 @@ import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
 import { ActionList, Box } from '@primer/react'
 import { CheckCircleIcon } from '@primer/octicons-react'
 
-After the issue has been created and any initial processing has been run, the
-issue comment workflow becomes the main driver of the rest of the process. This
+After the issue has been opened and any initial processing has been run, the
+comment workflow becomes the main driver of the rest of the process. This
 workflow is triggered by users commenting on issues and will do any further
 processing throughout the lifecycle of the issue.
 
 ## Event triggers
 
-The issue comment workflow should, at minimum, be triggered by creation of new
+The comment workflow should, at minimum, be triggered by creation of new
 comments. The `issue_comment` trigger also supports editing and deleting
 comments, which may be useful for your use-case.
 
@@ -48,8 +48,8 @@ becomes particularly challenging.
 Good IssueOps workflows make use of _commands_ to trigger actions. These
 commands are typically prefixed with a symbol, such as `.` or `/`, and are
 descriptive of the action that will be taken when the command is processed. In
-general, any workflow that involves processing issue comments should start by
-looking for the specific command being run.
+general, any workflow that involves processing comments should start by looking
+for a specific command being run.
 
 | Keyword    | Description                   |
 | ---------- | ----------------------------- |
@@ -122,8 +122,8 @@ The high-level flow of the `github/command` action is:
 
 ## Workflow steps
 
-Most issue comment workflows can be broken down into the following steps.
-Depending on your workflow, some of these may not be required.
+Most comment workflows can be broken down into the following steps. Depending on
+your workflow, some of these may not be required.
 
 1. Parse and validate the command and input(s)
 1. Parse and validate the issue body
@@ -276,7 +276,7 @@ steps:
 
 ### Check the user's permissions
 
-By default, any user with read access to a repository can create issues and add
+By default, any user with read access to a repository can open issues and add
 comments. If your IssueOps workflow involves certain authorized users being able
 to perform actions (e.g. approving or denying requests), this can be a problem!
 Instead, you should use the `allowlist` option in the `github/command` action to
@@ -390,7 +390,7 @@ Any time processing is done on an issue, its helpful to let users know:
 1. The outcome of the processing
 
 The `github/command` action takes care of the first part for you. It will
-automatically add a reaction to any issue comments that contain a command.
+automatically add a reaction to any comments that contain a command.
 
 ```yaml
 - uses: github/command@vX.X.X
