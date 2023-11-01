@@ -33,8 +33,8 @@ can set the visibility to `private` and add those users as
 
 ## Permissions
 
-Users only need `read` access to create issues! Unless there is a specific
-reason to do otherwise, you should only ever need to grant `read` access.
+Users only need `read` access to open issues! Unless there is a specific reason
+to do otherwise, you should only ever need to grant `read` access.
 
 The primary reason to grant `write` access is if your IssueOps flow uses pull
 requests instead of issues, but only if you want users to create pull requests
@@ -79,28 +79,26 @@ workflows at all. However, this may not be practical for your workflow. Here are
 some recommended settings:
 
 <DoDontContainer>
-  <Dont indented>Send write tokens to fork pull requests</Dont>
   <Do indented>
     Document required permissions for contributors to run the workflows
     themselves
   </Do>
+  <Dont indented>Send write tokens to fork pull requests</Dont>
 </DoDontContainer>
 
 <DoDontContainer>
-  <Dont indented>
-    Send secrets and variables to workflows from fork pull requests
-  </Dont>
   <Do indented>
     Document the required secrets and variables and how to generate them
   </Do>
+  <Dont indented>
+    Send secrets and variables to workflows from fork pull requests
+  </Dont>
 </DoDontContainer>
 
 One alternative to consider is to "wrap" the creation of the PR into part of
 your IssueOps flow. If the content of the PR will follow a known format, you can
 use a GitHub Action to create the PR on behalf of the user. This will allow you
-to remove the need to allow any GitHub Actions access to fork pull requests. For
-an example of this scenario, see the
-[IssueOps Actions](/reference/issueops-actions) page.
+to remove the need to allow any GitHub Actions access to fork pull requests.
 
 {/* TODO: Direct link to specific example */}
 
