@@ -99,7 +99,7 @@
     "@types/pluralize": "^0.0.31",
     "@types/preval.macro": "^3.0.1",
     "@types/prismjs": "^1.26.2",
-    "@types/react": "^18.2.25",
+    "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
     "@types/react-helmet": "^6.1.7",
     "@types/react-measure": "^2.0.10",
