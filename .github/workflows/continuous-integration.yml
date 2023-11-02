@@ -8,16 +8,15 @@ on:
     branches:
       - main
 
+permissions:
+  actions: read
+  checks: write
+  contents: read
+
 jobs:
   continuous-integration:
     name: Continuous Integration
     runs-on: ubuntu-latest
-
-    permissions:
-      actions: read
-      checks: write
-      contents: read
-      statuses: write
 
     steps:
       - name: Checkout
@@ -28,12 +27,16 @@ jobs:
         id: setup-node
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version-file: .node-version
           cache: npm
 
       - name: Install Dependencies
         id: install
         run: npm ci
+
+      - name: Install Playwright
+        id: playwright
+        run: npx playwright install
 
       - name: Check Format
         id: format-check
@@ -42,3 +45,9 @@ jobs:
       - name: Lint
         id: lint
         run: npm run lint
+
+      - name: Build
+        id: build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run build
