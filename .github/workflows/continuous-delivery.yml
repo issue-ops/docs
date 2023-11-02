@@ -37,7 +37,7 @@ jobs:
         id: setup-node
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version-file: .node-version
           cache: npm
 
       - name: Setup Pages
