@@ -58,7 +58,7 @@
     "get-pkg-repo": "^5.0.0",
     "github-slugger": "^2.0.0",
     "graphql": "^16.8.1",
-    "html-react-parser": "^4.2.6",
+    "html-react-parser": "^5.0.6",
     "lodash.debounce": "^4.0.8",
     "lodash.uniqby": "^4.7.0",
     "path-browserify": "^1.0.1",
