@@ -16,3 +16,4 @@ LICENSE
 .gitignore
 .prettierignore
 *.png
+.node-version
