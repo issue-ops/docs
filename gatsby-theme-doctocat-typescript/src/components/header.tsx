@@ -7,7 +7,7 @@ import {
   Box,
   Button,
   Link,
-  StyledOcticon,
+  Octicon,
   Text,
   themeGet,
   ThemeProvider
@@ -60,7 +60,7 @@ export default function Header({
                 mr: 3,
                 lineHeight: 'condensedUltra'
               }}>
-              <StyledOcticon icon={MarkGithubIcon} size={24} />
+              <Octicon icon={MarkGithubIcon} size={24} />
             </Link>
             {siteMetadata.header.title ? (
               <Link

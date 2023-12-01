@@ -1,5 +1,5 @@
 import { LinkIcon } from '@primer/octicons-react'
-import { Heading, Link, StyledOcticon, themeGet, useTheme } from '@primer/react'
+import { Heading, Link, Octicon, themeGet, useTheme } from '@primer/react'
 
 import GithubSlugger from 'github-slugger'
 import React from 'react'
@@ -43,7 +43,7 @@ function MarkdownHeading({ children, ...props }) {
           }
         }}>
         {children}
-        <StyledOcticon
+        <Octicon
           icon={LinkIcon}
           className="octicon-link"
           sx={{

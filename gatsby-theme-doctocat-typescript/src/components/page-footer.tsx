@@ -1,5 +1,5 @@
 import { PencilIcon } from '@primer/octicons-react'
-import { Box, Link, StyledOcticon } from '@primer/react'
+import { Box, Link, Octicon } from '@primer/react'
 
 import React, { ReactElement } from 'react'
 
@@ -36,7 +36,7 @@ export default function PageFooter({
       <Box sx={{ display: 'grid', gap: 4 }}>
         {editUrl ? (
           <Link href={editUrl}>
-            <StyledOcticon icon={PencilIcon} sx={{ mr: 2 }} />
+            <Octicon icon={PencilIcon} sx={{ mr: 2 }} />
             Edit this page on GitHub
           </Link>
         ) : null}
