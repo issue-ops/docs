@@ -45,6 +45,6 @@
     "@typescript-eslint/parser": "^6.13.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remark-gfm": "^4.0.0"
+    "remark-gfm": "^3.0.0"
   }
 }
