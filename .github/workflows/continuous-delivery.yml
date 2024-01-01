@@ -42,7 +42,7 @@ jobs:
 
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v4
         with:
           static_site_generator: gatsby
           generator_config_file: docs/gatsby-config.ts
@@ -63,7 +63,7 @@ jobs:
 
       - name: Upload Pages Artifact
         id: upload
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./docs/public
 
