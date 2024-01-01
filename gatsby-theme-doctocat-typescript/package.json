@@ -42,7 +42,7 @@
     "fuse.js": "^7.0.0",
     "gatsby": "^5.12.11",
     "gatsby-plugin-catch-links": "^5.13.0",
-    "gatsby-plugin-image": "^3.12.3",
+    "gatsby-plugin-image": "^3.13.0",
     "gatsby-plugin-local-search": "^2.0.1",
     "gatsby-plugin-manifest": "^5.12.3",
     "gatsby-plugin-mdx": "^5.13.0",
