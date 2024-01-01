@@ -30,7 +30,7 @@
     "@primer/component-metadata": "^0.5.1",
     "@primer/octicons-react": "^19.8.0",
     "@primer/primitives": "^7.15.5",
-    "@primer/react": "^36.3.1",
+    "@primer/react": "^36.5.0",
     "@styled-system/should-forward-prop": "^5.1.5",
     "@styled-system/theme-get": "^5.1.2",
     "axios": "^1.6.3",
