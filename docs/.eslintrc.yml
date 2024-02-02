@@ -17,3 +17,5 @@ settings:
   mdx/remark: true
   react:
     version: detect
+
+rules: { 'react/no-unescaped-entities': 'off' }
