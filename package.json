@@ -40,11 +40,12 @@
     "typescript": "^5.3.3"
   },
   "overrides": {
-    "styled-components": "^6.1.1",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
+    "axios": "^1.6.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remark-gfm": "^3.0.0"
+    "remark-gfm": "^3.0.0",
+    "styled-components": "^6.1.1"
   }
 }
