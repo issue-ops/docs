@@ -9,7 +9,6 @@ on:
       - main
 
 permissions:
-  actions: read
   checks: write
   contents: read
 
