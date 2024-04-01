@@ -28,7 +28,7 @@
     "@mdx-js/react": "^2.3.0",
     "@octokit/types": "^12.3.0",
     "@primer/component-metadata": "^0.5.1",
-    "@primer/octicons-react": "^19.8.0",
+    "@primer/octicons-react": "^19.9.0",
     "@primer/primitives": "^7.15.9",
     "@primer/react": "^36.10.0",
     "@styled-system/should-forward-prop": "^5.1.5",
