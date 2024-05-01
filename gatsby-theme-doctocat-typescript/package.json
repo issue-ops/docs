@@ -26,7 +26,7 @@
     "@gatsbyjs/reach-router": "^2.0.1",
     "@mdx-js/mdx": "^3.0.1",
     "@mdx-js/react": "^2.3.0",
-    "@octokit/types": "^12.3.0",
+    "@octokit/types": "^13.5.0",
     "@primer/component-metadata": "^0.5.1",
     "@primer/octicons-react": "^19.9.0",
     "@primer/primitives": "^7.15.15",
