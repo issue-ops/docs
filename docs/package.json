@@ -28,11 +28,11 @@
   "dependencies": {
     "@issue-ops/gatsby-theme-doctocat-typescript": "file:../gatsby-theme-doctocat-typescript",
     "@primer/octicons-react": "^19.9.0",
-    "@primer/react": "^36.10.0",
+    "@primer/react": "^36.17.0",
     "gatsby": "^5.13.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^6.1.1"
+    "styled-components": "^6.1.9"
   },
   "devDependencies": {
     "eslint": "^8.57.0",

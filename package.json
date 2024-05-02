@@ -40,12 +40,13 @@
     "typescript": "^5.4.5"
   },
   "overrides": {
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
-    "axios": "^1.6.7",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "axios": "^1.6.8",
+    "gatsby": "^5.13.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remark-gfm": "^3.0.0",
-    "styled-components": "^6.1.1"
+    "styled-components": "^6.1.9",
+    "webpack-dev-middleware": "^7.2.1"
   }
 }
