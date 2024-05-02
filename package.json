@@ -2,7 +2,7 @@
   "name": "issue-ops-docs",
   "description": "IssueOps Documentation",
   "author": "Nick Alteen <ncalteen@github.com>",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/issue-ops/docs#readme",
   "repository": "issue-ops/docs",
   "bugs": {
@@ -35,17 +35,18 @@
     "docs"
   ],
   "devDependencies": {
-    "@playwright/test": "^1.42.1",
+    "@playwright/test": "^1.43.1",
     "prettier": "^3.2.5",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.5"
   },
   "overrides": {
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
-    "axios": "^1.6.7",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "axios": "^1.6.8",
+    "gatsby": "^5.13.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remark-gfm": "^3.0.0",
-    "styled-components": "^6.1.1"
+    "styled-components": "^6.1.9",
+    "webpack-dev-middleware": "^7.2.1"
   }
 }
