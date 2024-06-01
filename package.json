@@ -35,8 +35,8 @@
     "docs"
   ],
   "devDependencies": {
-    "@playwright/test": "^1.43.1",
-    "prettier": "^3.2.5",
+    "@playwright/test": "^1.44.1",
+    "prettier": "^3.3.0",
     "typescript": "^5.4.5"
   },
   "overrides": {
