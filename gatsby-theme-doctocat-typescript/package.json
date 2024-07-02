@@ -84,7 +84,7 @@
     "remark-gfm": "^3.0.0",
     "remark-github": "^12.0.0",
     "remark-mdx": "^3.0.1",
-    "remark-mdx-frontmatter": "^4.0.0",
+    "remark-mdx-frontmatter": "^5.0.0",
     "styled-components": "^6.1.9",
     "styled-system": "^5.1.5",
     "ts-toolbelt": "^9.6.0",
