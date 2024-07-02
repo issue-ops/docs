@@ -57,7 +57,7 @@
     "gatsby-transformer-yaml": "^5.13.1",
     "get-pkg-repo": "^5.0.0",
     "github-slugger": "^2.0.0",
-    "graphql": "^16.8.1",
+    "graphql": "^16.9.0",
     "html-react-parser": "^5.0.11",
     "lodash.debounce": "^4.0.8",
     "lodash.uniqby": "^4.7.0",
