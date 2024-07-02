@@ -28,7 +28,7 @@
   "dependencies": {
     "@issue-ops/gatsby-theme-doctocat-typescript": "file:../gatsby-theme-doctocat-typescript",
     "@primer/octicons-react": "^19.10.0",
-    "@primer/react": "^36.20.0",
+    "@primer/react": "^36.24.0",
     "gatsby": "^5.13.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
