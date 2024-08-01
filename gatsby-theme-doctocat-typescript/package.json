@@ -94,7 +94,7 @@
     "@types/gatsbyjs__reach-router": "^2.0.4",
     "@types/lodash.debounce": "^4.0.9",
     "@types/lodash.uniqby": "^4.7.9",
-    "@types/node": "^20.14.9",
+    "@types/node": "^22.0.2",
     "@types/path-browserify": "^1.0.2",
     "@types/pluralize": "^0.0.33",
     "@types/preval.macro": "^3.0.2",
