@@ -33,7 +33,7 @@
     "@primer/react": "^36.27.0",
     "@styled-system/should-forward-prop": "^5.1.5",
     "@styled-system/theme-get": "^5.1.2",
-    "axios": "^1.6.8",
+    "axios": "^1.7.4",
     "copy-to-clipboard": "^3.3.3",
     "date-fns": "^3.6.0",
     "details-element-polyfill": "^2.4.0",
