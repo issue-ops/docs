@@ -1,4 +1,4 @@
-name: Super Linter
+name: Lint Codebase
 
 on:
   push:
@@ -8,15 +8,17 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  issues: write
+  packages: read
+  pull-requests: write
+  statuses: write
+
 jobs:
   lint:
     name: Lint Codebase
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      packages: read
-      statuses: write
 
     steps:
       - name: Checkout
@@ -36,15 +38,8 @@ jobs:
         id: install
         run: npm ci
 
-      - name: Super Linter
-        id: super-linter
-        uses: super-linter/super-linter/slim@v6
+      - name: Lint Codebase
+        id: lint
+        uses: oxsecurity/megalinter/flavors/javascript@v8
         env:
-          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          JAVASCRIPT_DEFAULT_STYLE: prettier
-          TYPESCRIPT_DEFAULT_STYLE: prettier
-          VALIDATE_ALL_CODEBASE: false
-          VALIDATE_JAVASCRIPT_STANDARD: false
-          VALIDATE_JSCPD: false
-          VALIDATE_TSX: false

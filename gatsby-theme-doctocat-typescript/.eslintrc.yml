@@ -1,5 +1,3 @@
-parser: '@typescript-eslint/parser'
-
 env:
   node: true
   es6: true
@@ -11,20 +9,22 @@ globals:
   SharedArrayBuffer: readonly
 
 ignorePatterns:
-  - node_modules/
+  - node_modules
   - gatsby-browser.jsx
   - gatsby-config.mjs
   - gatsby-node.js
   - gatsby-ssr.jsx
   - index.ts
 
+parser: '@typescript-eslint/parser'
+
 parserOptions:
   ecmaVersion: 2023
   sourceType: module
   project:
-    - './tsconfig.json'
+    - tsconfig.eslint.json
   extraFileExtensions:
-    - '.json'
+    - .json
   ecmaFeatures:
     jsx: true
 
@@ -33,15 +33,15 @@ plugins:
 
 settings:
   react:
-    version: 'detect'
+    version: detect
   import/resolver:
     node:
       extensions:
-        - '.ts'
-        - '.tsx'
+        - .ts
+        - .tsx
   import/extensions:
-    - '.ts'
-    - '.tsx'
+    - .ts
+    - .tsx
 
 extends:
   - eslint:recommended
@@ -52,12 +52,10 @@ extends:
   - plugin:prettier/recommended
 
 rules:
-  {
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    'import/no-commonjs': 'off',
-    'no-console': 'off',
-    'no-shadow': 'off',
-    'no-unused-vars': 'off'
-  }
+  '@typescript-eslint/no-explicit-any': off
+  '@typescript-eslint/no-unused-vars': off
+  '@typescript-eslint/no-var-requires': off
+  import/no-commonjs: off
+  no-console: off
+  no-shadow: off
+  no-unused-vars: off

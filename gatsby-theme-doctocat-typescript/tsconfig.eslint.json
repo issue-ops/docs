@@ -1,6 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.base.json",
-  "include": ["./content", "./src"],
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["./content", "./src", "types.d.ts"],
   "exclude": ["./.cache", "./node_modules", "./public"]
 }

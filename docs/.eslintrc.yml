@@ -1,4 +1,18 @@
-parser: 'eslint-mdx'
+env:
+  node: true
+  es6: true
+  jest: true
+
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+
+ignorePatterns:
+  - .cache
+  - node_modules
+  - public
+
+parser: eslint-mdx
 
 extends:
   - plugin:mdx/recommended
@@ -7,9 +21,9 @@ extends:
 
 parserOptions:
   extensions:
-    - 'mdx'
+    - mdx
   markdownExtensions:
-    - 'md'
+    - md
   ignoreRemarkConfig: false
 
 settings:
@@ -18,4 +32,5 @@ settings:
   react:
     version: detect
 
-rules: { 'react/no-unescaped-entities': 'off' }
+rules:
+  react/no-unescaped-entities: off

@@ -2,7 +2,7 @@
   "name": "issue-ops-docs",
   "description": "IssueOps Documentation",
   "author": "Nick Alteen <ncalteen@github.com>",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/issue-ops/docs#readme",
   "repository": "issue-ops/docs",
   "bugs": {
@@ -35,7 +35,8 @@
     "docs"
   ],
   "devDependencies": {
-    "@playwright/test": "^1.45.3",
+    "@playwright/test": "^1.46.1",
+    "eslint-plugin-jest": "^28.8.0",
     "prettier": "^3.3.3",
     "typescript": "^5.5.4"
   },

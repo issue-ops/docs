@@ -1,7 +1,3 @@
-###########################
-## YAML Linter rules     ##
-###########################
-
 rules:
   document-end: disable
   document-start:
