@@ -94,7 +94,7 @@
     "@types/gatsbyjs__reach-router": "^2.0.5",
     "@types/lodash.debounce": "^4.0.9",
     "@types/lodash.uniqby": "^4.7.9",
-    "@types/node": "^22.10.2",
+    "@types/node": "^22.10.3",
     "@types/path-browserify": "^1.0.3",
     "@types/pluralize": "^0.0.33",
     "@types/preval.macro": "^3.0.2",
@@ -111,7 +111,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-github": "^5.1.4",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react": "^7.37.3",
     "typescript": "^5.7.2",
     "yaml-loader": "^0.8.1"
   }
