@@ -5,7 +5,14 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import Alert from '@mui/material/Alert'
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
 
 ## Overview
 
@@ -22,18 +29,17 @@ The [`issue-ops/validator`](https://github.com/issue-ops/validator) action takes
 the parsed output of the issue body and validates it against the issue form
 template and any custom rules you define.
 
-<Note variant="danger">
+<Alert severity="error">
+  After a request is initially validated, there is nothing stopping a user from
+  editing the issue and submitting it with invalid inputs. You should run your
+  validation logic any time the following events occur:
 
-After a request is initially validated, there is nothing stopping a user from
-editing the issue and submitting it with invalid inputs. You should run your
-validation logic any time the following events occur:
-
-- The issue is opened
-- The issue body is edited
-- The issue is closed and reopened
-- The request is submitted for provisioning/creation
-
-</Note>
+{/* prettier-ignore */}
+  - The issue is opened
+  - The issue body is edited
+  - The issue is closed and reopened
+  - The request is submitted for provisioning/creation
+</Alert>
 
 ### Basic validation
 
@@ -99,11 +105,11 @@ validators:
 
 #### Validator scripts
 
-<Note>
+<Alert severity="info">
   If you want to run custom validators that access GitHub APIs, you will need to
   provide a value for the `github-token` input. This is another good scenario
   for GitHub App authentication!
-</Note>
+</Alert>
 
 Validator scripts are run on the associated fields in the configuration file.
 The script must specify a default export of a function with the following
@@ -151,28 +157,89 @@ Recall from the
 [issue form template](https://github.com/issue-ops/docs/blob/main/new-repository-request-example/ISSUE_TEMPLATE/new-repository-request.yml)
 that the new repository request expects the following inputs:
 
-| Input           | Required           | Options             |
-| --------------- | ------------------ | ------------------- |
-| Repository Name | :white_check_mark: |                     |
-| Visibility      | :white_check_mark: | `private`, `public` |
-| Read Team       | :white_check_mark: |                     |
-| Write Team      | :white_check_mark: |                     |
-| Auto Init       | :white_check_mark: | `true`, `false`     |
-| Topics          | :x:                |                     |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Input</TableCell>
+        <TableCell>Required</TableCell>
+        <TableCell>Options</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>Repository Name</TableCell>
+        <TableCell>:white_check_mark:</TableCell>
+        <TableCell></TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Visibility</TableCell>
+        <TableCell>:white_check_mark:</TableCell>
+        <TableCell>`private`, `public`</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Read Team</TableCell>
+        <TableCell>:white_check_mark:</TableCell>
+        <TableCell></TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Write Team</TableCell>
+        <TableCell>:white_check_mark:</TableCell>
+        <TableCell></TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Auto Init</TableCell>
+        <TableCell>:white_check_mark:</TableCell>
+        <TableCell>`true`, `false`</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Topics</TableCell>
+        <TableCell>:x:</TableCell>
+        <TableCell></TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
 Since the _Visibility_ and _Auto Init_ inputs must be one of several predefined
 values, they can be handled by basic validation. The other fields, however, must
 meet additional requirements:
 
-| Field           | Requirement                                                |
-| --------------- | ---------------------------------------------------------- |
-| Repository Name | Must not be an existing repository                         |
-| Read Team       | Must be a team in the organization                         |
-| Write Team      | Must be a team in the organization                         |
-| Topics          | Must be a list of 20 or fewer                              |
-|                 | Each topic must be lowercase                               |
-|                 | Each topic must be 50 or fewer characters                  |
-|                 | Each topic must contain only letters, numbers, and hyphens |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Field</TableCell>
+        <TableCell>Requirement</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>Repository Name</TableCell>
+        <TableCell>Must not be an existing repository</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Read Team</TableCell>
+        <TableCell>Must be a team in the organization</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Write Team</TableCell>
+        <TableCell>Must be a team in the organization</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Topics</TableCell>
+        <TableCell>
+          <ul>
+            <li>Must be a list of 20 or fewer</li>
+            <li>Each topic must be lowercase</li>
+            <li>Each topic must be 50 or fewer characters</li>
+            <li>Each topic must contain only letters, numbers, and hyphens</li>
+          </ul>
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
 ### Create a configuration file
 

@@ -5,7 +5,7 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import Alert from '@mui/material/Alert'
 
 ## GitHub Actions workflows
 
@@ -33,8 +33,8 @@ base permissions needed to run. For information about the available permissions,
 see
 [Assigning permissions to jobs](https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs).
 
-<Note>
+<Alert severity="info">
   Permissions can be assigned for the entire workflow, as well as for individual
   jobs. If one job needs additional permissions, make sure to scope them to that
   job only.
-</Note>
+</Alert>

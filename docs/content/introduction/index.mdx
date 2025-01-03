@@ -7,7 +7,14 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import Alert from '@mui/material/Alert'
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
 import { BookIcon, PersonIcon } from '@primer/octicons-react'
 import { Avatar, Box, StateLabel, Timeline } from '@primer/react'
 import { Blankslate } from '@primer/react/drafts'
@@ -112,11 +119,11 @@ membership request and approval process.
 We can assume the current, manual workflow looks something like this when
 rendered as a state diagram.
 
-<Note>
+<Alert severity="info">
   In state diagram format, nodes represent the state of an object (the
   membership request), while transitions represent actions that are taken as the
   object changes state.
-</Note>
+</Alert>
 
 <Box style={{ alignItems: 'center', textAlign: 'center' }}>
 
@@ -169,32 +176,98 @@ following table lists other
 [issue events](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#issues)
 and example use-cases.
 
-| Event          | Example                                                                                                                         |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `opened`       | Start a request workflow                                                                                                        |
-| `edited`       | Re-validate a modified request                                                                                                  |
-| `deleted`      | Cancel in-flight tasks for a request                                                                                            |
-| `transferred`  | Assign ownership of a request to a different department                                                                         |
-| `pinned`       | Upgrade the severity/urgency of a request                                                                                       |
-| `unpinned`     | Downgrade the severity/urgency of a request                                                                                     |
-| `closed`       | End a request workflow                                                                                                          |
-| `reopened`     | Restart a request workflow                                                                                                      |
-| `assigned`     | Ping the assignee in Slack                                                                                                      |
-| `unassigned`   | Ping the previous assignee in Slack                                                                                             |
-| `labeled`      | Track the current state of a request                                                                                            |
-| `unlabeled`    | Track the current state of a request                                                                                            |
-| `locked`       | See [locking conversations](https://docs.github.com/en/communities/moderating-comments-and-conversations/locking-conversations) |
-| `unlocked`     | See [locking conversations](https://docs.github.com/en/communities/moderating-comments-and-conversations/locking-conversations) |
-| `milestoned`   | Track requests by type to compare to team goals                                                                                 |
-| `demilestoned` | Track requests by type to compare to team goals                                                                                 |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Event</TableCell>
+        <TableCell>Example</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>`opened`</TableCell>
+        <TableCell>Start a request workflow</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`edited`</TableCell>
+        <TableCell>Re-validate a modified request</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`deleted`</TableCell>
+        <TableCell>Cancel in-flight tasks for a request</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`transferred`</TableCell>
+        <TableCell>Assign ownership of a request to a different team</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`pinned`</TableCell>
+        <TableCell>Upgrade the severity/urgency of a request</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`unpinned`</TableCell>
+        <TableCell>Downgrade the severity/urgency of a request</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`closed`</TableCell>
+        <TableCell>End a request workflow</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`reopened`</TableCell>
+        <TableCell>Restart a request workflow</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`assigned`</TableCell>
+        <TableCell>Ping the assignee in Slack</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`unassigned`</TableCell>
+        <TableCell>Ping the previous assignee in Slack</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`labeled`</TableCell>
+        <TableCell>Track the current state of a request</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`unlabeled`</TableCell>
+        <TableCell>Track the current state of a request</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`locked`</TableCell>
+        <TableCell>
+          See [locking
+          conversations](https://docs.github.com/en/communities/moderating-comments-and-conversations/locking-conversations)
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`unlocked`</TableCell>
+        <TableCell>
+          See [locking
+          conversations](https://docs.github.com/en/communities/moderating-comments-and-conversations/locking-conversations)
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`milestoned`</TableCell>
+        <TableCell>Track requests by type to compare to team goals</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`demilestoned`</TableCell>
+        <TableCell>Track requests by type to compare to team goals</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
-<Note variant="danger">
-  [Access to delete
+<br />
+
+<Alert severity="error">
+  Access to [delete
   issues](https://docs.github.com/en/organizations/managing-organization-settings/allowing-people-to-delete-issues-in-your-organization)
   should be carefully controlled. If you delete an issue, you will lose all of
   the information associated with it, including comments and attachments. You
   will also lose this request in the history of the repository.
-</Note>
+</Alert>
 
 ### Issue comments
 
@@ -203,11 +276,11 @@ drive it through the workflow. In the membership request workflow, for example,
 commenting on an issue is a great way to handle state changes such as an
 administrator approving or denying the request.
 
-<Note>
+<Alert severity="info">
   A core difference between issues and PRs is that issues do not have a built-in
   approval process. However, this can be implemented using issue comments. For
   more information, see [Approvals](/workflow/approvals).
-</Note>
+</Alert>
 
 Currently there are only three
 [`issue_comment` events](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#issue_comment)
@@ -240,10 +313,28 @@ types of requests when your repository supports more than one IssueOps workflow.
 For example, in the membership request workflow, you might have the following
 labels:
 
-| Label                     | Description                                              |
-| ------------------------- | -------------------------------------------------------- |
-| `team-membership-request` | The type of request                                      |
-| `submitted`               | Requests that have been submitted and are pending review |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Label</TableCell>
+        <TableCell>Description</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>`team-membership-request`</TableCell>
+        <TableCell>The type of request</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`submitted`</TableCell>
+        <TableCell>
+          Requests that have been submitted and are pending review
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
 Looking at this list, you may ask "why there aren't labels for `approved`,
 `denied`, or `closed` states?" These states don't have any transitions that do
@@ -264,11 +355,11 @@ These, however, refer to the actual creation and modification of the label
 itself, so they may not apply to your workflow. You will generally use the
 `issue => labeled` event instead.
 
-<Note variant="warning">
+<Alert severity="warning">
   Anyone with access to open issues can also change labels! Labels are good for
   state tracking, but should not be used to determine if a request is valid! For
   more information, see the [Validate](/workflow/validate) step.
-</Note>
+</Alert>
 
 ## GitHub features
 

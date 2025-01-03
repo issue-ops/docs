@@ -7,10 +7,17 @@ status: Alpha
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
 import {
   Do,
-  Dont,
   DoDontContainer,
+  Dont,
   Note
 } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
 
 This page outlines recommended configuration settings for IssueOps repositories.
 For instructions on how to create a repository, see the
@@ -22,10 +29,26 @@ IssueOps works best when your repository is accessible to users who need to
 submit requests. Depending on if the repository is owned by an organization or a
 user account, you can set the visibility to one of the following:
 
-| Owner        | Visibility             |
-| ------------ | ---------------------- |
-| Organization | `public` or `internal` |
-| User         | `public`               |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Owner</TableCell>
+        <TableCell>Visibility</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>Organization</TableCell>
+        <TableCell>`public` or `internal`</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>User</TableCell>
+        <TableCell>`public`</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
 Alternatively, if you only want to allow specific users to submit requests, you
 can set the visibility to `private` and add those users as
@@ -67,12 +90,46 @@ careful about the configuration of GitHub Actions and what permissions are
 allowed for fork pull requests. The following settings can be enabled for fork
 pull requests, with a description of the risks involved.
 
-| Setting                                                         | Risk                                                            |
-| --------------------------------------------------------------- | --------------------------------------------------------------- |
-| Run workflows from fork pull requests                           | Forks will have read permissions to your repository             |
-| Send write tokens to workflows from fork pull requests          | Forks will have **write** permissions to your repository        |
-| Send secrets and variables to workflows from fork pull requests | Forks will have access to your secrets and variables            |
-| Require approval for fork pull request workflows                | Forks will not be able to run workflows until they are approved |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Setting</TableCell>
+        <TableCell>Risk</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>Run workflows from fork pull requests</TableCell>
+        <TableCell>
+          Forks will have read permissions to your repository
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          Send write tokens to workflows from fork pull requests
+        </TableCell>
+        <TableCell>
+          Forks will have **write** permissions to your repository
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>
+          Send secrets and variables to workflows from fork pull requests
+        </TableCell>
+        <TableCell>
+          Forks will have access to your secrets and variables
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Require approval for fork pull request workflows</TableCell>
+        <TableCell>
+          Forks will not be able to run workflows until they are approved
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
 As you can guess, the safest option is to not allow fork pull requests to run
 workflows at all. However, this may not be practical for your workflow. Here are

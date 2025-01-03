@@ -5,10 +5,15 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import {
-  ImageContainer,
-  Note
-} from '@issue-ops/gatsby-theme-doctocat-typescript'
+import { ImageContainer } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import Alert from '@mui/material/Alert'
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
 import { Box, FormControl, Select, Textarea, TextInput } from '@primer/react'
 
 ## Overview
@@ -21,12 +26,34 @@ you can directly reference issue form fields without having to parse the body
 yourself with regular expressions. This action provides specific output formats
 based on the `type` property of the input.
 
-| Input type   | Example parsed output                               |
-| ------------ | --------------------------------------------------- |
-| `input`      | `"octorepo"`                                        |
-| `textarea`   | `"This is a description!\n\nIt is multiline, too!"` |
-| `dropdown`   | `["octocat", "issueops"]`                           |
-| `checkboxes` | `{ "selected": ["Yes"], "unselected": ["No"] }`     |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Input type</TableCell>
+        <TableCell>Example parsed output</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>`input`</TableCell>
+        <TableCell>`"octorepo"`</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`textarea`</TableCell>
+        <TableCell>`"This is a description!\n\nIt is multiline, too!"`</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`dropdown`</TableCell>
+        <TableCell>`["octocat", "issueops"]`</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`checkboxes`</TableCell>
+        <TableCell>`{ "selected": ["Yes"], "unselected": ["No"] }`</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
 Depending on how you're processing the input data, different types may be more
 helpful than others! Based on the issue form template and the contents of the
@@ -227,7 +254,7 @@ Creating an issue will kick off the start of the IssueOps process. However, in
 order to do anything with the request, we need to parse the issue body and
 extract the information we need to get approval and create a repository.
 
-<Note>Check the workflow comments for useful tips!</Note>
+<Alert severity="info">Check the workflow comments for useful tips!</Alert>
 
 ```yaml
 name: Issue Opened/Edited/Reopened

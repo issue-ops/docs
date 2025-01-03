@@ -5,9 +5,16 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import { ActionList, Box } from '@primer/react'
+import Alert from '@mui/material/Alert'
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
 import { CheckCircleIcon } from '@primer/octicons-react'
+import { ActionList, Box } from '@primer/react'
 
 After the issue has been opened and any initial processing has been run, the
 comment workflow becomes the main driver of the rest of the process. This
@@ -36,12 +43,12 @@ themselves. You can take a limitless number of actions based on user input!
 Be careful to not make your workflow _too_ complex. Otherwise, parsing comments
 becomes particularly challenging.
 
-<Note>
+<Alert severity="info">
   The `issue_comment` trigger may seem misleading. This trigger applies to
   comments on both issues and PRs. If you want to trigger workflows on comments
   that are part of a PR _review_, use the `pull_request_comment` trigger
   instead.
-</Note>
+</Alert>
 
 ## Commands
 
@@ -51,11 +58,30 @@ descriptive of the action that will be taken when the command is processed. In
 general, any workflow that involves processing comments should start by looking
 for a specific command being run.
 
-| Keyword    | Description                   |
-| ---------- | ----------------------------- |
-| `.submit`  | Submit a request for approval |
-| `.approve` | Approve a request             |
-| `.deny`    | Deny a request                |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Keyword</TableCell>
+        <TableCell>Description</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>`.submit`</TableCell>
+        <TableCell>Submit a request for approval</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`.approve`</TableCell>
+        <TableCell>Approve a request</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`.deny`</TableCell>
+        <TableCell>Deny a request</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
 The examples you will see throughout this documentation make heavy use of the
 [`github/command`](https://github.com/github/command) action. This action makes
@@ -195,11 +221,11 @@ jobs:
         run: npm run lint
 ```
 
-<Note variant="warning">
+<Alert severity="warning">
   The `params` output is a string, not an array or object. If you need to pass
   multiple parameters, you will need to include additional logic for parsing the
   string.
-</Note>
+</Alert>
 
 ### Parse and validate the issue body
 
@@ -269,10 +295,10 @@ steps:
         ':clock1: It looks like this issue has already been submitted. Sit tight!'
 ```
 
-<Note>
+<Alert severity="info">
   Labels can be edited at any time! You want to consider checking if the state
   indicated by the issue labels matches the expected state of the issue.
-</Note>
+</Alert>
 
 ### Check the user's permissions
 
@@ -402,16 +428,50 @@ automatically add a reaction to any comments that contain a command.
 
 Any of the following reactions can be added:
 
-| Value      | Emoji      |
-| ---------- | ---------- |
-| `+1`       | :+1:       |
-| `-1`       | :-1:       |
-| `laugh`    | :smile:    |
-| `confused` | :confused: |
-| `heart`    | :heart:    |
-| `hooray`   | :tada:     |
-| `rocket`   | :rocket:   |
-| `eyes`     | :eyes:     |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Value</TableCell>
+        <TableCell>Emoji</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>`+1`</TableCell>
+        <TableCell>:+1:</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`-1`</TableCell>
+        <TableCell>:-1:</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`laugh`</TableCell>
+        <TableCell>:smile:</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`confused`</TableCell>
+        <TableCell>:confused:</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`heart`</TableCell>
+        <TableCell>:heart:</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`hooray`</TableCell>
+        <TableCell>:tada:</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`rocket`</TableCell>
+        <TableCell>:rocket:</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`eyes`</TableCell>
+        <TableCell>:eyes:</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
 After the command has been received, adding comments to the issue to indicate
 work is being done is a great way to keep users informed. Once processing is

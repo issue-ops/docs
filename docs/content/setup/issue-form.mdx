@@ -5,7 +5,7 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import Alert from '@mui/material/Alert'
 
 The first interaction point users will have with your IssueOps workflow is the
 issue itself. This is where they will provide the information needed to kick off
@@ -23,7 +23,9 @@ repository. From a usability perspective, make sure to include a description and
 title that clearly explains what the user is requesting and what will happen
 once they submit their issue.
 
-<Note>Make sure to label your issues and assign them to projects!</Note>
+<Alert severity="info">
+  Make sure to label your issues and assign them to projects!
+</Alert>
 
 ```yaml
 name: Create a new repository
@@ -46,12 +48,12 @@ information you need to collect from the user. Its important to make sure to
 collect all the information you need to get started, but also to make sure that
 the form is not too long or complicated.
 
-<Note>
+<Alert severity="info">
   If there's a way you can calculate certain information, consider doing that
   instead of asking the user to provide additional inputs. For example, you can
   get the user's GitHub username from the issue metadata
   (`${{ github.event.issue.user.login }}`) instead of asking them to provide it.
-</Note>
+</Alert>
 
 As you are drafting your issue form template, think about the kind of data you
 are requesting and the best format to use (both for user input and for automated

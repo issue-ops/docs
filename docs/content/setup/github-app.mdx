@@ -5,7 +5,14 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import Alert from '@mui/material/Alert'
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
 
 If your IssueOps workflow requires access to anything outside of the repository
 it is running in, you will need to provide it with a token. This token is used
@@ -19,12 +26,12 @@ Since PATs are scoped to a single user, they are not recommended for use in
 IssueOps workflows. GitHub Apps are a better choice because they can be scoped
 to a repository or organization to provide access to the APIs you need.
 
-<Note variant="warning">
+<Alert severity="warning">
   GitHub Apps cannot currently be created at the enterprise level for access to
   administrative APIs. If you need access to these APIs, you will need to use a
   PAT. In these cases, creating a "machine user" account is recommended over a
   personal account.
-</Note>
+</Alert>
 
 ## Ownership
 
@@ -42,22 +49,53 @@ For instructions on how to create a GitHub App, see
 
 The following settings are a good starting point for IssueOps workflows:
 
-| Setting      | Value                                                       |
-| ------------ | ----------------------------------------------------------- |
-| Name         | A clear name that describes its purpose and permissions     |
-| Description  | A description of what the app does and what it can access   |
-| Homepage URL | The URL to the repository with your IssueOps code           |
-| Webhook      | Disable webhooks                                            |
-| Permissions  | Select the **minimum** permissions needed for your workflow |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Setting</TableCell>
+        <TableCell>Value</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>Name</TableCell>
+        <TableCell>
+          A clear name that describes its purpose and permissions
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Description</TableCell>
+        <TableCell>
+          A description of what the app does and what it can access
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Homepage URL</TableCell>
+        <TableCell>The URL to the repository with your IssueOps code</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Webhook</TableCell>
+        <TableCell>Disable webhooks</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Permissions</TableCell>
+        <TableCell>
+          Select the **minimum** permissions needed for your workflow
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
 ### Create a private key
 
 For instructions on how to create a private key, see
 [Managing private keys for GitHub Apps](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps).
 
-<Note variant="danger">
+<Alert severity="error">
   Make sure to save the private key in a secure location!
-</Note>
+</Alert>
 
 ### Create GitHub Actions secrets
 
@@ -69,15 +107,33 @@ needs.
 You will need to create the following secrets. Make sure to note the names you
 give them as you will need to reference them in your workflows.
 
-| Name        | Description                 |
-| ----------- | --------------------------- |
-| App ID      | The ID of your GitHub App   |
-| Private Key | The private key you created |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Name</TableCell>
+        <TableCell>Description</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>App ID</TableCell>
+        <TableCell>The ID of your GitHub App</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Private Key</TableCell>
+        <TableCell>The private key you created</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
-<Note>
+<br />
+
+<Alert severity="info">
   The GitHub App ID is not a sensitive value and can be stored as a variable
   instead of a secret. It can be found on the settings page for your GitHub App.
-</Note>
+</Alert>
 
 For instructions on how to create secrets, see the following links:
 
@@ -124,11 +180,11 @@ Make sure to update the following:
 - Set the version (`vX.X.X`) of the action to the latest published version.
 - Update the secret names to match the ones you created previously.
 
-<Note>
+<Alert severity="info">
   In the previous example, the `owner` property is set to the owner of the
   repository where this workflow is defined. If your GitHub App is installed
   under another owner, you will need to specify that instead.
-</Note>
+</Alert>
 
 ### Use the token in your workflow
 
@@ -150,14 +206,14 @@ steps:
         })
 ```
 
-<Note variant="warning">
+<Alert severity="warning">
   Make sure to check which steps in your workflow will need to use the GitHub
   App token versus the workflow token. For example, if you add the `issues:
   write` permission to your workflow, you do not need to use the GitHub App
   token to update issues in the _same_ repository as your workflows. However,
   you will need to use the GitHub App token to update issues in _other_
   repositories!
-</Note>
+</Alert>
 
 ## Example
 

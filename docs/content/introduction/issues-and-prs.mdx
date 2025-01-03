@@ -5,12 +5,17 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import {
-  ImageContainer,
-  Note
-} from '@issue-ops/gatsby-theme-doctocat-typescript'
-import { Avatar, Box, FormControl, TextInput, Timeline } from '@primer/react'
+import { ImageContainer } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import Alert from '@mui/material/Alert'
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
 import { MarkGithubIcon, TagIcon } from '@primer/octicons-react'
+import { Avatar, Box, FormControl, TextInput, Timeline } from '@primer/react'
 
 This page provides an overview of the different components that make up issues
 and PRs, and includes information about how each component can be used
@@ -24,20 +29,72 @@ Any user with read access to a repository can open an issue.
 
 ### Issue structure
 
-| Component    | Description                                            |
-| ------------ | ------------------------------------------------------ |
-| Title        | Title of an issue                                      |
-| Body         | Main content of an issue entered by a user             |
-| Assignees    | Users responsible for resolving an issue               |
-| Labels       | Short tags that can be applied to issues               |
-| Milestones   | Groups for issues and PRs                              |
-| Relations    | Other issues and PRs that are related to this issue    |
-| Development  | Branches or PRs linked to the issue                    |
-| Projects     | Projects that are tracking the issue                   |
-| Participants | Users who have interacted with the issue               |
-| Timeline     | Events that have occurred on the issue                 |
-| Comments     | Comments and replies that have been added to the issue |
-| Reactions    | Emoji reactions added to the issue and its comments    |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Component</TableCell>
+        <TableCell>Description</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>Title</TableCell>
+        <TableCell>Title of an issue</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Body</TableCell>
+        <TableCell>Main content of an issue entered by a user</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Assignees</TableCell>
+        <TableCell>User(s) responsible for resolving an issue</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Labels</TableCell>
+        <TableCell>Short tags that can be applied to issues</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Milestones</TableCell>
+        <TableCell>Groups for issues and PRs</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Relations</TableCell>
+        <TableCell>
+          Other issues and PRs that are related to this issue
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Development</TableCell>
+        <TableCell>Branches or PRs linked to the issue</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Projects</TableCell>
+        <TableCell>Projects that are tracking the issue</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Participants</TableCell>
+        <TableCell>Users who have interacted with the issue</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Timeline</TableCell>
+        <TableCell>Events that have occurred on the issue</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Comments</TableCell>
+        <TableCell>
+          Comments and replies that have been added to the issue
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Reactions</TableCell>
+        <TableCell>
+          Emoji reactions added to the issue and its comments
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
 ### Issue templates vs. issue forms
 
@@ -77,10 +134,10 @@ provide instructions to the user, and to collect information from them. For
 example, you can use a markdown field to provide instructions, and then use an
 input field to collect the name of the team they would like to join.
 
-<Note>
+<Alert severity="info">
   Any `markdown`-type fields in an issue form will not be included in the issue
   body after it has been submitted by the user.
-</Note>
+</Alert>
 
 For information about the different types of fields that can be used, see
 [Syntax for issue forms](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms).
@@ -98,7 +155,9 @@ assignees:
   - mona
 ```
 
-<Note variant="warning">Issues do not support team assignees, but PRs do!</Note>
+<Alert severity="warning">
+  Issues do not support team assignees, but PRs do!
+</Alert>
 
 ### Labels
 
@@ -168,12 +227,12 @@ projects:
 Within your project, you can specify columns for the state of each dish (e.g.
 `New`, `Ingredients purchased`, `Ready to cook`, and `Cooked`).
 
-<Note>
+<Alert severity="info">
   Unfortunately, @mona can't cook (maybe one day!), so you'll need to manually
   move the issues through the columns as they are assigned and prepared.
   However, you can use the project to track the state of each dish, and to
   communicate that state to the rest of the family!
-</Note>
+</Alert>
 
 ### Participants
 
@@ -196,24 +255,19 @@ compare when the issue body was last updated to when the validated label was
 added. If the label was added before the issue body was updated, you can
 determine that the label was added manually and re-run your validation logic.
 
+{/* prettier-ignore */}
 <Timeline>
   <Timeline.Item>
     <Timeline.Badge>
       <Avatar src="https://avatars.githubusercontent.com/u/5089146?v=4" />
     </Timeline.Badge>
-    <Timeline.Body>
-      ncalteen added <TagIcon size={16} />
-      <code>issueops:team-membership-request</code> 1 hour ago
-    </Timeline.Body>
+    <Timeline.Body>ncalteen added <TagIcon size={16} /> `issueops:team-request` 1 hour ago</Timeline.Body>
   </Timeline.Item>
   <Timeline.Item>
     <Timeline.Badge>
       <MarkGithubIcon size={16} />
     </Timeline.Badge>
-    <Timeline.Body>
-      github-actions added <TagIcon size={16} />
-      <code>issueops:validated</code> 1 hour ago
-    </Timeline.Body>
+    <Timeline.Body>github-actions added <TagIcon size={16} /> `issueops:validated` 1 hour ago</Timeline.Body>
   </Timeline.Item>
 </Timeline>
 
@@ -309,10 +363,26 @@ following sections.
 In order to create a pull request, the required permissions will differ based on
 the location of the branch you wish to merge.
 
-| Location                    | Permissions  |
-| --------------------------- | ------------ |
-| Same repository (branch)    | Write access |
-| Different repository (fork) | Read access  |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Location</TableCell>
+        <TableCell>Permissions</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>Same repository (branch)</TableCell>
+        <TableCell>Write access</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Different repository (fork)</TableCell>
+        <TableCell>Read access</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</TableContainer>
 
 ### Reviews and approvals
 

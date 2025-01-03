@@ -7,6 +7,13 @@ status: Alpha
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
 import { ImageContainer } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
 import { Box } from '@primer/react'
 
 As the [introduction](/introduction) mentioned, IssueOps can be thought of as a
@@ -23,19 +30,62 @@ Tracking state can be as simple as checking what labels are applied to your
 issues. Whatever approach you want to take, remember that tracking state is
 critical to ensure that the right processing occurs at the right time!
 
-| State       | Description                                                                             |
-| ----------- | --------------------------------------------------------------------------------------- |
-| `Opened`    | The initial state for a new issue that has been opened.                                 |
-|             | Typically the first state in the lifecycle of an issue.                                 |
-| `Parsed`    | The issue body has been read and converted to machine-readable JSON                     |
-|             | Usually the next immediate state after `Opened`.                                        |
-| `Validated` | The issue body has been deemed valid based on any custom rules.                         |
-|             | Usually the next immediate state after `Parsed`.                                        |
-|             | The next transitions depend on the type of request and any rules that must be followed. |
-| `Submitted` | The issue has been submitted for processing                                             |
-| `Approved`  | The issue has been approved for processing.                                             |
-| `Denied`    | The issue has been denied for processing                                                |
-| `Closed`    | The issue has been closed :tada:                                                        |
+<TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>State</TableCell>
+        <TableCell>Description</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>`Opened`</TableCell>
+        <TableCell>
+          The initial state for a new issue that has been opened.
+
+          Typically the first state in the lifecycle of an issue.
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`Parsed`</TableCell>
+        <TableCell>
+          The issue body has been read and converted to machine-readable JSON.
+
+          Usually the next immediate state after `Opened`.
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`Validated`</TableCell>
+        <TableCell>
+          The issue body has been deemed valid based on any custom rules.
+
+          Usually the next immediate state after `Parsed`.
+
+          The next transitions depend on the type of request and any rules that
+          must be followed.
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`Submitted`</TableCell>
+        <TableCell>The issue has been submitted for processing.</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`Approved`</TableCell>
+        <TableCell>The issue has been approved for processing.</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`Denied`</TableCell>
+        <TableCell>The issue has been denied for processing.</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`Closed`</TableCell>
+        <TableCell>The issue has been closed :tada:</TableCell>
+      </TableRow>
+    </TableBody>
+
+  </Table>
+</TableContainer>
 
 <Box style={{ alignItems: 'center', textAlign: 'center' }}>
 

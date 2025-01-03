@@ -4,7 +4,7 @@ status: Alpha
 ---
 
 export { HeroLayout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import Alert from '@mui/material/Alert'
 import {
   LockIcon,
   PencilIcon,
@@ -17,12 +17,12 @@ question _"What is IssueOps?"_ If so, you came to the right place! The goal of
 this site is to provide education, best practices, examples, and resources for
 building IssueOps workflows on GitHub.
 
-<Note>
+<Alert severity="info">
   This site is a work in progress. If you have any feedback, please [open an
   issue](https://github.com/issue-ops/docs/issues/new)! If you're interested in
   contributing, check out our [contribution
   guide](https://github.com/issue-ops/docs/blob/main/CONTRIBUTING.md).
-</Note>
+</Alert>
 
 ## What is IssueOps?
 
@@ -33,11 +33,9 @@ GitOps, and so on), IssueOps leverages a friendly interface to drive automation
 behind-the-scenes. In this case, issues and pull requests (PRs) are the
 interface, and GitHub Actions is the automation engine.
 
-<Note>
-  IssueOps isn't just a DevOps tool! You can run anything from complex CI/CD
-  pipelines to a bed and breakfast reservation system. If you can interact with
-  it via an API, there's a good chance you can build it with IssueOps :wink:
-</Note>
+IssueOps isn't just a DevOps tool! You can run anything from complex CI/CD
+pipelines to a bed and breakfast reservation system. If you can interact with it
+via an API, there's a good chance you can build it with IssueOps :wink:
 
 {/* TODO: Animation of IssueOps example */}
 
@@ -71,8 +69,8 @@ build your own workflows.
 
 {/* TODO: If you're looking for inspiration, check out the [Examples](/examples)! */}
 
-<Note>
+<Alert severity="info">
   If you have an interesting IssueOps project you'd like featured, send us a PR!
-</Note>
+</Alert>
 
 {/* TODO: Add a link to a demo that users can try */}

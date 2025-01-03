@@ -5,7 +5,7 @@ status: Alpha
 ---
 
 export { Layout as default } from '@issue-ops/gatsby-theme-doctocat-typescript'
-import { Note } from '@issue-ops/gatsby-theme-doctocat-typescript'
+import Alert from '@mui/material/Alert'
 
 ## Overview
 
@@ -43,11 +43,11 @@ request approval for a new repository, the `github/command` action ensures that
 any user cannot approve the request. Instead, only users or teams you specify
 can.
 
-<Note>
+<Alert severity="info">
   As with other actions that call GitHub APIs, if you want to include GitHub
   teams in the `allowlist` feature, you must provide a valid token in the
   `allowlist_pat` input. This can be a token generated from a GitHub App!
-</Note>
+</Alert>
 
 ```yaml
 steps:
@@ -199,12 +199,12 @@ example, this workflow doesn't need to run if:
 
 Workflow conditions can be used to control when the workflow jobs are invoked.
 
-<Note>
+<Alert severity="info">
   It's always a good idea to consider negative cases when writing workflows.
   What would happen if someone comments `.approve` but the request has already
   been approved? Adding a comment stating the request has already been approved
   helps prevent confusion. Communication is key!
-</Note>
+</Alert>
 
 ```yaml
 name: Issue Comment
