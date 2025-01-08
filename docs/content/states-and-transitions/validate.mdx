@@ -37,7 +37,7 @@ template and any custom rules you define.
 {/* prettier-ignore */}
   - The issue is opened
   - The issue body is edited
-  - The issue is closed and reopened
+  - The issue is reopened after being closed
   - The request is submitted for provisioning/creation
 </Alert>
 
@@ -57,8 +57,8 @@ message.
 ```
 
 For example, if you have an input field for users to select the visibility of
-their new repository, you can specify that the field is required and only one
-option can be chosen.
+their new repository, you can specify that the field is required and only one of
+a list of options can be chosen.
 
 ```yaml
 - type: dropdown
@@ -107,8 +107,8 @@ validators:
 
 <Alert severity="info">
   If you want to run custom validators that access GitHub APIs, you will need to
-  provide a value for the `github-token` input. This is another good scenario
-  for GitHub App authentication!
+  provide a value for the `github-token` input. This is a good scenario for
+  GitHub App authentication!
 </Alert>
 
 Validator scripts are run on the associated fields in the configuration file.
@@ -228,13 +228,20 @@ meet additional requirements:
       </TableRow>
       <TableRow>
         <TableCell>Topics</TableCell>
+        <TableCell>Must be a list of 20 or fewer</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell></TableCell>
+        <TableCell>Each topic must be lowercase</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell></TableCell>
+        <TableCell>Each topic must be 50 or fewer characters</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell></TableCell>
         <TableCell>
-          <ul>
-            <li>Must be a list of 20 or fewer</li>
-            <li>Each topic must be lowercase</li>
-            <li>Each topic must be 50 or fewer characters</li>
-            <li>Each topic must contain only letters, numbers, and hyphens</li>
-          </ul>
+          Each topic must contain only letters, numbers, and hyphens
         </TableCell>
       </TableRow>
     </TableBody>

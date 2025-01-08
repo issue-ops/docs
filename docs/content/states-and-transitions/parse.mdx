@@ -23,8 +23,15 @@ parse its contents and turn it into a machine-readable format. The
 [`issue-ops/parser`](https://github.com/issue-ops/parser) action does this by
 comparing the body of the issue with the original issue form template. This way,
 you can directly reference issue form fields without having to parse the body
-yourself with regular expressions. This action provides specific output formats
-based on the `type` property of the input.
+yourself with regular expressions.
+
+<Alert severity="info">
+  This is also available as a standalone npm package,
+  [`@github/issue-parser`](https://www.npmjs.com/package/@github/issue-parser)!
+</Alert>
+
+This action provides specific output formats based on the `type` property of the
+input.
 
 <TableContainer component={Paper}>
   <Table>
