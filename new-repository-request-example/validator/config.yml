@@ -1,9 +1,0 @@
-validators:
-  - field: repository_name
-    script: repo_doesnt_exist
-  - field: read_team
-    script: team_exists
-  - field: write_team
-    script: team_exists
-  - field: topics
-    script: topics_valid
