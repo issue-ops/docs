@@ -43,11 +43,11 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-mdx": "^3.1.5",
     "eslint-plugin-mdx": "^3.1.5",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-react": "^7.37.3",
-    "remark-preset-lint-consistent": "^6.0.0",
-    "remark-preset-lint-markdown-style-guide": "^6.0.0",
-    "remark-preset-lint-recommended": "^7.0.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "remark-preset-lint-consistent": "^6.0.1",
+    "remark-preset-lint-markdown-style-guide": "^6.0.1",
+    "remark-preset-lint-recommended": "^7.0.1",
     "remark-preset-prettier": "^2.0.1"
   }
 }
