@@ -42,3 +42,5 @@
       url: /reference/issueops-actions
     - title: Branch Deployments
       url: /reference/branch-deployments
+    - title: Examples
+      url: /reference/examples
