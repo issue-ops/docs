@@ -33,10 +33,6 @@ jobs:
         id: install
         run: npm install
 
-      - name: Install Playwright
-        id: playwright
-        run: npx playwright install
-
       - name: Check Format
         id: format-check
         run: npm run format:check
