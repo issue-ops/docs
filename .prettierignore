@@ -11,3 +11,12 @@ node_modules/
 dist/
 coverage/
 fixtures/
+.gitattributes
+.gitignore
+.node-version
+.prettierignore
+CODEOWNERS
+LICENSE
+favicon.ico
+.nojekyll
+*.png
