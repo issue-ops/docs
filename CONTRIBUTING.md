@@ -23,16 +23,3 @@ The maintainers of this repository will review your changes and provide any
 feedback. Once approved, they will be merged in and a new version of the site
 will be deployed. You'll also be able to see your GitHub profile tagged in the
 contributors list for any pages you contribute to!
-
-## Theme
-
-This repository uses [Gatsby](https://www.gatsbyjs.com/), along with the
-following themes and components:
-
-- [Primer Design System](https://primer.style/design/)
-- [Primer React](https://primer.style/react/)
-- [Doctocat](https://primer.style/doctocat/)
-
-A modified version of the Doctocat theme is used to build the documentation from
-`.mdx` files in the `docs` directory. Make sure to check out the above links to
-get familiarized with Gatsby, Primer, and React :smile:

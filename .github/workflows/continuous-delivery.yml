@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   build:
-    name: Build Gatsby Site
+    name: Build Site
     runs-on: ubuntu-latest
 
     # Only run this job if it was done manually or the PR was merged
@@ -43,17 +43,19 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+
+      # prettier-ignore
+      - name: Restore Cache
+        id: cache
+        uses: actions/cache@v4
         with:
-          static_site_generator: gatsby
-          generator_config_file: docs/gatsby-config.ts
+          path: .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json' }}-
 
       - name: Install Dependencies
         id: install
         run: npm ci
-
-      - name: Install Playwright
-        id: playwright
-        run: npx playwright install
 
       - name: Build
         id: build
@@ -65,7 +67,7 @@ jobs:
         id: upload
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs/public
+          path: ./out
 
   deploy:
     name: Deploy to GitHub Pages
