@@ -20,6 +20,8 @@ export default function Home() {
         please open a PR to add it to this page!
       </span>
 
+      <br />
+
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
