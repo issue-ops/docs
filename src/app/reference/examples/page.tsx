@@ -16,6 +16,18 @@ export default function Home() {
       <ul className="list-disc list-inside">
         <li>
           <Link
+            href="https://github.com/casa-vega/issue-ops"
+            className="text-blue-500 hover:underline">
+            GitHub Issue Operations via Actions
+          </Link>
+          : A self-service approach for managing github components/settings
+          across multiple instances of GitHub and GitHub Enterprise.
+        </li>
+      </ul>
+
+      <ul className="list-disc list-inside">
+        <li>
+          <Link
             href="https://github.com/stochastical/abstractnonsense"
             className="text-blue-500 hover:underline">
             Create Blog Posts from Issues
