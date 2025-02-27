@@ -1,5 +1,12 @@
 'use client'
 
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
 import Link from 'next/link'
 
 export default function Home() {
@@ -13,27 +20,43 @@ export default function Home() {
         please open a PR to add it to this page!
       </span>
 
-      <ul className="list-disc list-inside">
-        <li>
-          <Link
-            href="https://github.com/casa-vega/issue-ops"
-            className="text-blue-500 hover:underline">
-            GitHub Issue Operations via Actions
-          </Link>
-          : A self-service approach for managing github components/settings
-          across multiple instances of GitHub and GitHub Enterprise.
-        </li>
-      </ul>
-
-      <ul className="list-disc list-inside">
-        <li>
-          <Link
-            href="https://github.com/stochastical/abstractnonsense"
-            className="text-blue-500 hover:underline">
-            Create Blog Posts from Issues
-          </Link>
-        </li>
-      </ul>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Event</TableCell>
+              <TableCell>Example</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Link
+                  href="https://github.com/casa-vega/issue-ops"
+                  className="text-blue-500 hover:underline">
+                  GitHub Issue Operations via Actions
+                </Link>
+              </TableCell>
+              <TableCell>
+                A self-service approach for managing github components/settings
+                across multiple instances of GitHub and GitHub Enterprise.
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Link
+                  href="https://github.com/stochastical/abstractnonsense"
+                  className="text-blue-500 hover:underline">
+                  Create Blog Posts from Issues
+                </Link>
+              </TableCell>
+              <TableCell>
+                Build and deploy blog posts from issue forms.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   )
 }
