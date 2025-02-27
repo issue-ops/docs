@@ -26,7 +26,7 @@ import dedent from 'ts-dedent'
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">Issues and pull requests</h1>
+      <h1 className="text-5xl font-bold">About IssueOps</h1>
 
       <span>
         In GitHub, a pull request (PR) can be interacted with in a lot of the
@@ -64,8 +64,6 @@ export default function Home() {
         .
       </span>
 
-      <h1 className="text-4xl font-bold">IssueOps concept</h1>
-
       <span>
         Think of IssueOps as a{' '}
         <Link
@@ -80,7 +78,7 @@ export default function Home() {
         is reached, the issue is considered complete and can be closed.
       </span>
 
-      <h1 className="text-3xl font-bold">State Diagrams</h1>
+      <h1 className="text-4xl font-bold">State Diagrams</h1>
 
       <span>
         The following sections contain definitions and examples of common terms
@@ -88,7 +86,7 @@ export default function Home() {
         documentation.
       </span>
 
-      <h1 className="text-2xl font-bold">Action</h1>
+      <h1 className="text-3xl font-bold">Action</h1>
 
       <span>An atomic task that is performed when a transition is taken.</span>
 
@@ -106,7 +104,7 @@ export default function Home() {
         </CardHeader>
       </Card>
 
-      <h1 className="text-2xl font-bold">Event</h1>
+      <h1 className="text-3xl font-bold">Event</h1>
 
       <span>An external occurrence that triggers a state change.</span>
 
@@ -122,14 +120,14 @@ export default function Home() {
         </CardHeader>
       </Card>
 
-      <h1 className="text-2xl font-bold">Guard</h1>
+      <h1 className="text-3xl font-bold">Guard</h1>
 
       <span>
         A condition that is evaluated when a trigger event occurs. A transition
         is taken only if all associated guard conditions are met.
       </span>
 
-      <h1 className="text-2xl font-bold">State</h1>
+      <h1 className="text-3xl font-bold">State</h1>
 
       <span>
         A point in an object&apos;s lifecycle that satisfies certain
@@ -140,7 +138,7 @@ export default function Home() {
         Open
       </StateLabel>
 
-      <h1 className="text-2xl font-bold">Transition</h1>
+      <h1 className="text-3xl font-bold">Transition</h1>
 
       <span>
         A link between two states that, when traversed by an object, will cause
