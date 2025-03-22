@@ -32,7 +32,7 @@ export default function RootLayout({
           <AppSidebar />
           <SidebarInset>
             <div className="flex flex-1 flex-col gap-4 p-4">
-              <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min pl-[15%] pr-[15%]">
+              <div className="min-h-[100vh] min-w-[50vh] flex-1 rounded-xl bg-muted/50 md:min-h-min pl-[15%] pr-[15%]">
                 {children}
               </div>
             </div>

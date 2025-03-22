@@ -9,8 +9,8 @@ import dedent from 'ts-dedent'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">Submit</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">Submit</h1>
 
       <span>
         Once your issue has been parsed and validated, it&apos;s ready for
@@ -51,14 +51,14 @@ export default function Home() {
         submitting the request for further processing.
       </span>
 
-      <h1 className="text-4xl font-bold">Command actions</h1>
+      <h1 className="text-4xl font-bold text-center">Command actions</h1>
 
       <span>
         This is where the{' '}
         <Link
           href="https://github.com/github/command"
           className="text-blue-500 hover:underline">
-          <code>github/command</code>
+          <code className="text-blue-500 hover:underline">github/command</code>
         </Link>{' '}
         action comes into play. This action allows you to specify the <i>who</i>
         ,<i>what</i>, <i>when</i>, and <i>where</i> of activities that can be
@@ -79,19 +79,21 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        steps:
-          - name: Approve Command
-            id: approve
-            uses: github/command@vX.X.X
-            with:
-              allowed_contexts: issue
-              allowlist: octo-org/approvers
-              allowlist_pat: \${{ secrets.MY_TOKEN }}
-              command: .approve
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          steps:
+            - name: Approve Command
+              id: approve
+              uses: github/command@vX.X.X
+              with:
+                allowed_contexts: issue
+                allowlist: octo-org/approvers
+                allowlist_pat: \${{ secrets.MY_TOKEN }}
+                command: .approve
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         This step acts as the gate for any further processing of the issue. The{' '}
@@ -101,26 +103,28 @@ export default function Home() {
         <code>.approve</code> was indeed authorized to approve the request.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        steps:
-          - name: Approve Command
-            id: approve
-            uses: github/command@vX.X.X
-            with:
-              allowed_contexts: issue
-              allowlist: octo-org/approvers
-              allowlist_pat: \${{ secrets.MY_TOKEN }}
-              command: .approve
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          steps:
+            - name: Approve Command
+              id: approve
+              uses: github/command@vX.X.X
+              with:
+                allowed_contexts: issue
+                allowlist: octo-org/approvers
+                allowlist_pat: \${{ secrets.MY_TOKEN }}
+                command: .approve
 
-          ##############################################
-          # This is a great time to re-run validation! #
-          ##############################################
+            ##############################################
+            # This is a great time to re-run validation! #
+            ##############################################
 
-          - if: \${{ steps.approve.outputs.continue == 'true' }}
-            run: echo "This request is approved!"
-        `}
-      </SyntaxHighlighter>
+            - if: \${{ steps.approve.outputs.continue == 'true' }}
+              run: echo "This request is approved!"
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         With any approval workflow, you should also consider what happens when a
@@ -131,36 +135,38 @@ export default function Home() {
         would be <code>&apos;true&apos;</code>.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        steps:
-          - name: Approve Command
-            id: approve
-            uses: github/command@vX.X.X
-            with:
-              allowed_contexts: issue
-              allowlist: octo-org/approvers
-              allowlist_pat: \${{ secrets.MY_TOKEN }}
-              command: .approve
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          steps:
+            - name: Approve Command
+              id: approve
+              uses: github/command@vX.X.X
+              with:
+                allowed_contexts: issue
+                allowlist: octo-org/approvers
+                allowlist_pat: \${{ secrets.MY_TOKEN }}
+                command: .approve
 
-          - name: Deny Command
-            id: deny
-            uses: github/command@vX.X.X
-            with:
-              allowed_contexts: issue
-              allowlist: octo-org/approvers
-              allowlist_pat: \${{ secrets.MY_TOKEN }}
-              command: .deny
+            - name: Deny Command
+              id: deny
+              uses: github/command@vX.X.X
+              with:
+                allowed_contexts: issue
+                allowlist: octo-org/approvers
+                allowlist_pat: \${{ secrets.MY_TOKEN }}
+                command: .deny
 
-          - if: \${{ steps.approve.outputs.continue == 'true' }}
-            run: echo "This request is approved :)"
+            - if: \${{ steps.approve.outputs.continue == 'true' }}
+              run: echo "This request is approved :)"
 
-          - if: \${{ steps.deny.outputs.continue == 'true' }}
-            run: echo "This request is denied :("
-        `}
-      </SyntaxHighlighter>
+            - if: \${{ steps.deny.outputs.continue == 'true' }}
+              run: echo "This request is denied :("
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-4xl font-bold">New repository request</h1>
+      <h1 className="text-4xl font-bold text-center">New repository request</h1>
 
       <span>
         Up until this point, everything has been handled as part of the issue
@@ -168,7 +174,9 @@ export default function Home() {
         processing is done via comments, labels, reactions, and so on.
       </span>
 
-      <h1 className="text-3xl font-bold">Create the comment workflow file</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Create the comment workflow file
+      </h1>
 
       <span>
         The first step is to create a workflow file that will be triggered when
@@ -189,57 +197,59 @@ export default function Home() {
         the request is approved or denied.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        name: Issue Comment
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          name: Issue Comment
 
-        # This workflow runs any time a comment is added to an issue. The comment body
-        # is read and used to determine what action to take.
-        on:
-          issue_comment:
-            types:
-              - created
+          # This workflow runs any time a comment is added to an issue. The comment body
+          # is read and used to determine what action to take.
+          on:
+            issue_comment:
+              types:
+                - created
 
-        jobs:
-          # This job handles the case where a user comments with \`.approve\`.
-          approve:
-            name: Approve Request
-            runs-on: ubuntu-latest
+          jobs:
+            # This job handles the case where a user comments with \`.approve\`.
+            approve:
+              name: Approve Request
+              runs-on: ubuntu-latest
 
-            steps:
-              - name: Approve Command
-                id: approve
-                uses: github/command@vX.X.X
-                with:
-                  allowed_contexts: issue
-                  allowlist: octo-org/approvers
-                  allowlist_pat: \${{ secrets.MY_TOKEN }}
-                  command: .approve
+              steps:
+                - name: Approve Command
+                  id: approve
+                  uses: github/command@vX.X.X
+                  with:
+                    allowed_contexts: issue
+                    allowlist: octo-org/approvers
+                    allowlist_pat: \${{ secrets.MY_TOKEN }}
+                    command: .approve
 
-              - if: \${{ steps.approve.outputs.continue == 'true' }}
-                run: echo "This request is approved!"
+                - if: \${{ steps.approve.outputs.continue == 'true' }}
+                  run: echo "This request is approved!"
 
-          # This job handles the case where a user comments with \`.deny\`.
-          deny:
-            name: Deny Request
-            runs-on: ubuntu-latest
+            # This job handles the case where a user comments with \`.deny\`.
+            deny:
+              name: Deny Request
+              runs-on: ubuntu-latest
 
-            steps:
-              - name: Deny Command
-                id: deny
-                uses: github/command@vX.X.X
-                with:
-                  allowed_contexts: issue
-                  allowlist: octo-org/approvers
-                  allowlist_pat: \${{ secrets.MY_TOKEN }}
-                  command: .deny
+              steps:
+                - name: Deny Command
+                  id: deny
+                  uses: github/command@vX.X.X
+                  with:
+                    allowed_contexts: issue
+                    allowlist: octo-org/approvers
+                    allowlist_pat: \${{ secrets.MY_TOKEN }}
+                    command: .deny
 
-              - if: \${{ steps.deny.outputs.continue == 'true' }}
-                run: echo "This request is denied!"
-        `}
-      </SyntaxHighlighter>
+                - if: \${{ steps.deny.outputs.continue == 'true' }}
+                  run: echo "This request is denied!"
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-3xl font-bold">Trigger the workflow</h1>
+      <h1 className="text-3xl font-bold text-center">Trigger the workflow</h1>
 
       <span>
         In the above workflow, both the <code>approve</code> and{' '}
@@ -263,53 +273,55 @@ export default function Home() {
         invoked.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        name: Issue Comment
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          name: Issue Comment
 
-        on:
-          issue_comment:
-            types:
-              - created
+          on:
+            issue_comment:
+              types:
+                - created
 
-        jobs:
-          approve:
-            name: Approve Request
-            runs-on: ubuntu-latest
+          jobs:
+            approve:
+              name: Approve Request
+              runs-on: ubuntu-latest
 
-            # Only run when the following conditions are true:
-            #   - The issue has the \`issueops:new-repository\` label
-            #   - The issue has the \`issueops:validated\` label
-            #   - The issue does not have the \`issueops:approved\` label
-            #   - The issue is open
-            if: |
-              contains(github.event.issue.labels.*.name, 'issueops:new-repository') &&
-              contains(github.event.issue.labels.*.name, 'issueops:validated') &&
-              contains(github.event.issue.labels.*.name, 'issueops:approved') == false &&
-              github.event.issue.state == 'open'
+              # Only run when the following conditions are true:
+              #   - The issue has the \`issueops:new-repository\` label
+              #   - The issue has the \`issueops:validated\` label
+              #   - The issue does not have the \`issueops:approved\` label
+              #   - The issue is open
+              if: |
+                contains(github.event.issue.labels.*.name, 'issueops:new-repository') &&
+                contains(github.event.issue.labels.*.name, 'issueops:validated') &&
+                contains(github.event.issue.labels.*.name, 'issueops:approved') == false &&
+                github.event.issue.state == 'open'
 
-            steps:
-              # ...
+              steps:
+                # ...
 
-          deny:
-            name: Deny Request
-            runs-on: ubuntu-latest
+            deny:
+              name: Deny Request
+              runs-on: ubuntu-latest
 
-            # Only run when the following conditions are true:
-            #   - The issue has the \`issueops:new-repository\` label
-            #   - The issue has the \`issueops:validated\` label
-            #   - The issue does not have the \`issueops:approved\` label
-            #   - The issue is open
-            if: |
-              contains(github.event.issue.labels.*.name, 'issueops:new-repository') &&
-              contains(github.event.issue.labels.*.name, 'issueops:validated') &&
-              contains(github.event.issue.labels.*.name, 'issueops:approved') == false &&
-              github.event.issue.state == 'open'
+              # Only run when the following conditions are true:
+              #   - The issue has the \`issueops:new-repository\` label
+              #   - The issue has the \`issueops:validated\` label
+              #   - The issue does not have the \`issueops:approved\` label
+              #   - The issue is open
+              if: |
+                contains(github.event.issue.labels.*.name, 'issueops:new-repository') &&
+                contains(github.event.issue.labels.*.name, 'issueops:validated') &&
+                contains(github.event.issue.labels.*.name, 'issueops:approved') == false &&
+                github.event.issue.state == 'open'
 
-            steps:
-              # ...
-        `}
-      </SyntaxHighlighter>
+              steps:
+                # ...
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         This seems like duplication of the same checks. Plus, we haven&apos;t
@@ -317,119 +329,121 @@ export default function Home() {
         lets move this to a separate job that re-runs validation checks.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        name: Issue Comment
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          name: Issue Comment
 
-        on:
-          issue_comment:
-            types:
-              - created
+          on:
+            issue_comment:
+              types:
+                - created
 
-        jobs:
-          validate:
-            name: Validate Request
-            runs-on: ubuntu-latest
+          jobs:
+            validate:
+              name: Validate Request
+              runs-on: ubuntu-latest
 
-            # Only run when the following conditions are true:
-            #   - The issue has the \`issueops:new-repository\` label
-            #   - The issue has the \`issueops:validated\` label
-            #   - The issue does not have the \`issueops:approved\` label
-            #   - The issue is open
-            if: |
-              contains(github.event.issue.labels.*.name, 'issueops:new-repository') &&
-              contains(github.event.issue.labels.*.name, 'issueops:validated') &&
-              contains(github.event.issue.labels.*.name, 'issueops:approved') == false &&
-              github.event.issue.state == 'open'
+              # Only run when the following conditions are true:
+              #   - The issue has the \`issueops:new-repository\` label
+              #   - The issue has the \`issueops:validated\` label
+              #   - The issue does not have the \`issueops:approved\` label
+              #   - The issue is open
+              if: |
+                contains(github.event.issue.labels.*.name, 'issueops:new-repository') &&
+                contains(github.event.issue.labels.*.name, 'issueops:validated') &&
+                contains(github.event.issue.labels.*.name, 'issueops:approved') == false &&
+                github.event.issue.state == 'open'
 
-            permissions:
-              contents: read
-              id-token: write
-              issues: write
+              permissions:
+                contents: read
+                id-token: write
+                issues: write
 
-            outputs:
-              request: \${{ steps.parse.outputs.request }}
+              outputs:
+                request: \${{ steps.parse.outputs.request }}
 
-            steps:
-              - name: Remove Labels
-                id: remove-label
-                uses: issue-ops/labeler@vX.X.X
-                with:
-                  action: remove
-                  issue_number: \${{ github.event.issue.number }}
-                  labels: |
-                    issueops:validated
-                    issueops:submitted
+              steps:
+                - name: Remove Labels
+                  id: remove-label
+                  uses: issue-ops/labeler@vX.X.X
+                  with:
+                    action: remove
+                    issue_number: \${{ github.event.issue.number }}
+                    labels: |
+                      issueops:validated
+                      issueops:submitted
 
-              - name: Get App Token
-                id: token
-                uses: actions/create-github-app-token@vX.X.X
-                with:
-                  app_id: \${{ secrets.MY_GITHUB_APP_ID }}
-                  private_key: \${{ secrets.MY_GITHUB_APP_PEM }}
-                  owner: \${{ github.repository_owner }}
+                - name: Get App Token
+                  id: token
+                  uses: actions/create-github-app-token@vX.X.X
+                  with:
+                    app_id: \${{ secrets.MY_GITHUB_APP_ID }}
+                    private_key: \${{ secrets.MY_GITHUB_APP_PEM }}
+                    owner: \${{ github.repository_owner }}
 
-              - name: Checkout
-                id: checkout
-                uses: actions/checkout@vX.X.X
+                - name: Checkout
+                  id: checkout
+                  uses: actions/checkout@vX.X.X
 
-              - name: Setup Node.js
-                id: setup-node
-                uses: actions/setup-node@vX.X.X
-                with:
-                  node-version-file: .node-version
-                  cache: npm
+                - name: Setup Node.js
+                  id: setup-node
+                  uses: actions/setup-node@vX.X.X
+                  with:
+                    node-version-file: .node-version
+                    cache: npm
 
-              - name: Install Packages
-                id: npm
-                run: npm ci
+                - name: Install Packages
+                  id: npm
+                  run: npm ci
 
-              - name: Parse Issue
-                id: parse
-                uses: issue-ops/parser@vX.X.X
-                with:
-                  body: \${{ github.event.issue.body }}
-                  issue-form-template: new-repository-request.yml
+                - name: Parse Issue
+                  id: parse
+                  uses: issue-ops/parser@vX.X.X
+                  with:
+                    body: \${{ github.event.issue.body }}
+                    issue-form-template: new-repository-request.yml
 
-              - name: Validate Issue
-                id: validate
-                uses: issue-ops/validator@vX.X.X
-                with:
-                  issue-form-template: new-repository-request.yml
-                  github-token: \${{ steps.token.outputs.token }}
-                  parsed-issue-body: \${{ steps.parse.outputs.json }}
+                - name: Validate Issue
+                  id: validate
+                  uses: issue-ops/validator@vX.X.X
+                  with:
+                    issue-form-template: new-repository-request.yml
+                    github-token: \${{ steps.token.outputs.token }}
+                    parsed-issue-body: \${{ steps.parse.outputs.json }}
 
-              - if: \${{ steps.validate.outputs.result == 'success' }}
-                name: Add Validated Label
-                id: add-label
-                uses: issue-ops/labeler@vX.X.X
-                with:
-                  action: add
-                  issue_number: \${{ github.event.issue.number }}
-                  labels: |
-                    issueops:validated
+                - if: \${{ steps.validate.outputs.result == 'success' }}
+                  name: Add Validated Label
+                  id: add-label
+                  uses: issue-ops/labeler@vX.X.X
+                  with:
+                    action: add
+                    issue_number: \${{ github.event.issue.number }}
+                    labels: |
+                      issueops:validated
 
-          approve:
-            name: Approve Request
-            runs-on: ubuntu-latest
+            approve:
+              name: Approve Request
+              runs-on: ubuntu-latest
 
-            # Only run after validation has completed.
-            needs: validate
+              # Only run after validation has completed.
+              needs: validate
 
-            steps:
-              # ...
+              steps:
+                # ...
 
-          deny:
-            name: Deny Request
-            runs-on: ubuntu-latest
+            deny:
+              name: Deny Request
+              runs-on: ubuntu-latest
 
-            # Only run after validation has completed.
-            needs: validate
+              # Only run after validation has completed.
+              needs: validate
 
-            steps:
-              # ...
-        `}
-      </SyntaxHighlighter>
+              steps:
+                # ...
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         With this workflow, we know that the request has been validated before
@@ -437,7 +451,7 @@ export default function Home() {
         <b>Validate Early. Validate Often</b>.
       </span>
 
-      <h1 className="text-4xl font-bold">Next steps</h1>
+      <h1 className="text-4xl font-bold text-center">Next steps</h1>
 
       <span>
         Depending on if the request is approved or denied, you may want to take

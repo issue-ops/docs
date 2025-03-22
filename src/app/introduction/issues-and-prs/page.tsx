@@ -42,8 +42,10 @@ export default function Home() {
   })
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">Issues and PRs</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">
+        Issues and PRs
+      </h1>
 
       <span>
         This page provides an overview of the different components that make up
@@ -51,13 +53,13 @@ export default function Home() {
         used throughout an IssueOps workflow.
       </span>
 
-      <h1 className="text-4xl font-bold">Issues</h1>
+      <h1 className="text-4xl font-bold text-center">Issues</h1>
 
-      <h1 className="text-3xl font-bold">Issue permissions</h1>
+      <h1 className="text-3xl font-bold text-center">Issue permissions</h1>
 
       <span>Any user with read access to a repository can open an issue.</span>
 
-      <h1 className="text-3xl font-bold">Issue structure</h1>
+      <h1 className="text-3xl font-bold text-center">Issue structure</h1>
 
       <TableContainer component={Paper}>
         <Table>
@@ -126,7 +128,9 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <h1 className="text-3xl font-bold">Issue templates vs. issue forms</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Issue templates vs. issue forms
+      </h1>
 
       <span>
         Currently, GitHub supports both{' '}
@@ -149,7 +153,7 @@ export default function Home() {
         require specific input formats and result in a more consistent output.
       </span>
 
-      <h1 className="text-3xl font-bold">Title</h1>
+      <h1 className="text-3xl font-bold text-center">Title</h1>
 
       <span>
         The title of an issue is a short, concise description of the reason the
@@ -168,13 +172,15 @@ export default function Home() {
         issue.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        title: '[Request] Team Membership: TEAM_NAME'
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          title: '[Request] Team Membership: TEAM_NAME'
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-3xl font-bold">Body</h1>
+      <h1 className="text-3xl font-bold text-center">Body</h1>
 
       <span>
         The body of an issue is where your workflow will get most of the
@@ -205,7 +211,7 @@ export default function Home() {
         .
       </span>
 
-      <h1 className="text-3xl font-bold">Assignees</h1>
+      <h1 className="text-3xl font-bold text-center">Assignees</h1>
 
       <span>
         Assignees are users who are responsible for resolving an issue. If your
@@ -215,13 +221,15 @@ export default function Home() {
         tasks are involved.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        assignees:
-          - octocat
-          - mona
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          assignees:
+            - octocat
+            - mona
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <Alert>
         <Info className="h-4 w-4" />
@@ -231,7 +239,7 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold">Labels</h1>
+      <h1 className="text-3xl font-bold text-center">Labels</h1>
 
       <span>
         Labels are a great way to control the flow of an issue through the
@@ -240,14 +248,16 @@ export default function Home() {
         and where it needs to go next.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        labels:
-          - issueops:team-membership-request
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          labels:
+            - issueops:team-membership-request
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-3xl font-bold">Milestones</h1>
+      <h1 className="text-3xl font-bold text-center">Milestones</h1>
 
       <span>
         If you have certain timelines or deadlines associated with your
@@ -274,7 +284,7 @@ export default function Home() {
         in the reference for more information.
       </span>
 
-      <h1 className="text-3xl font-bold">Relations</h1>
+      <h1 className="text-3xl font-bold text-center">Relations</h1>
 
       <span>
         When creating or commenting on issues, you can reference related issues
@@ -290,7 +300,7 @@ export default function Home() {
         issue.
       </span>
 
-      <h1 className="text-3xl font-bold">Development</h1>
+      <h1 className="text-3xl font-bold text-center">Development</h1>
 
       <span>
         The development section of an issue is where you can track the branches
@@ -305,7 +315,7 @@ export default function Home() {
         created following their requirements.
       </span>
 
-      <h1 className="text-3xl font-bold">Projects</h1>
+      <h1 className="text-3xl font-bold text-center">Projects</h1>
 
       <span>
         GitHub Projects are dual-purpose when it comes to IssueOps. They can be
@@ -325,12 +335,14 @@ export default function Home() {
         issue form, and automatically assign them to your meal project.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        projects:
-          - octo-repo/1
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          projects:
+            - octo-repo/1
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         Within your project, you can specify columns for the state of each dish
@@ -350,7 +362,7 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold">Projects</h1>
+      <h1 className="text-3xl font-bold text-center">Projects</h1>
 
       <span>
         Participants are users who have interacted with an issue. This includes
@@ -359,7 +371,7 @@ export default function Home() {
         interacted with an issue, and to communicate with them if needed.
       </span>
 
-      <h1 className="text-3xl font-bold">Timeline</h1>
+      <h1 className="text-3xl font-bold text-center">Timeline</h1>
 
       <span>
         The timeline is a list of all of the events that have occurred on an
@@ -411,7 +423,7 @@ export default function Home() {
         </CardContent>
       </Card>
 
-      <h1 className="text-3xl font-bold">Comments</h1>
+      <h1 className="text-3xl font-bold text-center">Comments</h1>
 
       <span>
         Other than the issue body, comments are how a user will drive your
@@ -430,7 +442,7 @@ export default function Home() {
         issue because the request was missing information.
       </span>
 
-      <h1 className="text-3xl font-bold">Reactions</h1>
+      <h1 className="text-3xl font-bold text-center">Reactions</h1>
 
       <span>
         Though they don&apos;t convey as much information as a comment, adding
@@ -439,42 +451,44 @@ export default function Home() {
         you can follow up with a comment when processing is complete.
       </span>
 
-      <h1 className="text-3xl font-bold">Example issue form</h1>
+      <h1 className="text-3xl font-bold text-center">Example issue form</h1>
 
-      <h1 className="text-2xl font-bold">Issue form template</h1>
+      <h1 className="text-2xl font-bold text-center">Issue form template</h1>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        name: Team Membership Request
-        description: Submit a request to be added to a GitHub Team
-        title: '[Request] Team Membership: TEAM_NAME'
-        labels:
-          - issueops:team-membership-request
-        assignees:
-          - octocat
-          - mona
-        projects:
-          - octo-repo/1
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          name: Team Membership Request
+          description: Submit a request to be added to a GitHub Team
+          title: '[Request] Team Membership: TEAM_NAME'
+          labels:
+            - issueops:team-membership-request
+          assignees:
+            - octocat
+            - mona
+          projects:
+            - octo-repo/1
 
-        body:
-          - type: markdown
-            attributes:
-              value:
-                Welcome to GitHub! Please fill out the information below to request to
-                be added to a GitHub Team. Once submitted, your request will be reviewed
-                by the admin team. Once approved, you will be added automatically!
-          - type: input
-            id: name
-            attributes:
-              label: Team name
-              description: The name of the team you would like to join.
-              placeholder: octoteam
-            validations:
-              required: true
-        `}
-      </SyntaxHighlighter>
+          body:
+            - type: markdown
+              attributes:
+                value:
+                  Welcome to GitHub! Please fill out the information below to request to
+                  be added to a GitHub Team. Once submitted, your request will be reviewed
+                  by the admin team. Once approved, you will be added automatically!
+            - type: input
+              id: name
+              attributes:
+                label: Team name
+                description: The name of the team you would like to join.
+                placeholder: octoteam
+              validations:
+                required: true
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-2xl font-bold">Rendered output</h1>
+      <h1 className="text-2xl font-bold text-center">Rendered output</h1>
 
       <Card className="max-w-[800px] p-4">
         <CardContent>
@@ -502,6 +516,8 @@ export default function Home() {
                 request will be reviewed by the admin team. Once approved, you
                 will be added automatically!
               </span>
+              <br />
+              <br />
               <FormField
                 control={form.control}
                 name="teamName"
@@ -522,7 +538,7 @@ export default function Home() {
         </CardContent>
       </Card>
 
-      <h1 className="text-4xl font-bold">Pull requests</h1>
+      <h1 className="text-4xl font-bold text-center">Pull requests</h1>
 
       <span>
         Pull requests add extra features and metadata on top of issues. Many
@@ -531,7 +547,9 @@ export default function Home() {
         workflows, are listed in the following sections.
       </span>
 
-      <h1 className="text-3xl font-bold">Pull request permissions</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Pull request permissions
+      </h1>
 
       <span>
         In order to create a pull request, the required permissions will differ
@@ -559,7 +577,7 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <h1 className="text-3xl font-bold">Reviews and approvals</h1>
+      <h1 className="text-3xl font-bold text-center">Reviews and approvals</h1>
 
       <span>
         Unlike issues, PRs support reviews and approvals out of the box. When
@@ -581,7 +599,7 @@ export default function Home() {
         workflows for tracking approvals as comments.
       </span>
 
-      <h1 className="text-3xl font-bold">Status checks</h1>
+      <h1 className="text-3xl font-bold text-center">Status checks</h1>
 
       <span>
         Status checks run any time a PR is created or updated. These can range
@@ -604,7 +622,9 @@ export default function Home() {
         you can ensure that validation rules pass before a PR can change states.
       </span>
 
-      <h1 className="text-3xl font-bold">Deployments and Environments</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Deployments and Environments
+      </h1>
 
       <span>
         When a GitHub Actions workflow runs that specifies an environment, a

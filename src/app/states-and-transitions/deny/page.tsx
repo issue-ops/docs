@@ -7,8 +7,8 @@ import dedent from 'ts-dedent'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">Deny</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">Deny</h1>
 
       <span>
         In the <code>Denied</code> state, we know that the issue has been denied
@@ -59,7 +59,7 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-4xl font-bold">New repository request</h1>
+      <h1 className="text-4xl font-bold text-center">New repository request</h1>
 
       <span>
         When a new repository request is denied, we want to close the issue and
@@ -67,46 +67,48 @@ export default function Home() {
         we know the request was closed as denied.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        # This job is responsible for handling denied requests.
-        deny:
-          name: Deny Request
-          runs-on: ubuntu-latest
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          # This job is responsible for handling denied requests.
+          deny:
+            name: Deny Request
+            runs-on: ubuntu-latest
 
-          # Only run after validation has completed.
-          needs: validate
+            # Only run after validation has completed.
+            needs: validate
 
-          steps:
-            - name: Deny Command
-              id: deny
-              uses: github/command@vX.X.X
-              with:
-                allowed_contexts: issue
-                allowlist: octo-org/approvers
-                allowlist_pat: \${{ secrets.MY_TOKEN }}
-                command: .deny
+            steps:
+              - name: Deny Command
+                id: deny
+                uses: github/command@vX.X.X
+                with:
+                  allowed_contexts: issue
+                  allowlist: octo-org/approvers
+                  allowlist_pat: \${{ secrets.MY_TOKEN }}
+                  command: .deny
 
-            # Comment on the issue to let the user know their request was denied.
-            - if: \${{ steps.deny.outputs.continue == 'true' }}
-              name: Post Comment
-              id: comment
-              uses: peter-evans/create-or-update-comment@vX.X.X
-              with:
-                issue-number: \${{ github.event.issue.number }}
-                body:
-                  ':no_entry_sign: This request has been denied! This issue will be
-                  closed shortly.'
+              # Comment on the issue to let the user know their request was denied.
+              - if: \${{ steps.deny.outputs.continue == 'true' }}
+                name: Post Comment
+                id: comment
+                uses: peter-evans/create-or-update-comment@vX.X.X
+                with:
+                  issue-number: \${{ github.event.issue.number }}
+                  body:
+                    ':no_entry_sign: This request has been denied! This issue will be
+                    closed shortly.'
 
-            # Close the issue.
-            - if: \${{ steps.deny.outputs.continue == 'true' }}
-              name: Close Issue
-              id: close
-              run: gh issue close \${{ github.event.issue.number }} --reason not_planned
-        `}
-      </SyntaxHighlighter>
+              # Close the issue.
+              - if: \${{ steps.deny.outputs.continue == 'true' }}
+                name: Close Issue
+                id: close
+                run: gh issue close \${{ github.event.issue.number }} --reason not_planned
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-4xl font-bold">Next steps</h1>
+      <h1 className="text-4xl font-bold text-center">Next steps</h1>
 
       <span>Your IssueOps workflow is officially complete!</span>
     </div>

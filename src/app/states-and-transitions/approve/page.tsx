@@ -7,8 +7,8 @@ import dedent from 'ts-dedent'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">Approve</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">Approve</h1>
 
       <span>
         In the <code>Approved</code> state, we know that the issue has been
@@ -60,7 +60,7 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-4xl font-bold">New repository request</h1>
+      <h1 className="text-4xl font-bold text-center">New repository request</h1>
 
       <span>
         When a new repository request is approved, we need to do the following:
@@ -72,60 +72,62 @@ export default function Home() {
         <li>Close the issue</li>
       </ol>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        # This job is responsible for handling approved requests.
-        approve:
-          name: Approve Request
-          runs-on: ubuntu-latest
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          # This job is responsible for handling approved requests.
+          approve:
+            name: Approve Request
+            runs-on: ubuntu-latest
 
-          # Only run after validation has completed.
-          needs: validate
+            # Only run after validation has completed.
+            needs: validate
 
-          steps:
-            - name: Approve Command
-              id: approve
-              uses: github/command@vX.X.X
-              with:
-                allowed_contexts: issue
-                allowlist: octo-org/approvers
-                allowlist_pat: \${{ secrets.MY_TOKEN }}
-                command: .approve
+            steps:
+              - name: Approve Command
+                id: approve
+                uses: github/command@vX.X.X
+                with:
+                  allowed_contexts: issue
+                  allowlist: octo-org/approvers
+                  allowlist_pat: \${{ secrets.MY_TOKEN }}
+                  command: .approve
 
-            # Create the repository.
-            - if: \${{ steps.approve.outputs.continue == 'true' }}
-              name: Create Repository
-              id: create
-              uses: actions/github-script@vX.X.X
-              with:
-                github-token: \${{ secrets.MY_TOKEN }}
-                script: |
-                  const request = JSON.parse('\${{ needs.validate.outputs.request }}')
-                  await github.rest.repos.createInOrg({
-                    org: '\${{ github.repository_owner }}',
-                    name: request.name,
-                  })
+              # Create the repository.
+              - if: \${{ steps.approve.outputs.continue == 'true' }}
+                name: Create Repository
+                id: create
+                uses: actions/github-script@vX.X.X
+                with:
+                  github-token: \${{ secrets.MY_TOKEN }}
+                  script: |
+                    const request = JSON.parse('\${{ needs.validate.outputs.request }}')
+                    await github.rest.repos.createInOrg({
+                      org: '\${{ github.repository_owner }}',
+                      name: request.name,
+                    })
 
-            # Comment on the issue to let the user know their request was denied.
-            - if: \${{ steps.approve.outputs.continue == 'true' }}
-              name: Post Comment
-              id: comment
-              uses: peter-evans/create-or-update-comment@vX.X.X
-              with:
-                issue-number: \${{ github.event.issue.number }}
-                body:
-                  ':tada: This request has been approved! Your repository has been
-                  created.'
+              # Comment on the issue to let the user know their request was denied.
+              - if: \${{ steps.approve.outputs.continue == 'true' }}
+                name: Post Comment
+                id: comment
+                uses: peter-evans/create-or-update-comment@vX.X.X
+                with:
+                  issue-number: \${{ github.event.issue.number }}
+                  body:
+                    ':tada: This request has been approved! Your repository has been
+                    created.'
 
-            # Close the issue.
-            - if: \${{ steps.approve.outputs.continue == 'true' }}
-              name: Close Issue
-              id: close
-              run: gh issue close \${{ github.event.issue.number }} --reason completed
-        `}
-      </SyntaxHighlighter>
+              # Close the issue.
+              - if: \${{ steps.approve.outputs.continue == 'true' }}
+                name: Close Issue
+                id: close
+                run: gh issue close \${{ github.event.issue.number }} --reason completed
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-4xl font-bold">Next steps</h1>
+      <h1 className="text-4xl font-bold text-center">Next steps</h1>
 
       <span>Your IssueOps workflow is officially complete!</span>
     </div>

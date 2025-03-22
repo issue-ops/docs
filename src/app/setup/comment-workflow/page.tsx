@@ -19,8 +19,10 @@ import dedent from 'ts-dedent'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">Comment Workflow</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">
+        Comment Workflow
+      </h1>
 
       <span>
         After the issue has been opened and any initial processing has been run,
@@ -29,7 +31,7 @@ export default function Home() {
         further processing throughout the lifecycle of the issue.
       </span>
 
-      <h1 className="text-4xl font-bold">Event triggers</h1>
+      <h1 className="text-4xl font-bold text-center">Event triggers</h1>
 
       <span>
         The comment workflow should, at minimum, be triggered by creation of new
@@ -37,14 +39,16 @@ export default function Home() {
         may be useful for your use-case.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        on:
-          issue_comment:
-            types:
-              - created
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          on:
+            issue_comment:
+              types:
+                - created
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         The flexibility with the <code>issue_comment</code> trigger lies in the
@@ -68,7 +72,7 @@ export default function Home() {
         <code>pull_request_comment</code> trigger instead.
       </span>
 
-      <h1 className="text-4xl font-bold">Commands</h1>
+      <h1 className="text-4xl font-bold text-center">Commands</h1>
 
       <span>
         Good IssueOps workflows make use of <i>commands</i> to trigger actions.
@@ -116,7 +120,7 @@ export default function Home() {
         <Link
           href="https://github.com/github/command"
           className="text-blue-500 hover:underline">
-          <code>github/command</code>
+          <code className="text-blue-500 hover:underline">github/command</code>
         </Link>{' '}
         action. This action makes it easy to define your actions, who can run
         them, and what happens when they are run.
@@ -129,47 +133,49 @@ export default function Home() {
         <code>.lint</code> on a PR.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        name: IssueOps Linter
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          name: IssueOps Linter
 
-        on:
-          issue_comment:
-            types:
-              - created
+          on:
+            issue_comment:
+              types:
+                - created
 
-        jobs:
-          lint:
-            name: Lint Codebase
-            runs-on: ubuntu-latest
+          jobs:
+            lint:
+              name: Lint Codebase
+              runs-on: ubuntu-latest
 
-            # Only run on PR comments, not issue comments
-            if: \${{ github.event.pull_request }}
+              # Only run on PR comments, not issue comments
+              if: \${{ github.event.pull_request }}
 
-            # Minimum required permissions for the \`github/command\` action
-            permissions:
-              pull-requests: write
-              issues: write
-              checks: read
+              # Minimum required permissions for the \`github/command\` action
+              permissions:
+                pull-requests: write
+                issues: write
+                checks: read
 
-            steps:
-              - name: Lint Command
-                id: command
-                uses: github/command@vX.X.X
-                with:
-                  command: .lint
+              steps:
+                - name: Lint Command
+                  id: command
+                  uses: github/command@vX.X.X
+                  with:
+                    command: .lint
 
-              - if: \${{ steps.command.outputs.continue == 'true' }}
-                name: Checkout
-                id: checkout
-                uses: actions/checkout@vX.X.X
+                - if: \${{ steps.command.outputs.continue == 'true' }}
+                  name: Checkout
+                  id: checkout
+                  uses: actions/checkout@vX.X.X
 
-              - if: \${{ steps.command.outputs.continue == 'true' }}
-                name: Run Linter
-                id: run-linter
-                run: npm run lint
-        `}
-      </SyntaxHighlighter>
+                - if: \${{ steps.command.outputs.continue == 'true' }}
+                  name: Run Linter
+                  id: run-linter
+                  run: npm run lint
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         As you can see, the <code>Checkout</code> and <code>Run Linter</code>{' '}
@@ -199,7 +205,7 @@ export default function Home() {
         <li>Collect any arguments passed to the command</li>
       </ol>
 
-      <h1 className="text-4xl font-bold">Workflow steps</h1>
+      <h1 className="text-4xl font-bold text-center">Workflow steps</h1>
 
       <span>
         Most comment workflows can be broken down into the following steps.
@@ -216,7 +222,7 @@ export default function Home() {
         <li>Provide feedback to the user</li>
       </ol>
 
-      <h1 className="text-3xl font-bold">
+      <h1 className="text-3xl font-bold text-center">
         Parse and validate the command and input(s)
       </h1>
 
@@ -236,61 +242,65 @@ export default function Home() {
         linting on. Users would enter a comment like this:
       </span>
 
-      <SyntaxHighlighter language="plain" style={vscDarkPlus}>
-        {dedent`
-        .lint | main
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="plain" style={vscDarkPlus}>
+          {dedent`
+          .lint | main
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         Within your workflow, you would need to parse the parameter value and
         use it to checkout the correct branch:
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        name: IssueOps Linter
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          name: IssueOps Linter
 
-        on:
-          issue_comment:
-            types:
-              - created
+          on:
+            issue_comment:
+              types:
+                - created
 
-        jobs:
-          lint:
-            name: Lint Codebase
-            runs-on: ubuntu-latest
+          jobs:
+            lint:
+              name: Lint Codebase
+              runs-on: ubuntu-latest
 
-            # Only run on PR comments, not issue comments
-            if: \${{ github.event.pull_request }}
+              # Only run on PR comments, not issue comments
+              if: \${{ github.event.pull_request }}
 
-            # Minimum required permissions for the \`github/command\` action
-            permissions:
-              pull-requests: write
-              issues: write
-              checks: read
+              # Minimum required permissions for the \`github/command\` action
+              permissions:
+                pull-requests: write
+                issues: write
+                checks: read
 
-            steps:
-              - name: Lint Command
-                id: command
-                uses: github/command@vX.X.X
-                with:
-                  command: .lint
-                  param_separator: '|' # This is the default value
+              steps:
+                - name: Lint Command
+                  id: command
+                  uses: github/command@vX.X.X
+                  with:
+                    command: .lint
+                    param_separator: '|' # This is the default value
 
-              - if: \${{ steps.command.outputs.continue == 'true' }}
-                name: Checkout
-                id: checkout
-                uses: actions/checkout@vX.X.X
-                with:
-                  ref: \${{ steps.command.outputs.params }}
+                - if: \${{ steps.command.outputs.continue == 'true' }}
+                  name: Checkout
+                  id: checkout
+                  uses: actions/checkout@vX.X.X
+                  with:
+                    ref: \${{ steps.command.outputs.params }}
 
-              - if: \${{ steps.command.outputs.continue == 'true' }}
-                name: Run Linter
-                id: run-linter
-                run: npm run lint
-        `}
-      </SyntaxHighlighter>
+                - if: \${{ steps.command.outputs.continue == 'true' }}
+                  name: Run Linter
+                  id: run-linter
+                  run: npm run lint
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <Alert>
         <Info className="h-4 w-4" />
@@ -302,7 +312,9 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold">Parse and validate the issue body</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Parse and validate the issue body
+      </h1>
 
       <Card>
         <CardContent>
@@ -327,39 +339,47 @@ export default function Home() {
         <Link
           href="https://github.com/issue-ops/parser"
           className="text-blue-500 hover:underline">
-          <code>issue-ops/parser</code>
+          <code className="text-blue-500 hover:underline">
+            issue-ops/parser
+          </code>
         </Link>{' '}
         and{' '}
         <Link
           href="https://github.com/issue-ops/validator"
           className="text-blue-500 hover:underline">
-          <code>issue-ops/validator</code>
+          <code className="text-blue-500 hover:underline">
+            issue-ops/validator
+          </code>
         </Link>{' '}
         actions can take care of this for you. All you need to do is make sure
         they are included in your comment processing workflows.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        steps:
-          - name: Parse Issue Body
-            id: parse
-            uses: issue-ops/parser@vX.X.X
-            with:
-              body: \${{ github.event.issue.body }}
-              issue-form-template: my-issue-form.yml
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          steps:
+            - name: Parse Issue Body
+              id: parse
+              uses: issue-ops/parser@vX.X.X
+              with:
+                body: \${{ github.event.issue.body }}
+                issue-form-template: my-issue-form.yml
 
-          - name: Validate Issue Body
-            id: validate
-            uses: issue-ops/validator@vX.X.X
-            with:
-              issue-form-template: my-issue-form.yml
-              issue-number: \${{ github.event.issue.number }}
-              parsed-issue-body: \${{ steps.parse.outputs.json }}
-        `}
-      </SyntaxHighlighter>
+            - name: Validate Issue Body
+              id: validate
+              uses: issue-ops/validator@vX.X.X
+              with:
+                issue-form-template: my-issue-form.yml
+                issue-number: \${{ github.event.issue.number }}
+                parsed-issue-body: \${{ steps.parse.outputs.json }}
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-3xl font-bold">Check the current state</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Check the current state
+      </h1>
 
       <span>
         As an issue is processed, it will move through a series of{' '}
@@ -380,21 +400,23 @@ export default function Home() {
         again.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        # This will only run if the request has already been submitted.
-        if: contains(github.event.issue.labels.*.name, 'issueops:submitted') == true
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          # This will only run if the request has already been submitted.
+          if: contains(github.event.issue.labels.*.name, 'issueops:submitted') == true
 
-        steps:
-          - name: Post Comment
-            id: comment
-            uses: peter-evans/create-or-update-comment@vX.X.X
-            with:
-              issue-number: \${{ github.event.issue.number }}
-              body: |
-                ':clock1: It looks like this issue has already been submitted. Sit tight!'
-        `}
-      </SyntaxHighlighter>
+          steps:
+            - name: Post Comment
+              id: comment
+              uses: peter-evans/create-or-update-comment@vX.X.X
+              with:
+                issue-number: \${{ github.event.issue.number }}
+                body: |
+                  ':clock1: It looks like this issue has already been submitted. Sit tight!'
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <Alert>
         <Info className="h-4 w-4" />
@@ -406,7 +428,9 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold">Check the user&apos;s permissions</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Check the user&apos;s permissions
+      </h1>
 
       <span>
         By default, any user with read access to a repository can open issues
@@ -425,16 +449,18 @@ export default function Home() {
         be able to push the request through to the next state.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        - name: Approve Command
-          id: approve
-          uses: github/command@vX.X.X
-          with:
-            command: .approve
-            allowlist: octocat,mona
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          - name: Approve Command
+            id: approve
+            uses: github/command@vX.X.X
+            with:
+              command: .approve
+              allowlist: octocat,mona
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         If you want to use teams to control access, you will also need to
@@ -450,24 +476,26 @@ export default function Home() {
         .
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        - uses: actions/create-github-app-token@vX.X.X
-          id: token
-          with:
-            app_id: \${{ secrets.MY_GITHUB_APP_ID }}
-            private_key: \${{ secrets.MY_GITHUB_APP_PEM }}
-            owner: \${{ github.repository_owner }}
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          - uses: actions/create-github-app-token@vX.X.X
+            id: token
+            with:
+              app_id: \${{ secrets.MY_GITHUB_APP_ID }}
+              private_key: \${{ secrets.MY_GITHUB_APP_PEM }}
+              owner: \${{ github.repository_owner }}
 
-        - name: Approve Command
-          id: approve
-          uses: github/command@vX.X.X
-          with:
-            command: .approve
-            allowlist: octo-org/admin-team
-            allowlist_pat: \${{ steps.token.outputs.token }}
-        `}
-      </SyntaxHighlighter>
+          - name: Approve Command
+            id: approve
+            uses: github/command@vX.X.X
+            with:
+              command: .approve
+              allowlist: octo-org/admin-team
+              allowlist_pat: \${{ steps.token.outputs.token }}
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         Alternatively, you can restrict access to specific roles in your
@@ -476,18 +504,20 @@ export default function Home() {
         repository can run commands.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        - name: Approve Command
-          id: approve
-          uses: github/command@vX.X.X
-          with:
-            command: .approve
-            permissions: admin,maintain # Restrict users with write access
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          - name: Approve Command
+            id: approve
+            uses: github/command@vX.X.X
+            with:
+              command: .approve
+              permissions: admin,maintain # Restrict users with write access
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-3xl font-bold">Process the command</h1>
+      <h1 className="text-3xl font-bold text-center">Process the command</h1>
 
       <span>
         This is where the magic happens! You can use any series of actions to
@@ -495,7 +525,9 @@ export default function Home() {
         <Link
           href="https://github.com/actions/github-script"
           className="text-blue-500 hover:underline">
-          <code>actions/github-script</code>
+          <code className="text-blue-500 hover:underline">
+            actions/github-script
+          </code>
         </Link>{' '}
         action is a great choice for interacting with GitHub APIs.
       </span>
@@ -506,27 +538,29 @@ export default function Home() {
         <code>github/command</code> action!
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        - if: \${{ steps.command.outputs.continue == 'true' }}
-          name: Add User to Team
-          id: add-user
-          uses: actions/github-script@vX.X.X
-          with:
-            token: \${{ steps.token.outputs.token }}
-            script: |
-              const request = JSON.parse('\${{ steps.parse.outputs.json }}')
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          - if: \${{ steps.command.outputs.continue == 'true' }}
+            name: Add User to Team
+            id: add-user
+            uses: actions/github-script@vX.X.X
+            with:
+              token: \${{ steps.token.outputs.token }}
+              script: |
+                const request = JSON.parse('\${{ steps.parse.outputs.json }}')
 
-              await github.rest.teams.addOrUpdateMembershipForUserInOrg({
-                org: context.repo.owner,
-                team_slug: request.team_name,
-                username: '\${{ github.event.issue.user.login }}',
-                role: 'member'
-              })
-        `}
-      </SyntaxHighlighter>
+                await github.rest.teams.addOrUpdateMembershipForUserInOrg({
+                  org: context.repo.owner,
+                  team_slug: request.team_name,
+                  username: '\${{ github.event.issue.user.login }}',
+                  role: 'member'
+                })
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-3xl font-bold">Update the issue state</h1>
+      <h1 className="text-3xl font-bold text-center">Update the issue state</h1>
 
       <span>
         Once any processing has been completed, the issue can be transitioned to
@@ -540,27 +574,33 @@ export default function Home() {
         <Link
           href="https://github.com/issue-ops/labeler"
           className="text-blue-500 hover:underline">
-          <code>issue-ops/labeler</code>
+          <code className="text-blue-500 hover:underline">
+            issue-ops/labeler
+          </code>
         </Link>{' '}
         action to transition the issue from <code>validated</code> to{' '}
         <code>submitted</code> state.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        - if: \${{ steps.command.outputs.continue == 'true' }}
-          name: Set Submitted State
-          id: set-submitted
-          uses: issue-ops/labeler@vX.X.X
-          with:
-            action: add
-            issue_number: \${{ github.event.issue.number }}
-            labels: |
-              issueops:submitted
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          - if: \${{ steps.command.outputs.continue == 'true' }}
+            name: Set Submitted State
+            id: set-submitted
+            uses: issue-ops/labeler@vX.X.X
+            with:
+              action: add
+              issue_number: \${{ github.event.issue.number }}
+              labels: |
+                issueops:submitted
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-3xl font-bold">Provide feedback to the user</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Provide feedback to the user
+      </h1>
 
       <span>
         Any time processing is done on an issue, its helpful to let users know:
@@ -578,15 +618,17 @@ export default function Home() {
         command.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        - uses: github/command@vX.X.X
-          id: command
-          with:
-            command: .lint
-            reaction: eyes
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          - uses: github/command@vX.X.X
+            id: command
+            with:
+              command: .lint
+              reaction: eyes
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>Any of the following reactions can be added:</span>
 
@@ -603,49 +645,49 @@ export default function Home() {
               <TableCell>
                 <code style={{ color: 'black' }}>+1</code>
               </TableCell>
-              <TableCell>:+1:</TableCell>
+              <TableCell>👍</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
                 <code style={{ color: 'black' }}>-1</code>
               </TableCell>
-              <TableCell>:-1:</TableCell>
+              <TableCell>👎</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
                 <code style={{ color: 'black' }}>laugh</code>
               </TableCell>
-              <TableCell>:smile:</TableCell>
+              <TableCell>😄</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
                 <code style={{ color: 'black' }}>confused</code>
               </TableCell>
-              <TableCell>:confused:</TableCell>
+              <TableCell>😕</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
                 <code style={{ color: 'black' }}>heart</code>
               </TableCell>
-              <TableCell>:heart:</TableCell>
+              <TableCell>❤️</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
                 <code style={{ color: 'black' }}>hooray</code>
               </TableCell>
-              <TableCell>:tada:</TableCell>
+              <TableCell>🎉</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
                 <code style={{ color: 'black' }}>rocket</code>
               </TableCell>
-              <TableCell>:rocket:</TableCell>
+              <TableCell>🚀</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>
                 <code style={{ color: 'black' }}>eyes</code>
               </TableCell>
-              <TableCell>:eyes:</TableCell>
+              <TableCell>👀</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -658,21 +700,23 @@ export default function Home() {
         the outcome.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        - if: \${{ steps.command.outputs.continue == 'true' }}
-          name: Add Complete Comment
-          id: comment-complete
-          uses: peter-evans/create-or-update-comment@vX.X.X
-          with:
-            issue-number: \${{ github.event.issue.number }}
-            body: |
-              Your request has been processed! Here are the details of the request:
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          - if: \${{ steps.command.outputs.continue == 'true' }}
+            name: Add Complete Comment
+            id: comment-complete
+            uses: peter-evans/create-or-update-comment@vX.X.X
+            with:
+              issue-number: \${{ github.event.issue.number }}
+              body: |
+                Your request has been processed! Here are the details of the request:
 
-              - **Team:** \${{ steps.parse.outputs.json.team_name }}
-              - **Role:** \`member\`
-        `}
-      </SyntaxHighlighter>
+                - **Team:** \${{ steps.parse.outputs.json.team_name }}
+                - **Role:** \`member\`
+          `}
+        </SyntaxHighlighter>
+      </div>
     </div>
   )
 }

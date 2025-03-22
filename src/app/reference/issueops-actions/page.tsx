@@ -13,8 +13,10 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">IssueOps Actions</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">
+        IssueOps Actions
+      </h1>
 
       <span>
         This page contains a list of useful actions for IssueOps workflows. If
@@ -35,7 +37,9 @@ export default function Home() {
                 <Link
                   href="https://github.com/actions/add-to-project"
                   className="text-blue-500 hover:underline">
-                  <code style={{ color: 'black' }}>actions/add-to-project</code>
+                  <code className="text-blue-500 hover:underline">
+                    actions/add-to-project
+                  </code>
                 </Link>
               </TableCell>
               <TableCell>Add issues to project boards</TableCell>
@@ -45,7 +49,7 @@ export default function Home() {
                 <Link
                   href="https://github.com/actions/create-github-app-token"
                   className="text-blue-500 hover:underline">
-                  <code style={{ color: 'black' }}>
+                  <code className="text-blue-500 hover:underline">
                     actions/create-github-app-token
                   </code>
                 </Link>
@@ -59,7 +63,9 @@ export default function Home() {
                 <Link
                   href="https://github.com/issue-ops/labeler"
                   className="text-blue-500 hover:underline">
-                  <code style={{ color: 'black' }}>issue-ops/labeler</code>
+                  <code className="text-blue-500 hover:underline">
+                    issue-ops/labeler
+                  </code>
                 </Link>
               </TableCell>
               <TableCell>Bulk add/remove labels</TableCell>
@@ -69,7 +75,9 @@ export default function Home() {
                 <Link
                   href="https://github.com/issue-ops/parser"
                   className="text-blue-500 hover:underline">
-                  <code style={{ color: 'black' }}>issue-ops/parser</code>
+                  <code className="text-blue-500 hover:underline">
+                    issue-ops/parser
+                  </code>
                 </Link>
               </TableCell>
               <TableCell>Parse an issue into JSON</TableCell>
@@ -79,7 +87,9 @@ export default function Home() {
                 <Link
                   href="https://github.com/issue-ops/releaser"
                   className="text-blue-500 hover:underline">
-                  <code style={{ color: 'black' }}>issue-ops/releaser</code>
+                  <code className="text-blue-500 hover:underline">
+                    issue-ops/releaser
+                  </code>
                 </Link>
               </TableCell>
               <TableCell>Automatically create releases</TableCell>
@@ -89,7 +99,9 @@ export default function Home() {
                 <Link
                   href="https://github.com/issue-ops/semver"
                   className="text-blue-500 hover:underline">
-                  <code style={{ color: 'black' }}>issue-ops/semver</code>
+                  <code className="text-blue-500 hover:underline">
+                    issue-ops/semver
+                  </code>
                 </Link>
               </TableCell>
               <TableCell>Automatically handle version tags</TableCell>
@@ -99,7 +111,9 @@ export default function Home() {
                 <Link
                   href="https://github.com/issue-ops/validator"
                   className="text-blue-500 hover:underline">
-                  <code style={{ color: 'black' }}>issue-ops/validator</code>
+                  <code className="text-blue-500 hover:underline">
+                    issue-ops/validator
+                  </code>
                 </Link>
               </TableCell>
               <TableCell>Validate issues against custom rules</TableCell>
@@ -109,7 +123,9 @@ export default function Home() {
                 <Link
                   href="https://github.com/github/command"
                   className="text-blue-500 hover:underline">
-                  <code style={{ color: 'black' }}>github/command</code>
+                  <code className="text-blue-500 hover:underline">
+                    github/command
+                  </code>
                 </Link>
               </TableCell>
               <TableCell>IssueOps commands for GitHub Actions</TableCell>

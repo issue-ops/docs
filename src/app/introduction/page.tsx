@@ -25,8 +25,10 @@ import dedent from 'ts-dedent'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">About IssueOps</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">
+        About IssueOps
+      </h1>
 
       <span>
         In GitHub, a pull request (PR) can be interacted with in a lot of the
@@ -78,7 +80,7 @@ export default function Home() {
         is reached, the issue is considered complete and can be closed.
       </span>
 
-      <h1 className="text-4xl font-bold">State Diagrams</h1>
+      <h1 className="text-4xl font-bold text-center">State Diagrams</h1>
 
       <span>
         The following sections contain definitions and examples of common terms
@@ -86,7 +88,7 @@ export default function Home() {
         documentation.
       </span>
 
-      <h1 className="text-3xl font-bold">Action</h1>
+      <h1 className="text-3xl font-bold text-center">Action</h1>
 
       <span>An atomic task that is performed when a transition is taken.</span>
 
@@ -104,7 +106,7 @@ export default function Home() {
         </CardHeader>
       </Card>
 
-      <h1 className="text-3xl font-bold">Event</h1>
+      <h1 className="text-3xl font-bold text-center">Event</h1>
 
       <span>An external occurrence that triggers a state change.</span>
 
@@ -120,14 +122,14 @@ export default function Home() {
         </CardHeader>
       </Card>
 
-      <h1 className="text-3xl font-bold">Guard</h1>
+      <h1 className="text-3xl font-bold text-center">Guard</h1>
 
       <span>
         A condition that is evaluated when a trigger event occurs. A transition
         is taken only if all associated guard conditions are met.
       </span>
 
-      <h1 className="text-3xl font-bold">State</h1>
+      <h1 className="text-3xl font-bold text-center">State</h1>
 
       <span>
         A point in an object&apos;s lifecycle that satisfies certain
@@ -138,14 +140,14 @@ export default function Home() {
         Open
       </StateLabel>
 
-      <h1 className="text-3xl font-bold">Transition</h1>
+      <h1 className="text-3xl font-bold text-center">Transition</h1>
 
       <span>
         A link between two states that, when traversed by an object, will cause
         certain action(s) to be performed.
       </span>
 
-      <h1 className="text-4xl font-bold">IssueOps workflow</h1>
+      <h1 className="text-4xl font-bold text-center">IssueOps workflow</h1>
 
       <span>
         In general, an IssueOps workflow will follow the same basic pattern:
@@ -169,7 +171,9 @@ export default function Home() {
 
       <span>Let&apos;s use a more practical example...</span>
 
-      <h1 className="text-3xl font-bold">Example: GitHub team membership</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Example: GitHub team membership
+      </h1>
 
       <span>
         <b>
@@ -232,7 +236,7 @@ export default function Home() {
         response to state changes.
       </span>
 
-      <h1 className="text-3xl font-bold">Event triggers</h1>
+      <h1 className="text-3xl font-bold text-center">Event triggers</h1>
 
       <span>
         In the membership request workflow, there are several events that
@@ -257,7 +261,7 @@ export default function Home() {
         . Here, we will focus on the events that are most relevant to IssueOps.
       </span>
 
-      <h1 className="text-2xl font-bold">Issues</h1>
+      <h1 className="text-2xl font-bold text-center">Issues</h1>
 
       <span>
         Events related to issues seem like a good fit for <i>Issue</i>Ops!
@@ -424,7 +428,7 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-2xl font-bold">Issue Comments</h1>
+      <h1 className="text-2xl font-bold text-center">Issue Comments</h1>
 
       <span>
         After an issue is opened, other events must take place that change the
@@ -454,7 +458,7 @@ export default function Home() {
         <Link
           href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#issue_comment"
           className="text-blue-500 hover:underline">
-          <code>issue_comment</code>
+          <code className="text-blue-500 hover:underline">issue_comment</code>
         </Link>{' '}
         events that can trigger workflows:
       </span>
@@ -490,7 +494,7 @@ export default function Home() {
         <Link
           href="https://docs.github.com/en/webhooks/webhook-events-and-payloads#issue_comment"
           className="text-blue-500 hover:underline">
-          <code>issue_comment</code>
+          <code className="text-blue-500 hover:underline">issue_comment</code>
         </Link>{' '}
         context can provide us with information to decide what actions to take,
         if any. In our team membership workflow, we can get the user that
@@ -499,7 +503,7 @@ export default function Home() {
         this to determine if the user is authorized to approve the request.
       </span>
 
-      <h1 className="text-2xl font-bold">Labels</h1>
+      <h1 className="text-2xl font-bold text-center">Labels</h1>
 
       <span>
         Labels are a great way to track the state of a request. You can think of
@@ -556,7 +560,7 @@ export default function Home() {
         <Link
           href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#label"
           className="text-blue-500 hover:underline">
-          <code>label</code>
+          <code className="text-blue-500 hover:underline">label</code>
         </Link>{' '}
         events available:
       </span>
@@ -595,14 +599,14 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-4xl font-bold">GitHub features</h1>
+      <h1 className="text-4xl font-bold text-center">GitHub features</h1>
 
       <span>
         You can leverage other GitHub features to dramatically increase the
         value of IssueOps.
       </span>
 
-      <h1 className="text-3xl font-bold">Secrets</h1>
+      <h1 className="text-3xl font-bold text-center">Secrets</h1>
 
       <span>
         <Link
@@ -618,7 +622,9 @@ export default function Home() {
         that can be used to access external resources from your workflows.
       </span>
 
-      <h1 className="text-3xl font-bold">Projects and milestones</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Projects and milestones
+      </h1>
 
       <span>
         Keeping track of requests, especially when you have an approval process
@@ -658,7 +664,7 @@ export default function Home() {
         workflows.
       </span>
 
-      <h1 className="text-3xl font-bold">GitHub Apps</h1>
+      <h1 className="text-3xl font-bold text-center">GitHub Apps</h1>
 
       <span>
         One of the most important things to consider when creating workflows

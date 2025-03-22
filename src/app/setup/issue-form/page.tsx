@@ -9,8 +9,8 @@ import dedent from 'ts-dedent'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">Issue Form</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">Issue Form</h1>
 
       <span>
         The first interaction point users will have with your IssueOps workflow
@@ -30,7 +30,7 @@ export default function Home() {
         .
       </span>
 
-      <h1 className="text-4xl font-bold">Top-level syntax</h1>
+      <h1 className="text-4xl font-bold text-center">Top-level syntax</h1>
 
       <span>
         The top-level syntax of the issue form template is used to define the
@@ -48,23 +48,25 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        name: Create a new repository
-        description: |
-          Once opened, this issue will cause a new GitHub repository to be created in
-          the \`octocat\` organization. You will be granted access as a collaborator so
-          you can build something awesome!
-        labels:
-          - issueops:new-repository
-        projects:
-          - octocat/123
-        body:
-          # ...
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          name: Create a new repository
+          description: |
+            Once opened, this issue will cause a new GitHub repository to be created in
+            the \`octocat\` organization. You will be granted access as a collaborator so
+            you can build something awesome!
+          labels:
+            - issueops:new-repository
+          projects:
+            - octocat/123
+          body:
+            # ...
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-4xl font-bold">Body syntax</h1>
+      <h1 className="text-4xl font-bold text-center">Body syntax</h1>
 
       <span>
         The <code>body</code> property is where you specify the inputs and any
@@ -98,95 +100,99 @@ export default function Home() {
         template:
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        name: New Repo Request
-        description: Submit a request to create a new GitHub repository
-        title: '[Request] New Repository'
-        labels:
-          - issueops:new-repository
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          name: New Repo Request
+          description: Submit a request to create a new GitHub repository
+          title: '[Request] New Repository'
+          labels:
+            - issueops:new-repository
 
-        body:
-          # Markdown type fields are not included in the submitted issue body
-          - type: markdown
-            attributes:
-              value:
-                Welcome to GitHub! Please fill out the information below to request a
-                new repository. Once submitted, your request will be reviewed by the
-                IssueOps team. If approved, the repository will be created and you will
-                be notified via a comment on this issue.
-          - type: input
-            id: name
-            attributes:
-              label: Repository Name
-              description: The name of the repository you would like to create.
-              placeholder: octorepo
-            validations:
-              required: true
-          - type: dropdown
-            id: visibility
-            attributes:
-              label: Repository Visibility
-              description: The visibility of the repository.
-              multiple: false
-              options:
-                - private
-                - public
-            validations:
-              required: true
-          - type: dropdown
-            id: topics
-            attributes:
-              label: Repository Topics
-              description: The topics to add to the repository.
-              multiple: true
-              options:
-                - octocat
-                - issueops
-                - automation
-            validations:
-              required: true
-          - type: checkboxes
-            id: confirm
-            attributes:
-              label: Confirmation
-              description: Do you confirm this request?
-              options:
-                - label: 'Yes'
-                  required: true
-                - label: 'No'
-                  required: false
-        `}
-      </SyntaxHighlighter>
+          body:
+            # Markdown type fields are not included in the submitted issue body
+            - type: markdown
+              attributes:
+                value:
+                  Welcome to GitHub! Please fill out the information below to request a
+                  new repository. Once submitted, your request will be reviewed by the
+                  IssueOps team. If approved, the repository will be created and you will
+                  be notified via a comment on this issue.
+            - type: input
+              id: name
+              attributes:
+                label: Repository Name
+                description: The name of the repository you would like to create.
+                placeholder: octorepo
+              validations:
+                required: true
+            - type: dropdown
+              id: visibility
+              attributes:
+                label: Repository Visibility
+                description: The visibility of the repository.
+                multiple: false
+                options:
+                  - private
+                  - public
+              validations:
+                required: true
+            - type: dropdown
+              id: topics
+              attributes:
+                label: Repository Topics
+                description: The topics to add to the repository.
+                multiple: true
+                options:
+                  - octocat
+                  - issueops
+                  - automation
+              validations:
+                required: true
+            - type: checkboxes
+              id: confirm
+              attributes:
+                label: Confirmation
+                description: Do you confirm this request?
+                options:
+                  - label: 'Yes'
+                    required: true
+                  - label: 'No'
+                    required: false
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         When the user submits the issue form, it will have the following
         Markdown format:
       </span>
 
-      <SyntaxHighlighter
-        language="markdown"
-        style={vscDarkPlus}
-        showLineNumbers>
-        {dedent`
-        ### Repository Name
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter
+          language="markdown"
+          style={vscDarkPlus}
+          showLineNumbers>
+          {dedent`
+          ### Repository Name
 
-        octorepo
+          octorepo
 
-        ### Repository Visibility
+          ### Repository Visibility
 
-        public
+          public
 
-        ### Repository Topics
+          ### Repository Topics
 
-        octocat, issueops
+          octocat, issueops
 
-        ### Confirmation
+          ### Confirmation
 
-        - [x] Yes
-        - [ ] No
-        `}
-      </SyntaxHighlighter>
+          - [x] Yes
+          - [ ] No
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         You can see that certain inputs look the same, but are actually

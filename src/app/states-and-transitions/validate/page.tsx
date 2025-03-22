@@ -18,8 +18,8 @@ import dedent from 'ts-dedent'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">Validate</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">Validate</h1>
 
       <span>
         Once an issue has been parsed, it can be validated against any rules
@@ -43,7 +43,9 @@ export default function Home() {
         <Link
           href="https://github.com/issue-ops/validator"
           className="text-blue-500 hover:underline">
-          <code>issue-ops/validator</code>
+          <code className="text-blue-500 hover:underline">
+            issue-ops/validator
+          </code>
         </Link>{' '}
         action takes the parsed output of the issue body and validates it
         against the issue form template and any custom rules you define.
@@ -67,7 +69,7 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-4xl font-bold">Basic validation</h1>
+      <h1 className="text-4xl font-bold text-center">Basic validation</h1>
 
       <span>
         The most basic validation compares each input field to the rules
@@ -75,16 +77,18 @@ export default function Home() {
         with an error message.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        - name: Validate Issue
-          id: validate
-          uses: issue-ops/validator@vX.X.X
-          with:
-            issue-form-template: example-request.yml
-            parsed-issue-body: \${{ steps.parse.outputs.json }}
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          - name: Validate Issue
+            id: validate
+            uses: issue-ops/validator@vX.X.X
+            with:
+              issue-form-template: example-request.yml
+              parsed-issue-body: \${{ steps.parse.outputs.json }}
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         For example, if you have an input field for users to select the
@@ -92,21 +96,23 @@ export default function Home() {
         required and only one of a list of options can be chosen.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        - type: dropdown
-          id: visibility
-          attributes:
-            label: Repository Visibility
-            description: The visibility of the repository.
-            multiple: false
-            options:
-              - private
-              - public
-          validations:
-            required: true
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          - type: dropdown
+            id: visibility
+            attributes:
+              label: Repository Visibility
+              description: The visibility of the repository.
+              multiple: false
+              options:
+                - private
+                - public
+            validations:
+              required: true
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         When run against an issue submitted with this template, the validator
@@ -123,7 +129,7 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-4xl font-bold">Custom validation</h1>
+      <h1 className="text-4xl font-bold text-center">Custom validation</h1>
 
       <span>
         For each form field, you can also specify custom validation logic. This
@@ -141,7 +147,7 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-3xl font-bold">Configuration file</h1>
+      <h1 className="text-3xl font-bold text-center">Configuration file</h1>
 
       <span>
         This file defines the mapping of validator scripts to form fields. For
@@ -151,17 +157,19 @@ export default function Home() {
         those fields.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        validators:
-          - field: read_team
-            script: check_team_exists
-          - field: write_team
-            script: check_team_exists
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          validators:
+            - field: read_team
+              script: check_team_exists
+            - field: write_team
+              script: check_team_exists
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-3xl font-bold">Validator scripts</h1>
+      <h1 className="text-3xl font-bold text-center">Validator scripts</h1>
 
       <Alert>
         <KeyRound className="h-4 w-4" />
@@ -207,42 +215,46 @@ export default function Home() {
         <Link
           href="https://github.com/issue-ops/validator/blob/main/.github/validator/team.js"
           className="text-blue-500 hover:underline">
-          <code>issue-ops/validator</code>
+          <code className="text-blue-500 hover:underline">
+            issue-ops/validator
+          </code>
         </Link>{' '}
         repository.
       </span>
 
-      <SyntaxHighlighter
-        language="javascript"
-        style={vscDarkPlus}
-        showLineNumbers>
-        {dedent`
-        module.exports = async (field) => {
-          if (typeof field !== 'string') return 'Field type is invalid'
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter
+          language="javascript"
+          style={vscDarkPlus}
+          showLineNumbers>
+          {dedent`
+          module.exports = async (field) => {
+            if (typeof field !== 'string') return 'Field type is invalid'
 
-          const { getOctokit } = require('@actions/github')
-          const core = require('@actions/core')
-          const octokit = getOctokit(core.getInput('github-token', { required: true }))
+            const { getOctokit } = require('@actions/github')
+            const core = require('@actions/core')
+            const octokit = getOctokit(core.getInput('github-token', { required: true }))
 
-          try {
-            await octokit.rest.teams.getByName({
-              org: process.env.ORGANIZATION ?? '',
-              team_slug: field
-            })
+            try {
+              await octokit.rest.teams.getByName({
+                org: process.env.ORGANIZATION ?? '',
+                team_slug: field
+              })
 
-            core.info(\`Team '\${field}' exists\`)
-            return 'success'
-          } catch (error) {
-            if (error.status === 404) {
-              core.error(\`Team '\${field}' does not exist\`)
-              return \`Team '\${field}' does not exist\`
+              core.info(\`Team '\${field}' exists\`)
+              return 'success'
+            } catch (error) {
+              if (error.status === 404) {
+                core.error(\`Team '\${field}' does not exist\`)
+                return \`Team '\${field}' does not exist\`
+              }
             }
           }
-        }
-        `}
-      </SyntaxHighlighter>
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-4xl font-bold">New repository request</h1>
+      <h1 className="text-4xl font-bold text-center">New repository request</h1>
 
       <span>
         Recall from the issue form template that the new repository request
@@ -352,30 +364,36 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <h1 className="text-3xl font-bold">Create a configuration file</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Create a configuration file
+      </h1>
 
       <span>
         In order to configure custom validation, first create a configuration
         file in the repository.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        # File Path: .github/validator/config.yml
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          # File Path: .github/validator/config.yml
 
-        validators:
-          - field: repository_name
-            script: repo_doesnt_exist
-          - field: read_team
-            script: team_exists
-          - field: write_team
-            script: team_exists
-          - field: topics
-            script: topics_valid
-        `}
-      </SyntaxHighlighter>
+          validators:
+            - field: repository_name
+              script: repo_doesnt_exist.js
+            - field: read_team
+              script: team_exists.js
+            - field: write_team
+              script: team_exists.js
+            - field: topics
+              script: topics_valid.js
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-3xl font-bold">Create validator scripts</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Create validator scripts
+      </h1>
 
       <span>
         The following scripts can be used to validate the new repository
@@ -386,212 +404,220 @@ export default function Home() {
         First, create a script to check if a repository already exists.
       </span>
 
-      <SyntaxHighlighter
-        language="javascript"
-        style={vscDarkPlus}
-        showLineNumbers>
-        {dedent`
-        // File Path: .github/validator/repo_doesnt_exist.js
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter
+          language="javascript"
+          style={vscDarkPlus}
+          showLineNumbers>
+          {dedent`
+          // File Path: .github/validator/repo_doesnt_exist.js
 
-        module.exports = async (field) => {
-          if (typeof field !== 'string') return 'Field type is invalid'
+          module.exports = async (field) => {
+            if (typeof field !== 'string') return 'Field type is invalid'
 
-          const { getOctokit } = require('@actions/github')
-          const core = require('@actions/core')
-          const octokit = getOctokit(core.getInput('github-token', { required: true }))
+            const { getOctokit } = require('@actions/github')
+            const core = require('@actions/core')
+            const octokit = getOctokit(core.getInput('github-token', { required: true }))
 
-          try {
-            // This should throw a 404 error
-            await octokit.rest.repos.get({
-              org: '<org-name>',
-              repo: field
-            })
+            try {
+              // This should throw a 404 error
+              await octokit.rest.repos.get({
+                org: '<org-name>',
+                repo: field
+              })
 
-            core.error(\`Repository '\${field}' already exists\`)
-            return \`Repository '\${field}' already exists\`
-          } catch (error) {
-            if (error.status === 404) {
-              core.info(\`Repository '\${field}' does not exist\`)
-              return 'success'
+              core.error(\`Repository '\${field}' already exists\`)
+              return \`Repository '\${field}' already exists\`
+            } catch (error) {
+              if (error.status === 404) {
+                core.info(\`Repository '\${field}' does not exist\`)
+                return 'success'
+              }
             }
           }
-        }
-        `}
-      </SyntaxHighlighter>
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>Next, create a script to check if a team exists.</span>
 
-      <SyntaxHighlighter
-        language="javascript"
-        style={vscDarkPlus}
-        showLineNumbers>
-        {dedent`
-        // File Path: .github/validator/team_exists.js
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter
+          language="javascript"
+          style={vscDarkPlus}
+          showLineNumbers>
+          {dedent`
+          // File Path: .github/validator/team_exists.js
 
-        module.exports = async (field) => {
-          if (typeof field !== 'string') return 'Field type is invalid'
+          module.exports = async (field) => {
+            if (typeof field !== 'string') return 'Field type is invalid'
 
-          const { getOctokit } = require('@actions/github')
-          const core = require('@actions/core')
-          const octokit = getOctokit(core.getInput('github-token', { required: true }))
+            const { getOctokit } = require('@actions/github')
+            const core = require('@actions/core')
+            const octokit = getOctokit(core.getInput('github-token', { required: true }))
 
-          try {
-            await octokit.rest.teams.getByName({
-              org: process.env.ORGANIZATION ?? '',
-              team_slug: field
-            })
+            try {
+              await octokit.rest.teams.getByName({
+                org: process.env.ORGANIZATION ?? '',
+                team_slug: field
+              })
 
-            core.info(\`Team '\${field}' exists\`)
-            return 'success'
-          } catch (error) {
-            if (error.status === 404) {
-              core.error(\`Team '\${field}' does not exist\`)
-              return \`Team '\${field}' does not exist\`
+              core.info(\`Team '\${field}' exists\`)
+              return 'success'
+            } catch (error) {
+              if (error.status === 404) {
+                core.error(\`Team '\${field}' does not exist\`)
+                return \`Team '\${field}' does not exist\`
+              }
             }
           }
-        }
-        `}
-      </SyntaxHighlighter>
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>Finally, create a script to check if the topics are valid.</span>
 
-      <SyntaxHighlighter
-        language="javascript"
-        style={vscDarkPlus}
-        showLineNumbers>
-        {dedent`
-        // File Path: .github/validator/topics_valid.js
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter
+          language="javascript"
+          style={vscDarkPlus}
+          showLineNumbers>
+          {dedent`
+          // File Path: .github/validator/topics_valid.js
 
-        module.exports = async (field) => {
-          if (typeof field !== 'string') return 'Field type is invalid'
+          module.exports = async (field) => {
+            if (typeof field !== 'string') return 'Field type is invalid'
 
-          const topics = field.split(/[\\r\\n]+/)
+            const topics = field.split(/[\\r\\n]+/)
 
-          if (topics.length > 20)
-            return \`There are \${request.topics.length} topics (max: 20)\`
+            if (topics.length > 20)
+              return \`There are \${request.topics.length} topics (max: 20)\`
 
-          const invalidTopics = []
-          for (const topic of topics) {
-            if (
-              topic !== topic.toLowerCase() ||
-              topic.length > 50 ||
-              !topic.match(/^[a-z0-9-]+$/)
-            )
-              invalidTopics.push(topic)
+            const invalidTopics = []
+            for (const topic of topics) {
+              if (
+                topic !== topic.toLowerCase() ||
+                topic.length > 50 ||
+                !topic.match(/^[a-z0-9-]+$/)
+              )
+                invalidTopics.push(topic)
+            }
+
+            if (invalidTopics.length > 0)
+              return \`The following topics are invalid: \${JSON.stringify(invalidTopics)}\`
           }
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-          if (invalidTopics.length > 0)
-            return \`The following topics are invalid: \${JSON.stringify(invalidTopics)}\`
-        }
-        `}
-      </SyntaxHighlighter>
-
-      <h1 className="text-3xl font-bold">Update the workflow</h1>
+      <h1 className="text-3xl font-bold text-center">Update the workflow</h1>
 
       <span>
         Now that issue validation has been configured, you can add it as a step
         to your workflow. Additional updates are noted with comments.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        name: Issue Opened/Edited/Reopened
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          name: Issue Opened/Edited/Reopened
 
-        on:
-          issues:
-            types:
-              - opened
-              - edited
-              - reopened
+          on:
+            issues:
+              types:
+                - opened
+                - edited
+                - reopened
 
-        jobs:
-          new-repository-request:
-            name: New Repository Request
-            runs-on: ubuntu-latest
+          jobs:
+            new-repository-request:
+              name: New Repository Request
+              runs-on: ubuntu-latest
 
-            if: contains(github.event.issue.labels.*.name, 'issueops:new-repository')
+              if: contains(github.event.issue.labels.*.name, 'issueops:new-repository')
 
-            # Since the validation step involves adding comments to issues, you will
-            # need to give it write permissions. If you are using a GitHub App to call
-            # other GitHub APIs, you will also need to add the appropriate permissions.
-            permissions:
-              contents: read
-              id-token: write
-              issues: write
+              # Since the validation step involves adding comments to issues, you will
+              # need to give it write permissions. If you are using a GitHub App to call
+              # other GitHub APIs, you will also need to add the appropriate permissions.
+              permissions:
+                contents: read
+                id-token: write
+                issues: write
 
-            steps:
-              # Always remove the validated/submitted labels first! This ensures that
-              # the validation logic runs any time the issue body is edited. It also
-              # ensures the issue must be re-submitted after editing.
-              - name: Remove Labels
-                id: remove-label
-                uses: issue-ops/labeler@vX.X.X
-                with:
-                  action: remove
-                  issue_number: \${{ github.event.issue.number }}
-                  labels: |
-                    issueops:validated
-                    issueops:submitted
+              steps:
+                # Always remove the validated/submitted labels first! This ensures that
+                # the validation logic runs any time the issue body is edited. It also
+                # ensures the issue must be re-submitted after editing.
+                - name: Remove Labels
+                  id: remove-label
+                  uses: issue-ops/labeler@vX.X.X
+                  with:
+                    action: remove
+                    issue_number: \${{ github.event.issue.number }}
+                    labels: |
+                      issueops:validated
+                      issueops:submitted
 
-              # If your validation script checks things beyond the scope of the
-              # repository it is running in, you will need to create a GitHub App and
-              # generate an installation access token in your workflow.
-              - name: Get App Token
-                id: token
-                uses: actions/create-github-app-token@vX.X.X
-                with:
-                  app_id: \${{ secrets.MY_GITHUB_APP_ID }}
-                  private_key: \${{ secrets.MY_GITHUB_APP_PEM }}
-                  owner: \${{ github.repository_owner }}
+                # If your validation script checks things beyond the scope of the
+                # repository it is running in, you will need to create a GitHub App and
+                # generate an installation access token in your workflow.
+                - name: Get App Token
+                  id: token
+                  uses: actions/create-github-app-token@vX.X.X
+                  with:
+                    app_id: \${{ secrets.MY_GITHUB_APP_ID }}
+                    private_key: \${{ secrets.MY_GITHUB_APP_PEM }}
+                    owner: \${{ github.repository_owner }}
 
-              - name: Checkout
-                id: checkout
-                uses: actions/checkout@vX.X.X
+                - name: Checkout
+                  id: checkout
+                  uses: actions/checkout@vX.X.X
 
-              # Install Node.js so the workflow can add npm packages that are used by
-              # the custom validator scripts (e.g. '@octokit/rest').
-              - name: Setup Node.js
-                id: setup-node
-                uses: actions/setup-node@vX.X.X
-                with:
-                  node-version-file: .node-version
-                  cache: npm
+                # Install Node.js so the workflow can add npm packages that are used by
+                # the custom validator scripts (e.g. '@octokit/rest').
+                - name: Setup Node.js
+                  id: setup-node
+                  uses: actions/setup-node@vX.X.X
+                  with:
+                    node-version-file: .node-version
+                    cache: npm
 
-              # Install NPM packages needed by the validator scripts.
-              - name: Install Packages
-                id: npm
-                run: npm ci
+                # Install NPM packages needed by the validator scripts.
+                - name: Install Packages
+                  id: npm
+                  run: npm ci
 
-              - name: Parse Issue
-                id: parse
-                uses: issue-ops/parser@vX.X.X
-                with:
-                  body: \${{ github.event.issue.body }}
-                  issue-form-template: new-repository-request.yml
+                - name: Parse Issue
+                  id: parse
+                  uses: issue-ops/parser@vX.X.X
+                  with:
+                    body: \${{ github.event.issue.body }}
+                    issue-form-template: new-repository-request.yml
 
-              # Add a step to validate the issue.
-              - name: Validate Issue
-                id: validate
-                uses: issue-ops/validator@vX.X.X
-                with:
-                  issue-form-template: new-repository-request.yml
-                  github-token: \${{ steps.token.outputs.token }}
-                  parsed-issue-body: \${{ steps.parse.outputs.json }}
+                # Add a step to validate the issue.
+                - name: Validate Issue
+                  id: validate
+                  uses: issue-ops/validator@vX.X.X
+                  with:
+                    issue-form-template: new-repository-request.yml
+                    github-token: \${{ steps.token.outputs.token }}
+                    parsed-issue-body: \${{ steps.parse.outputs.json }}
 
-              # Add a label to mark the request as validated.
-              - if: \${{ steps.validate.outputs.result == 'success' }}
-                name: Add Validated Label
-                id: add-label
-                uses: issue-ops/labeler@vX.X.X
-                with:
-                  action: add
-                  issue_number: \${{ github.event.issue.number }}
-                  labels: |
-                    issueops:validated
-        `}
-      </SyntaxHighlighter>
+                # Add a label to mark the request as validated.
+                - if: \${{ steps.validate.outputs.result == 'success' }}
+                  name: Add Validated Label
+                  id: add-label
+                  uses: issue-ops/labeler@vX.X.X
+                  with:
+                    action: add
+                    issue_number: \${{ github.event.issue.number }}
+                    labels: |
+                      issueops:validated
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-4xl font-bold">Next steps</h1>
+      <h1 className="text-4xl font-bold text-center">Next steps</h1>
 
       <span>
         Congratulations! Your request has been successfully transitioned to the{' '}

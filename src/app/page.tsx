@@ -47,8 +47,8 @@ const carouselItems = [
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[0px_1fr_0px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-4xl sm:text-5xl font-bold pt-[20px] text-center">
         The one stop shop for all things IssueOps
       </h1>
 
@@ -79,7 +79,9 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h2 className="text-2xl font-bold">What is IssueOps?</h2>
+      <h2 className="text-xl sm:text-2xl font-bold text-center">
+        What is IssueOps?
+      </h2>
 
       <span>
         IssueOps is a loose collection of tools, workflows, and concepts that
@@ -105,7 +107,9 @@ export default function Home() {
 
       {/* TODO: Animation of IssueOps example */}
 
-      <h2 className="text-2xl font-bold">Why should I use IssueOps?</h2>
+      <h2 className="text-xl sm:text-2xl font-bold text-center">
+        Why should I use IssueOps?
+      </h2>
 
       <Carousel
         className="w-full max-w-xs"
@@ -131,7 +135,9 @@ export default function Home() {
         <CarouselNext />
       </Carousel>
 
-      <h2 className="text-2xl font-bold">How do I get started?</h2>
+      <h2 className="text-xl sm:text-2xl font-bold text-center">
+        How do I get started?
+      </h2>
 
       <span>
         Check out the resources on this site to learn more about IssueOps and

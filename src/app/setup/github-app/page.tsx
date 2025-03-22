@@ -18,8 +18,8 @@ import dedent from 'ts-dedent'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">GitHub App</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">GitHub App</h1>
 
       <span>
         If your IssueOps workflow requires access to anything outside of the
@@ -64,7 +64,7 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-4xl font-bold">Ownership</h1>
+      <h1 className="text-4xl font-bold text-center">Ownership</h1>
 
       <span>
         When creating a GitHub App, you have the option to specify your personal
@@ -73,9 +73,9 @@ export default function Home() {
         organization and simplifies permissions management.
       </span>
 
-      <h1 className="text-4xl font-bold">Setup</h1>
+      <h1 className="text-4xl font-bold text-center">Setup</h1>
 
-      <h1 className="text-3xl font-bold">Create a GitHub App</h1>
+      <h1 className="text-3xl font-bold text-center">Create a GitHub App</h1>
 
       <span>
         For instructions on how to create a GitHub App, see{' '}
@@ -132,7 +132,7 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <h1 className="text-3xl font-bold">Create a private key</h1>
+      <h1 className="text-3xl font-bold text-center">Create a private key</h1>
 
       <span>
         For instructions on how to create a private key, see{' '}
@@ -152,7 +152,9 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold">Create GitHub Actions secrets</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Create GitHub Actions secrets
+      </h1>
 
       <span>
         After creating your GitHub App, you will need to create secrets that
@@ -226,9 +228,11 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-4xl font-bold">Usage</h1>
+      <h1 className="text-4xl font-bold text-center">Usage</h1>
 
-      <h1 className="text-3xl font-bold">Update the workflow permissions</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Update the workflow permissions
+      </h1>
 
       <span>
         In any workflow that needs to authenticate as a GitHub App, the
@@ -236,15 +240,17 @@ export default function Home() {
         level.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        permissions:
-          contents: read
-          id-token: write
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          permissions:
+            contents: read
+            id-token: write
+          `}
+        </SyntaxHighlighter>
+      </div>
 
-      <h1 className="text-3xl font-bold">
+      <h1 className="text-3xl font-bold text-center">
         Generate the installation access token
       </h1>
 
@@ -255,7 +261,9 @@ export default function Home() {
         <Link
           href="https://github.com/actions/create-github-app-token"
           className="text-blue-500 hover:underline">
-          <code>actions/create-github-app-token</code>
+          <code className="text-blue-500 hover:underline">
+            actions/create-github-app-token
+          </code>
         </Link>{' '}
         action.
       </span>
@@ -265,17 +273,19 @@ export default function Home() {
         you will need to include the following step.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        steps:
-          - uses: actions/create-github-app-token@vX.X.X
-            id: token
-            with:
-              app_id: \${{ secrets.MY_GITHUB_APP_ID }}
-              private_key: \${{ secrets.MY_GITHUB_APP_PEM }}
-              owner: \${{ github.repository_owner }}
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          steps:
+            - uses: actions/create-github-app-token@vX.X.X
+              id: token
+              with:
+                app_id: \${{ secrets.MY_GITHUB_APP_ID }}
+                private_key: \${{ secrets.MY_GITHUB_APP_PEM }}
+                owner: \${{ github.repository_owner }}
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>Make sure to update the following:</span>
 
@@ -300,7 +310,9 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold">Use the token in your workflow</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Use the token in your workflow
+      </h1>
 
       <span>
         Now that the token is being generated, you can reference it in your
@@ -309,20 +321,22 @@ export default function Home() {
         (e.g. <code>{`\${{ steps.token.outputs.token }}`}</code>).
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        steps:
-          - uses: actions/github-script@vX.X.X
-            id: create-org-project
-            with:
-              github-token: \${{ steps.token.outputs.token }}
-              script: |
-                await github.rest.projects.createForOrg({
-                  org: 'octo-org',
-                  name: 'My awesome project'
-                })
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          steps:
+            - uses: actions/github-script@vX.X.X
+              id: create-org-project
+              with:
+                github-token: \${{ steps.token.outputs.token }}
+                script: |
+                  await github.rest.projects.createForOrg({
+                    org: 'octo-org',
+                    name: 'My awesome project'
+                  })
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <Alert>
         <CircleAlert className="h-4 w-4" />
@@ -337,45 +351,47 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-4xl font-bold">Example</h1>
+      <h1 className="text-4xl font-bold text-center">Example</h1>
 
       <span>
         The following can be used as a starting point for your own workflows.
         Make sure to update secret names and action versions.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        name: Example Workflow
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          name: Example Workflow
 
-        # This workflow runs any time an issue is opened or edited.
-        on:
-          issues:
-            types:
-              - opened
-              - edited
+          # This workflow runs any time an issue is opened or edited.
+          on:
+            issues:
+              types:
+                - opened
+                - edited
 
-        jobs:
-          example-job:
-            name: Example Job
-            runs-on: ubuntu-latest
+          jobs:
+            example-job:
+              name: Example Job
+              runs-on: ubuntu-latest
 
-            permissions:
-              contents: read
-              id-token: write
+              permissions:
+                contents: read
+                id-token: write
 
-            steps:
-              # Get the GitHub App installation access token.
-              - uses: actions/create-github-app-token@vX.X.X
-                id: token
-                with:
-                  app_id: \${{ secrets.MY_GITHUB_APP_ID }}
-                  private_key: \${{ secrets.MY_GITHUB_APP_PEM }}
-                  owner: \${{ github.repository_owner }}
+              steps:
+                # Get the GitHub App installation access token.
+                - uses: actions/create-github-app-token@vX.X.X
+                  id: token
+                  with:
+                    app_id: \${{ secrets.MY_GITHUB_APP_ID }}
+                    private_key: \${{ secrets.MY_GITHUB_APP_PEM }}
+                    owner: \${{ github.repository_owner }}
 
-              - run: echo "Add your custom steps here!"
-        `}
-      </SyntaxHighlighter>
+                - run: echo "Add your custom steps here!"
+          `}
+        </SyntaxHighlighter>
+      </div>
     </div>
   )
 }

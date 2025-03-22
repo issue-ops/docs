@@ -18,8 +18,10 @@ import dedent from 'ts-dedent'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">States and Transitions</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">
+        States and Transitions
+      </h1>
 
       <span>
         As the{' '}
@@ -32,7 +34,7 @@ export default function Home() {
         states, transitions. and how to implement them in your workflows.
       </span>
 
-      <h1 className="text-4xl font-bold">States</h1>
+      <h1 className="text-4xl font-bold text-center">States</h1>
 
       <span>
         If an issue was a paper form, a state would be a big rubber stamp that
@@ -147,7 +149,7 @@ export default function Home() {
         </CardContent>
       </Card>
 
-      <h1 className="text-4xl font-bold">Transitions</h1>
+      <h1 className="text-4xl font-bold text-center">Transitions</h1>
 
       <span>
         If an issue was a paper form, a transition would be someone taking it
@@ -165,14 +167,16 @@ export default function Home() {
 
       <span>Since each transition is triggered by the same type of event:</span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        on:
-          issue_comment:
-            types:
-              - created
-        `}
-      </SyntaxHighlighter>
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          on:
+            issue_comment:
+              types:
+                - created
+          `}
+        </SyntaxHighlighter>
+      </div>
 
       <span>
         Your workflows must track the following to determine what jobs to run:
@@ -197,13 +201,17 @@ export default function Home() {
         <Link
           href="https://github.com/issue-ops/bear-creek-honey-farm"
           className="text-blue-500 hover:underline">
-          <code>issue-ops/bear-creek-honey-farm</code>
+          <code className="text-blue-500 hover:underline">
+            issue-ops/bear-creek-honey-farm
+          </code>
         </Link>{' '}
         and{' '}
         <Link
           href="https://github.com/issue-ops/demo-reservation-action"
           className="text-blue-500 hover:underline">
-          <code>issue-ops/demo-reservation-action</code>
+          <code className="text-blue-500 hover:underline">
+            issue-ops/demo-reservation-action
+          </code>
         </Link>{' '}
         repositories.
       </span>
@@ -246,9 +254,9 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-4xl font-bold">FAQ</h1>
+      <h1 className="text-4xl font-bold text-center">FAQ</h1>
 
-      <h1 className="text-3xl font-bold">
+      <h1 className="text-3xl font-bold text-center">
         Do my IssueOps need all these states?
       </h1>
 
@@ -258,7 +266,7 @@ export default function Home() {
         the <code>Approved</code> state.
       </span>
 
-      <h1 className="text-3xl font-bold">
+      <h1 className="text-3xl font-bold text-center">
         Can my IssueOps use each state more than once?
       </h1>
 

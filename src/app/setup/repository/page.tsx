@@ -18,8 +18,8 @@ import dedent from 'ts-dedent'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold">Repository</h1>
+    <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-5xl font-bold pt-[20px] text-center">Repository</h1>
 
       <span>
         This page outlines recommended configuration settings for IssueOps
@@ -28,11 +28,11 @@ export default function Home() {
           href="https://docs.github.com/en/get-started/quickstart/create-a-repo"
           className="text-blue-500 hover:underline">
           GitHub documentation
-        </Link>{' '}
+        </Link>
         .
       </span>
 
-      <h1 className="text-4xl font-bold">Visibility</h1>
+      <h1 className="text-4xl font-bold text-center">Visibility</h1>
 
       <span>
         IssueOps works best when your repository is accessible to users who need
@@ -75,11 +75,11 @@ export default function Home() {
           href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository"
           className="text-blue-500 hover:underline">
           collaborators
-        </Link>{' '}
+        </Link>
         .
       </span>
 
-      <h1 className="text-4xl font-bold">Permissions</h1>
+      <h1 className="text-4xl font-bold text-center">Permissions</h1>
 
       <span>
         Users only need <code>read</code> access to open issues! Unless there is
@@ -95,7 +95,7 @@ export default function Home() {
         and users can create pull requests from their forked repository instead.
       </span>
 
-      <h1 className="text-4xl font-bold">Branch protection</h1>
+      <h1 className="text-4xl font-bold text-center">Branch protection</h1>
 
       <span>
         <Link
@@ -126,9 +126,11 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-4xl font-bold">GitHub Actions</h1>
+      <h1 className="text-4xl font-bold text-center">GitHub Actions</h1>
 
-      <h1 className="text-3xl font-bold">Fork pull request workflows</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Fork pull request workflows
+      </h1>
 
       <span>
         If your IssueOps workflow uses pull requests instead of issues, you must
@@ -247,7 +249,7 @@ export default function Home() {
         Actions access to fork pull requests.
       </span>
 
-      <h1 className="text-3xl font-bold">Workflow permissions</h1>
+      <h1 className="text-3xl font-bold text-center">Workflow permissions</h1>
 
       <span>
         In the repository settings, it is best to keep the base workflow
@@ -257,7 +259,7 @@ export default function Home() {
         specific jobs.
       </span>
 
-      <h1 className="text-4xl font-bold">Environments</h1>
+      <h1 className="text-4xl font-bold text-center">Environments</h1>
 
       <span>
         If your IssueOps workflow involves deployments or interaction with
@@ -273,7 +275,7 @@ export default function Home() {
         and variables by defining them at the environment level!
       </span>
 
-      <h1 className="text-4xl font-bold">Other considerations</h1>
+      <h1 className="text-4xl font-bold text-center">Other considerations</h1>
 
       <span>
         A few common questions and answers about repository setup. Most of the
@@ -281,7 +283,7 @@ export default function Home() {
         to consider.
       </span>
 
-      <h1 className="text-3xl font-bold">
+      <h1 className="text-3xl font-bold text-center">
         Multiple IssueOps workflows in one repository
       </h1>
 
@@ -303,32 +305,34 @@ export default function Home() {
         You can use labels to scope jobs to specific requests.
       </span>
 
-      <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
-        {dedent`
-        name: Issue Opened/Edited
+      <div className="overflow-auto max-w-full">
+        <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
+          {dedent`
+          name: Issue Opened/Edited
 
-        on:
-          issues:
-            types:
-              - opened
-              - edited
+          on:
+            issues:
+              types:
+                - opened
+                - edited
 
-        jobs:
-          new-repository-request:
-            name: New Repository Request
-            runs-on: ubuntu-latest
+          jobs:
+            new-repository-request:
+              name: New Repository Request
+              runs-on: ubuntu-latest
 
-            # Only run for issues with the \`issueops:new-repository\` label.
-            if: contains(github.event.issue.labels.*.name, 'issueops:new-repository')
+              # Only run for issues with the \`issueops:new-repository\` label.
+              if: contains(github.event.issue.labels.*.name, 'issueops:new-repository')
 
-          team-membership-request:
-            name: Team Membership Request
-            runs-on: ubuntu-latest
+            team-membership-request:
+              name: Team Membership Request
+              runs-on: ubuntu-latest
 
-            # Only run for issues with the \`issueops:team-add\` label.
-            if: contains(github.event.issue.labels.*.name, 'issueops:team-add')
-        `}
-      </SyntaxHighlighter>
+              # Only run for issues with the \`issueops:team-add\` label.
+              if: contains(github.event.issue.labels.*.name, 'issueops:team-add')
+          `}
+        </SyntaxHighlighter>
+      </div>
     </div>
   )
 }
