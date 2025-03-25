@@ -12,13 +12,13 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">Examples</h1>
+      <h1 className="text-5xl font-bold pt-[20px]">Examples</h1>
 
-      <span>
+      <p>
         Here you can find examples of IssueOps workflows and repos from the
         developer community. If you have an example you&apos;d like to share,
         please open a PR to add it to this page!
-      </span>
+      </p>
 
       <br />
 

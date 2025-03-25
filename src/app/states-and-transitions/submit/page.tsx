@@ -10,9 +10,9 @@ import dedent from 'ts-dedent'
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">Submit</h1>
+      <h1 className="text-5xl font-bold pt-[20px]">Submit</h1>
 
-      <span>
+      <p>
         Once your issue has been parsed and validated, it&apos;s ready for
         processing! At this point, _processing_ can mean a lot of things and is
         entirely dependent on your use case. For example, if you&apos;re using
@@ -20,28 +20,28 @@ export default function Home() {
         review and approve the issue. Or, if you&apos;re using IssueOps to track
         PTO requests, you may not need any additional approvals and can simply
         mark the issue as processed.
-      </span>
+      </p>
 
-      <span>
+      <p>
         This page walks through the process of submitting a request after it has
         been validated. In particular, it covers requesting approval from
         authorized users or teams.
-      </span>
+      </p>
 
-      <span>
+      <p>
         <i>
           Wouldn&apos;t opening the issue count as the act of submitting it?
         </i>
-      </span>
+      </p>
 
-      <span>
+      <p>
         Absolutely! However, the act of opening an issue may not be the best
         indicator that an issue is in the <code>Submitted</code> state in your
         workflow. What if you need to do additional processing on the validated
         request which requires confirmation from the user?
-      </span>
+      </p>
 
-      <span>
+      <p>
         Using the new repository request as an example, your organization may
         want to enforce certain naming conventions for repositories, such as
         prefixing the name with the user&apos;s department. In this case, when a
@@ -49,11 +49,11 @@ export default function Home() {
         <code>pto-requests</code>, you could have them confirm that the
         generated name of <code>hr-pto-requests</code> is acceptable before
         submitting the request for further processing.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Command actions</h1>
+      <h1 className="text-4xl font-bold">Command actions</h1>
 
-      <span>
+      <p>
         This is where the{' '}
         <Link
           href="https://github.com/github/command"
@@ -66,7 +66,7 @@ export default function Home() {
         repository, the <code>github/command</code> action ensures that any user
         cannot approve the request. Instead, only users or teams you specify
         can.
-      </span>
+      </p>
 
       <Alert>
         <KeyRound className="h-4 w-4" />
@@ -95,13 +95,13 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         This step acts as the gate for any further processing of the issue. The{' '}
         <code>continue</code> output can be used to conditionally invoke further
         steps. For example, if the <code>continue</code> output is{' '}
         <code>&apos;true&apos;</code>, the user who commented on the issue with{' '}
         <code>.approve</code> was indeed authorized to approve the request.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -126,14 +126,14 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         With any approval workflow, you should also consider what happens when a
         request is explicitly denied This is easy to implement as a separate{' '}
         <code>github/command</code> step that looks for the <code>.deny</code>{' '}
         command. As with the approval command, if the user who commented on the
         issue is authorized to deny requests, the <code>continue</code> output
         would be <code>&apos;true&apos;</code>.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -166,23 +166,21 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-4xl font-bold text-center">New repository request</h1>
+      <h1 className="text-4xl font-bold">New repository request</h1>
 
-      <span>
+      <p>
         Up until this point, everything has been handled as part of the issue
         creation workflow. Now that the issue has been validated, any further
         processing is done via comments, labels, reactions, and so on.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">
-        Create the comment workflow file
-      </h1>
+      <h1 className="text-3xl font-bold">Create the comment workflow file</h1>
 
-      <span>
+      <p>
         The first step is to create a workflow file that will be triggered when
         a user comments on an issue. This workflow file will be responsible for
         parsing the comment and determining the following:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>
@@ -192,10 +190,10 @@ export default function Home() {
         <li>The user is authorized to call that command</li>
       </ul>
 
-      <span>
+      <p>
         In this example, we will set up two different jobs that will run when
         the request is approved or denied.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -249,16 +247,16 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">Trigger the workflow</h1>
+      <h1 className="text-3xl font-bold">Trigger the workflow</h1>
 
-      <span>
+      <p>
         In the above workflow, both the <code>approve</code> and{' '}
         <code>deny</code> jobs are triggered when a user comments on an issue or
         PR. Though the <code>github/command</code> actions will act as one gate,
         you may want to add additional conditions to ensure that the workflow is
         not run when the issue is in a state that does not require approval. For
         example, this workflow doesn&apos;t need to run if:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>The issue is not part of this IssueOps workflow</li>
@@ -268,10 +266,10 @@ export default function Home() {
         <li>The request is already approved</li>
       </ul>
 
-      <span>
+      <p>
         Workflow conditions can be used to control when the workflow jobs are
         invoked.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -323,11 +321,11 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         This seems like duplication of the same checks. Plus, we haven&apos;t
         followed our own rule: <b>Validate Early. Validate Often.</b> Instead,
         lets move this to a separate job that re-runs validation checks.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -445,23 +443,23 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         With this workflow, we know that the request has been validated before
         we handle any approval or denial. This is a good example of{' '}
         <b>Validate Early. Validate Often</b>.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Next steps</h1>
+      <h1 className="text-4xl font-bold">Next steps</h1>
 
-      <span>
+      <p>
         Depending on if the request is approved or denied, you may want to take
         further actions. For example, if the request is approved, you could
         create the repository, add a comment to the issue, and close it as
         completed. On the other hand, if the request is denied, you could close
         the issue as not planned.
-      </span>
+      </p>
 
-      <span>
+      <p>
         Continue to the{' '}
         <Link
           href="/states-and-transitions/approve"
@@ -475,7 +473,7 @@ export default function Home() {
           deny
         </Link>{' '}
         sections to learn more.
-      </span>
+      </p>
     </div>
   )
 }

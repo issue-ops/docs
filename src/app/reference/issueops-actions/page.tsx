@@ -14,14 +14,12 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">
-        IssueOps Actions
-      </h1>
+      <h1 className="text-5xl font-bold pt-[20px]">IssueOps Actions</h1>
 
-      <span>
+      <p>
         This page contains a list of useful actions for IssueOps workflows. If
         you know of any, feel free to submit a PR to add it to the list!
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>

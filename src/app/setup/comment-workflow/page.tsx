@@ -20,24 +20,22 @@ import dedent from 'ts-dedent'
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">
-        Comment Workflow
-      </h1>
+      <h1 className="text-5xl font-bold pt-[20px]">Comment Workflow</h1>
 
-      <span>
+      <p>
         After the issue has been opened and any initial processing has been run,
         the comment workflow becomes the main driver of the rest of the process.
         This workflow is triggered by users commenting on issues and will do any
         further processing throughout the lifecycle of the issue.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Event triggers</h1>
+      <h1 className="text-4xl font-bold">Event triggers</h1>
 
-      <span>
+      <p>
         The comment workflow should, at minimum, be triggered by creation of new
         comments. The trigger also supports editing and deleting comments, which
         may be useful for your use-case.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -50,12 +48,12 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         The flexibility with the <code>issue_comment</code> trigger lies in the
         comments themselves. You can take a limitless number of actions based on
         user input! Be careful to not make your workflow <i>too</i> complex.
         Otherwise, parsing comments becomes particularly challenging.
-      </span>
+      </p>
 
       <Alert>
         <AlertDescription>
@@ -65,23 +63,23 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <span>
+      <p>
         The <code>issue_comment</code> trigger may seem misleading. This trigger
         applies to comments on both issues and PRs. If you want to trigger
         workflows on comments that are part of a PR <b>review</b>, use the{' '}
         <code>pull_request_comment</code> trigger instead.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Commands</h1>
+      <h1 className="text-4xl font-bold">Commands</h1>
 
-      <span>
+      <p>
         Good IssueOps workflows make use of <i>commands</i> to trigger actions.
         These commands are typically prefixed with a symbol, such as{' '}
         <code>.</code> or <code>/</code>, and are descriptive of the action that
         will be taken when the command is processed. In general, any workflow
         that involves processing comments should start by looking for a specific
         command being run.
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -114,7 +112,7 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <span>
+      <p>
         The examples you will see throughout this documentation make heavy use
         of the{' '}
         <Link
@@ -124,14 +122,14 @@ export default function Home() {
         </Link>{' '}
         action. This action makes it easy to define your actions, who can run
         them, and what happens when they are run.
-      </span>
+      </p>
 
-      <span>
+      <p>
         The following code block shows a basic implementation of this action as
         part of a IssueOps workflow to lint a pull request. In this example, the{' '}
         <code>Lint Command</code> step will run any time a user comments with{' '}
         <code>.lint</code> on a PR.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -177,17 +175,17 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         As you can see, the <code>Checkout</code> and <code>Run Linter</code>{' '}
         steps only proceed if the <code>Lint Command</code> step&apos;s{' '}
         <code>continue</code> output is <code>&apos;true&apos;</code>. The{' '}
         <code>github/command</code> action provides the <code>continue</code>{' '}
         output to act as a gate for the rest of the workflow.
-      </span>
+      </p>
 
-      <span>
+      <p>
         The high-level flow of the <code>github/command</code> action is:
-      </span>
+      </p>
 
       <ol className="list-decimal list-inside">
         <li>
@@ -205,12 +203,12 @@ export default function Home() {
         <li>Collect any arguments passed to the command</li>
       </ol>
 
-      <h1 className="text-4xl font-bold text-center">Workflow steps</h1>
+      <h1 className="text-4xl font-bold">Workflow steps</h1>
 
-      <span>
+      <p>
         Most comment workflows can be broken down into the following steps.
         Depending on your workflow, some of these may not be required.
-      </span>
+      </p>
 
       <ol className="list-decimal list-inside">
         <li>Parse and validate the command and input(s)</li>
@@ -222,25 +220,25 @@ export default function Home() {
         <li>Provide feedback to the user</li>
       </ol>
 
-      <h1 className="text-3xl font-bold text-center">
+      <h1 className="text-3xl font-bold">
         Parse and validate the command and input(s)
       </h1>
 
-      <span>
+      <p>
         Depending on your workflow, you may need users to be able to provide
         additional inputs in their comments. For example, you may want to allow
         users to specify a specific branch to lint, or a specific file to run
         tests on. Input arguments can also be passed into the comment body as
         part of a command.
-      </span>
+      </p>
 
-      <span>
+      <p>
         The <code>github/command</code> action can be extended to support input
         parameters. Parameters must be added after the separator specified by
         the <code>param_separator</code> argument (default: <code>|</code>).
         Suppose you want to also allow users to provide a branch name to run
         linting on. Users would enter a comment like this:
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="plain" style={vscDarkPlus}>
@@ -250,10 +248,10 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         Within your workflow, you would need to parse the parameter value and
         use it to checkout the correct branch:
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -312,9 +310,7 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold text-center">
-        Parse and validate the issue body
-      </h1>
+      <h1 className="text-3xl font-bold">Parse and validate the issue body</h1>
 
       <Card>
         <CardContent>
@@ -322,17 +318,17 @@ export default function Home() {
           <ul className="list-inside">
             <li className="flex items-center">
               <CircleCheckBig className="h-8 w-8" />
-              <span>&nbsp;&nbsp;Validate Early</span>
+              <p>&nbsp;&nbsp;Validate Early</p>
             </li>
             <li className="flex items-center">
               <CircleCheckBig className="h-8 w-8" />
-              <span>&nbsp;&nbsp;Validate Often</span>
+              <p>&nbsp;&nbsp;Validate Often</p>
             </li>
           </ul>
         </CardContent>
       </Card>
 
-      <span>
+      <p>
         Any time you interact with an issue, make sure to validate the body!
         Users can edit the issue body at any time, so it&apos;s important to
         make sure you&apos;re working with the latest information. The{' '}
@@ -353,7 +349,7 @@ export default function Home() {
         </Link>{' '}
         actions can take care of this for you. All you need to do is make sure
         they are included in your comment processing workflows.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -377,11 +373,9 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">
-        Check the current state
-      </h1>
+      <h1 className="text-3xl font-bold">Check the current state</h1>
 
-      <span>
+      <p>
         As an issue is processed, it will move through a series of{' '}
         <Link
           href="/states-and-transitions"
@@ -389,16 +383,16 @@ export default function Home() {
           states
         </Link>
         . The current state of an issue can be tracked via labels.
-      </span>
+      </p>
 
-      <span>
+      <p>
         For example, suppose you have a workflow that requires users to submit
         their request after is has been validated and confirmed. You could use
         the following logic to check if the issue has already been submitted.
         That way, the processing that would transition the issue from
         <code>validated</code> to <code>submitted</code> state does not run
         again.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -428,26 +422,24 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold text-center">
-        Check the user&apos;s permissions
-      </h1>
+      <h1 className="text-3xl font-bold">Check the user&apos;s permissions</h1>
 
-      <span>
+      <p>
         By default, any user with read access to a repository can open issues
         and add comments. If your IssueOps workflow involves certain authorized
         users being able to perform actions (e.g. approving or denying
         requests), this can be a problem! Instead, you should use the
         <code>allowlist</code> option in the <code>github/command</code> action
         to restrict who has the ability to run certain commands.
-      </span>
+      </p>
 
-      <span>
+      <p>
         For example, suppose you want to only allow certain administrators to
         approve requests for new repositories. The following step would only
         allow @octocat and @mona to run the <code>.approve</code> command. Any
         other users who comment on the issue with <code>.approve</code> will not
         be able to push the request through to the next state.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -462,7 +454,7 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         If you want to use teams to control access, you will also need to
         provide a token with <code>read:org</code> scope for the{' '}
         <code>allowlist_pat</code> property. For information on creating a
@@ -474,7 +466,7 @@ export default function Home() {
           GitHub App setup
         </Link>
         .
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -497,12 +489,12 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         Alternatively, you can restrict access to specific roles in your
         IssueOps repository using the <code>permissions</code> property. By
         default, anyone with write, maintain, or administrator access to the
         repository can run commands.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -517,9 +509,9 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">Process the command</h1>
+      <h1 className="text-3xl font-bold">Process the command</h1>
 
-      <span>
+      <p>
         This is where the magic happens! You can use any series of actions to
         process your request. For example, the{' '}
         <Link
@@ -530,13 +522,13 @@ export default function Home() {
           </code>
         </Link>{' '}
         action is a great choice for interacting with GitHub APIs.
-      </span>
+      </p>
 
-      <span>
+      <p>
         Make sure to gate these steps using the <code>continue</code> output
         from the
         <code>github/command</code> action!
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -560,15 +552,15 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">Update the issue state</h1>
+      <h1 className="text-3xl font-bold">Update the issue state</h1>
 
-      <span>
+      <p>
         Once any processing has been completed, the issue can be transitioned to
         the next state. This is done by adding or removing labels from the
         issue.
-      </span>
+      </p>
 
-      <span>
+      <p>
         For example, suppose you have a workflow that requires users to submit
         their request after is has been validated and confirmed. You can use the{' '}
         <Link
@@ -580,7 +572,7 @@ export default function Home() {
         </Link>{' '}
         action to transition the issue from <code>validated</code> to{' '}
         <code>submitted</code> state.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -598,13 +590,11 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">
-        Provide feedback to the user
-      </h1>
+      <h1 className="text-3xl font-bold">Provide feedback to the user</h1>
 
-      <span>
+      <p>
         Any time processing is done on an issue, its helpful to let users know:
-      </span>
+      </p>
 
       <ol className="list-decimal list-inside">
         <li>The command has been received</li>
@@ -612,11 +602,11 @@ export default function Home() {
         <li>The outcome of the processing</li>
       </ol>
 
-      <span>
+      <p>
         The <code>github/command</code> action takes care of the first part for
         you. It will automatically add a reaction to any comments that contain a
         command.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -630,7 +620,7 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>Any of the following reactions can be added:</span>
+      <p>Any of the following reactions can be added:</p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -693,12 +683,12 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <span>
+      <p>
         After the command has been received, adding comments to the issue to
         indicate work is being done is a great way to keep users informed. Once
         processing is complete, a comment can be added to the issue to indicate
         the outcome.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>

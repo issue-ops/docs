@@ -54,9 +54,9 @@ export default function Home() {
 
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">Parse</h1>
+      <h1 className="text-5xl font-bold pt-[20px]">Parse</h1>
 
-      <span>
+      <p>
         When a new issue is opened, before any action can be taken on it, you
         should parse its contents and turn it into a machine-readable format.
         The{' '}
@@ -71,7 +71,7 @@ export default function Home() {
         issue form template. This way, you can directly reference issue form
         fields without having to parse the body yourself with regular
         expressions.
-      </span>
+      </p>
 
       <Alert>
         <Package className="h-4 w-4" />
@@ -88,11 +88,11 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <span>
+      <p>
         This action provides specific output formats based on the{' '}
         <code>type</code>
         property of the input.
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -145,12 +145,12 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <span>
+      <p>
         Depending on how you&apos;re processing the input data, different types
         may be more helpful than others! Based on the issue form template and
         the contents of the issue itself, the <code>json</code> output will look
         similar to the following:
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="json" style={vscDarkPlus} showLineNumbers>
@@ -181,7 +181,7 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         Once an issue has been parsed, the next step is to{' '}
         <Link
           href="/states-and-transitions/validate"
@@ -191,16 +191,16 @@ export default function Home() {
         the contents to make sure the request isn&apos;t missing data,
         doesn&apos;t contain invalid data, and can be processed by your
         workflow.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">New repository request</h1>
+      <h1 className="text-4xl font-bold">New repository request</h1>
 
-      <h1 className="text-3xl font-bold text-center">Issue form template</h1>
+      <h1 className="text-3xl font-bold">Issue form template</h1>
 
-      <span>
+      <p>
         The new repository worklow starts off with the following issue form
         template.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -281,10 +281,10 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         When a user submits a request for a new repository, the issue form will
         look something like this:
-      </span>
+      </p>
 
       <Card className="max-w-[800px] p-4">
         <CardContent>
@@ -306,12 +306,12 @@ export default function Home() {
                   </FormItem>
                 )}
               />
-              <span>
+              <p>
                 Welcome to GitHub! Please fill out the information below to
                 request a new repository. Once submitted, your request will be
                 reviewed by the IssueOps team. If approved, the repository will
                 be created and you will be notified via a comment on this issue.
-              </span>
+              </p>
               <FormField
                 control={form.control}
                 name="repoName"
@@ -432,16 +432,14 @@ export default function Home() {
         </CardContent>
       </Card>
 
-      <h1 className="text-3xl font-bold text-center">
-        GitHub Actions workflow
-      </h1>
+      <h1 className="text-3xl font-bold">GitHub Actions workflow</h1>
 
-      <span>
+      <p>
         Creating an issue will kick off the start of the IssueOps process.
         However, in order to do anything with the request, we need to parse the
         issue body and extract the information we need to get approval and
         create a repository.
-      </span>
+      </p>
 
       <Alert>
         <Info className="h-4 w-4" />
@@ -508,9 +506,9 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">Next steps</h1>
+      <h1 className="text-3xl font-bold">Next steps</h1>
 
-      <span>
+      <p>
         At this point, our issue has successfully transitioned into the{' '}
         <code>Parsed</code>
         state. This means that we have a machine-readable representation of the
@@ -518,9 +516,9 @@ export default function Home() {
         don&apos;t know if the request actually contains valid information! The
         next transition involves validating the parsed request against a set of
         rules to make sure it&apos;s ready to be processed.
-      </span>
+      </p>
 
-      <span>
+      <p>
         Continue to the next section to learn about{' '}
         <Link
           href="/states-and-transitions/validate"
@@ -528,7 +526,7 @@ export default function Home() {
           validation
         </Link>
         .
-      </span>
+      </p>
     </div>
   )
 }

@@ -10,17 +10,17 @@ import dedent from 'ts-dedent'
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">Issue Form</h1>
+      <h1 className="text-5xl font-bold pt-[20px]">Issue Form</h1>
 
-      <span>
+      <p>
         The first interaction point users will have with your IssueOps workflow
         is the issue itself. This is where they will provide the information
         needed to kick off the workflow. Because of this, it is important to
         make sure that the issue form template is set up to capture all the
         information you need to get started.
-      </span>
+      </p>
 
-      <span>
+      <p>
         For more information on the supported options, see{' '}
         <Link
           href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms"
@@ -28,17 +28,17 @@ export default function Home() {
           Syntax for issue forms
         </Link>
         .
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Top-level syntax</h1>
+      <h1 className="text-4xl font-bold">Top-level syntax</h1>
 
-      <span>
+      <p>
         The top-level syntax of the issue form template is used to define the
         title and description that users will see when they go to create an
         issue in your repository. From a usability perspective, make sure to
         include a description and title that clearly explains what the user is
         requesting and what will happen once they submit their issue.
-      </span>
+      </p>
 
       <Alert>
         <Info className="h-4 w-4" />
@@ -66,15 +66,15 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-4xl font-bold text-center">Body syntax</h1>
+      <h1 className="text-4xl font-bold">Body syntax</h1>
 
-      <span>
+      <p>
         The <code>body</code> property is where you specify the inputs and any
         other supporting information you need to collect from the user. Its
         important to make sure to collect all the information you need to get
         started, but also to make sure that the form is not too long or
         complicated.
-      </span>
+      </p>
 
       <Alert>
         <Info className="h-4 w-4" />
@@ -88,17 +88,17 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <span>
+      <p>
         As you are drafting your issue form template, think about the kind of
         data you are requesting and the best format to use (both for user input
         and for automated processing later).
-      </span>
+      </p>
 
-      <span>
+      <p>
         This can be confusing, because once an issue form is submitted, all the
         inputs look the same. Suppose you have the following issue form
         template:
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -163,10 +163,10 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         When the user submits the issue form, it will have the following
         Markdown format:
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter
@@ -194,11 +194,11 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         You can see that certain inputs look the same, but are actually
         different types and, depending on their values, may be processed
         differently.
-      </span>
+      </p>
     </div>
   )
 }

@@ -19,9 +19,9 @@ import dedent from 'ts-dedent'
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">Validate</h1>
+      <h1 className="text-5xl font-bold pt-[20px]">Validate</h1>
 
-      <span>
+      <p>
         Once an issue has been parsed, it can be validated against any rules
         that you require. When used in public repositories, issue form templates
         do enforce some{' '}
@@ -36,9 +36,9 @@ export default function Home() {
         to GitHub teams, the issue form template is not able to validate if a
         value provided by a user is in fact a team in your organization.e. When
         used in public repositories, issue form templates do enforce some
-      </span>
+      </p>
 
-      <span>
+      <p>
         The{' '}
         <Link
           href="https://github.com/issue-ops/validator"
@@ -49,7 +49,7 @@ export default function Home() {
         </Link>{' '}
         action takes the parsed output of the issue body and validates it
         against the issue form template and any custom rules you define.
-      </span>
+      </p>
 
       <Alert>
         <User className="h-4 w-4" />
@@ -69,13 +69,13 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-4xl font-bold text-center">Basic validation</h1>
+      <h1 className="text-4xl font-bold">Basic validation</h1>
 
-      <span>
+      <p>
         The most basic validation compares each input field to the rules
         specified in your issue form template and, if any are violated, comments
         with an error message.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -90,11 +90,11 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         For example, if you have an input field for users to select the
         visibility of their new repository, you can specify that the field is
         required and only one of a list of options can be chosen.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -114,11 +114,11 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         When run against an issue submitted with this template, the validator
         will comment on the issue with an error message if any of the following
         occur:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>The field is empty</li>
@@ -129,12 +129,12 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-4xl font-bold text-center">Custom validation</h1>
+      <h1 className="text-4xl font-bold">Custom validation</h1>
 
-      <span>
+      <p>
         For each form field, you can also specify custom validation logic. This
         is done using several files in your repository:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>
@@ -147,15 +147,15 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-3xl font-bold text-center">Configuration file</h1>
+      <h1 className="text-3xl font-bold">Configuration file</h1>
 
-      <span>
+      <p>
         This file defines the mapping of validator scripts to form fields. For
         example, if your issue form has input fields named{' '}
         <code>Read Team</code> and <code>Write Team</code>, you can specify a
         validator script (<code>check_team_exists.js</code>) to run against
         those fields.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -169,7 +169,7 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">Validator scripts</h1>
+      <h1 className="text-3xl font-bold">Validator scripts</h1>
 
       <Alert>
         <KeyRound className="h-4 w-4" />
@@ -181,11 +181,11 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <span>
+      <p>
         Validator scripts are run on the associated fields in the configuration
         file. The script must specify a default export of a function with the
         following behavior:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>Accept inputs of the following types:</li>
@@ -209,7 +209,7 @@ export default function Home() {
         </li>
       </ul>
 
-      <span>
+      <p>
         The following is an example of a validator script that checks if a team
         exists. This can also be found in the{' '}
         <Link
@@ -220,7 +220,7 @@ export default function Home() {
           </code>
         </Link>{' '}
         repository.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter
@@ -254,12 +254,12 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-4xl font-bold text-center">New repository request</h1>
+      <h1 className="text-4xl font-bold">New repository request</h1>
 
-      <span>
+      <p>
         Recall from the issue form template that the new repository request
         expects the following inputs:
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -321,11 +321,11 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <span>
+      <p>
         Since the <i>Visibility</i> and <i>Auto Init</i> inputs must be one of
         several predefined values, they can be handled by basic validation. The
         other fields, however, must meet additional requirements:
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -364,14 +364,12 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <h1 className="text-3xl font-bold text-center">
-        Create a configuration file
-      </h1>
+      <h1 className="text-3xl font-bold">Create a configuration file</h1>
 
-      <span>
+      <p>
         In order to configure custom validation, first create a configuration
         file in the repository.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -391,18 +389,14 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">
-        Create validator scripts
-      </h1>
+      <h1 className="text-3xl font-bold">Create validator scripts</h1>
 
-      <span>
+      <p>
         The following scripts can be used to validate the new repository
         request.
-      </span>
+      </p>
 
-      <span>
-        First, create a script to check if a repository already exists.
-      </span>
+      <p>First, create a script to check if a repository already exists.</p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter
@@ -439,7 +433,7 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>Next, create a script to check if a team exists.</span>
+      <p>Next, create a script to check if a team exists.</p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter
@@ -475,7 +469,7 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>Finally, create a script to check if the topics are valid.</span>
+      <p>Finally, create a script to check if the topics are valid.</p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter
@@ -510,12 +504,12 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">Update the workflow</h1>
+      <h1 className="text-3xl font-bold">Update the workflow</h1>
 
-      <span>
+      <p>
         Now that issue validation has been configured, you can add it as a step
         to your workflow. Additional updates are noted with comments.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -617,13 +611,13 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-4xl font-bold text-center">Next steps</h1>
+      <h1 className="text-4xl font-bold">Next steps</h1>
 
-      <span>
+      <p>
         Congratulations! Your request has been successfully transitioned to the{' '}
         <code>Validated</code> state. Next, we&apos;re going to submit the
         request for approval.
-      </span>
+      </p>
 
       <Link
         href="/states-and-transitions/submit"

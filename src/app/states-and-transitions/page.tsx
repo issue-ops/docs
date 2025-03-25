@@ -19,11 +19,9 @@ import dedent from 'ts-dedent'
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">
-        States and Transitions
-      </h1>
+      <h1 className="text-5xl font-bold pt-[20px]">States and Transitions</h1>
 
-      <span>
+      <p>
         As the{' '}
         <Link href="/introduction" className="text-blue-500 hover:underline">
           introduction
@@ -32,21 +30,21 @@ export default function Home() {
         transitions through different states in response to events and
         conditions. This section of the documentation describes some common
         states, transitions. and how to implement them in your workflows.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">States</h1>
+      <h1 className="text-4xl font-bold">States</h1>
 
-      <span>
+      <p>
         If an issue was a paper form, a state would be a big rubber stamp that
         tells anyone who looks at the form exactly what is going on.
-      </span>
+      </p>
 
-      <span>
+      <p>
         Tracking state can be as simple as checking what labels are applied to
         your issues. Whatever approach you want to take, remember that tracking
         state is critical to ensure that the right processing occurs at the
         right time!
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -149,23 +147,23 @@ export default function Home() {
         </CardContent>
       </Card>
 
-      <h1 className="text-4xl font-bold text-center">Transitions</h1>
+      <h1 className="text-4xl font-bold">Transitions</h1>
 
-      <span>
+      <p>
         If an issue was a paper form, a transition would be someone taking it
         out of their inbox, stamping it <strong>APPROVED</strong>, and putting
         it in their outbox.
-      </span>
+      </p>
 
-      <span>
+      <p>
         Transitions are where actual processing on your issues occurs. A
         transition is equivalent to an event that triggers a GitHub Actions
         workflow run. That is why, as your IssueOps workflows become larger and
         more complex, tracking state is so important. Otherwise , its easy to
         end up the wrong workflows running at the wrong time!
-      </span>
+      </p>
 
-      <span>Since each transition is triggered by the same type of event:</span>
+      <p>Since each transition is triggered by the same type of event:</p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -178,9 +176,9 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         Your workflows must track the following to determine what jobs to run:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>Issue state</li>
@@ -189,14 +187,14 @@ export default function Home() {
         <li>Any other relevant information in the issue</li>
       </ul>
 
-      <span>
+      <p>
         Each of the following sections describes how to implement the core
         transitions in an IssueOps workflow. Throughout each page, you will see
         an example implementation of a new repository request workflow. This
         workflow is designed to demonstrate how to apply each concept.
-      </span>
+      </p>
 
-      <span>
+      <p>
         A full example can be found in the{' '}
         <Link
           href="https://github.com/issue-ops/bear-creek-honey-farm"
@@ -214,7 +212,7 @@ export default function Home() {
           </code>
         </Link>{' '}
         repositories.
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>
@@ -254,28 +252,28 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-4xl font-bold text-center">FAQ</h1>
+      <h1 className="text-4xl font-bold">FAQ</h1>
 
-      <h1 className="text-3xl font-bold text-center">
+      <h1 className="text-3xl font-bold">
         Do my IssueOps need all these states?
       </h1>
 
-      <span>
+      <p>
         Nope! You can use as many or as few states as you need. For example, if
         you don&apos;t need an authorized user to approve requests, you can omit
         the <code>Approved</code> state.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">
+      <h1 className="text-3xl font-bold">
         Can my IssueOps use each state more than once?
       </h1>
 
-      <span>
+      <p>
         Of course! In state diagrams, its common for each state to have multiple
         transitions. States can even transition back into themselves!
-      </span>
+      </p>
 
-      <span>
+      <p>
         When an issue is first opened it will be in the <code>Opened</code>{' '}
         state. Typically, the first step after an issue is opened is to parse
         the body and prepare for further processing. If this is successful, the
@@ -283,7 +281,7 @@ export default function Home() {
         problem during parsing, the workflow can add a comment with a
         descriptive error and return the issue to the <code>Opened</code> state.
         When the user edits the issue to fix the error, parsing would run again.
-      </span>
+      </p>
 
       <Card>
         <CardHeader>

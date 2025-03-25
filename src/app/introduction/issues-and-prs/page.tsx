@@ -43,23 +43,21 @@ export default function Home() {
 
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">
-        Issues and PRs
-      </h1>
+      <h1 className="text-5xl font-bold pt-[20px]">Issues and PRs</h1>
 
-      <span>
+      <p>
         This page provides an overview of the different components that make up
         issues and PRs, and includes information about how each component can be
         used throughout an IssueOps workflow.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Issues</h1>
+      <h1 className="text-4xl font-bold">Issues</h1>
 
-      <h1 className="text-3xl font-bold text-center">Issue permissions</h1>
+      <h1 className="text-3xl font-bold">Issue permissions</h1>
 
-      <span>Any user with read access to a repository can open an issue.</span>
+      <p>Any user with read access to a repository can open an issue.</p>
 
-      <h1 className="text-3xl font-bold text-center">Issue structure</h1>
+      <h1 className="text-3xl font-bold">Issue structure</h1>
 
       <TableContainer component={Paper}>
         <Table>
@@ -128,11 +126,9 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <h1 className="text-3xl font-bold text-center">
-        Issue templates vs. issue forms
-      </h1>
+      <h1 className="text-3xl font-bold">Issue templates vs. issue forms</h1>
 
-      <span>
+      <p>
         Currently, GitHub supports both{' '}
         <Link
           href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository"
@@ -151,26 +147,26 @@ export default function Home() {
         desired format, since they allow users to overwrite or replace the
         entire contents of the issue body during creation. Issue <i>forms</i>{' '}
         require specific input formats and result in a more consistent output.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Title</h1>
+      <h1 className="text-3xl font-bold">Title</h1>
 
-      <span>
+      <p>
         The title of an issue is a short, concise description of the reason the
         issue has been opened, such as a particular bug or piece of feedback.
         Typically, the title is the first thing a user will enter when they open
         an issue (or they may update it based on the initial title provided by
         the issue form).
-      </span>
+      </p>
 
-      <span>
+      <p>
         When creating an issue forms, the title can be used as a way to identify
         the type of issue. For example, you can use a title like{' '}
         <code>[Request] Team Membership: TEAM_NAME</code> to indicate that the
         issue is a request to be added to a team. However, since this field can
         be modified by users, it should not be used as a way to validate the
         issue.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -180,16 +176,16 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">Body</h1>
+      <h1 className="text-3xl font-bold">Body</h1>
 
-      <span>
+      <p>
         The body of an issue is where your workflow will get most of the
         information it needs to process the issue. When creating an issue form,
         you can use the body to provide instructions to the user, and to collect
         information from them. For example, you can use a markdown field to
         provide instructions, and then use an input field to collect the name of
         the team they would like to join.
-      </span>
+      </p>
 
       <Alert>
         <Info className="h-4 w-4" />
@@ -200,7 +196,7 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <span>
+      <p>
         For information about the different types of fields that can be used,
         see{' '}
         <Link
@@ -209,17 +205,17 @@ export default function Home() {
           Syntax for issue forms
         </Link>
         .
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Assignees</h1>
+      <h1 className="text-3xl font-bold">Assignees</h1>
 
-      <span>
+      <p>
         Assignees are users who are responsible for resolving an issue. If your
         workflow involves a review process, you can use assignees to indicate
         who is responsible for reviewing the issue. You can also use assignees
         to indicate who is responsible for processing the issue when manual
         tasks are involved.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -239,14 +235,14 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold text-center">Labels</h1>
+      <h1 className="text-3xl font-bold">Labels</h1>
 
-      <span>
+      <p>
         Labels are a great way to control the flow of an issue through the
         state(s) you&apos;ve defined. Any time a issue is commented on or
         updated, you can use labels to tell where in the flow it is currently,
         and where it needs to go next.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -257,14 +253,14 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">Milestones</h1>
+      <h1 className="text-3xl font-bold">Milestones</h1>
 
-      <span>
+      <p>
         If you have certain timelines or deadlines associated with your
         workflow, you can use milestones to track them. Milestones are groups of
         issues and pull requests that are tracked together. They can be used to
         track:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>Due date</li>
@@ -272,7 +268,7 @@ export default function Home() {
         <li>Open and closed issues and pull requests</li>
       </ul>
 
-      <span>
+      <p>
         An issue cannot be added automatically to a milestone using issue forms,
         but you can use GitHub Actions to add it to a milestone after it has
         been created. See{' '}
@@ -282,27 +278,27 @@ export default function Home() {
           IssueOps Actions
         </Link>{' '}
         in the reference for more information.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Relations</h1>
+      <h1 className="text-3xl font-bold">Relations</h1>
 
-      <span>
+      <p>
         When creating or commenting on issues, you can reference related issues
         by using the <code>#</code> symbol followed by the issue number. For
         example, if you want to reference issue 1 in another issue in the same
         repository, you would type <code>#1</code>.
-      </span>
+      </p>
 
-      <span>
+      <p>
         Relations may be useful when your workflow involves multiple issues. For
         example, if you have a workflow that involves interaction with another
         team, you can use relations to track the status of the other team&apos;s
         issue.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Development</h1>
+      <h1 className="text-3xl font-bold">Development</h1>
 
-      <span>
+      <p>
         The development section of an issue is where you can track the branches
         and pull requests that are associated with the issue. This can be useful
         if your workflow involves creating branches or pull requests for the
@@ -313,27 +309,27 @@ export default function Home() {
         way, developers don&apos;t have to learn Terraform to get new
         infrastructure, and operations teams can ensure all infrastructure is
         created following their requirements.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Projects</h1>
+      <h1 className="text-3xl font-bold">Projects</h1>
 
-      <span>
+      <p>
         GitHub Projects are dual-purpose when it comes to IssueOps. They can be
         used to both track and change the state of an issue. This is especially
         the case when your workflow involves manual steps that must be performed
         by a human.
-      </span>
+      </p>
 
-      <span>
+      <p>
         As a non-technical example, suppose you&apos;re planning Thanksgiving
         dinner with your extended family. Everyone in the family is supposed to
         suggest three dishes, prepare them, and bring them on Thanksgiving day.
-      </span>
+      </p>
 
-      <span>
+      <p>
         You can open issues for each dish that needs to be prepared using an
         issue form, and automatically assign them to your meal project.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -344,11 +340,11 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         Within your project, you can specify columns for the state of each dish
         (e.g. <code>New</code>, <code>Ingredients purchased</code>,{' '}
         <code>Ready to cook</code>, and <code>Cooked</code>).
-      </span>
+      </p>
 
       <Alert>
         <Info className="h-4 w-4" />
@@ -362,25 +358,25 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold text-center">Projects</h1>
+      <h1 className="text-3xl font-bold">Projects</h1>
 
-      <span>
+      <p>
         Participants are users who have interacted with an issue. This includes
         the user who opened the issue as well as users who have commented on or
         been assigned to the issue. You can use participants to track who has
         interacted with an issue, and to communicate with them if needed.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Timeline</h1>
+      <h1 className="text-3xl font-bold">Timeline</h1>
 
-      <span>
+      <p>
         The timeline is a list of all of the events that have occurred on an
         issue, starting from when it was first opened. Each timeline event
         includes a timestamp, the origin of the event, and other useful
         information.
-      </span>
+      </p>
 
-      <span>
+      <p>
         The timeline is especially useful to verify information about an issue.
         For example, if you have a workflow that requires validation of the
         issue body, you can (and should!) use labels to mark the issue as
@@ -389,7 +385,7 @@ export default function Home() {
         last updated to when the validated label was added. If the label was
         added before the issue body was updated, you can determine that the
         label was added manually and re-run your validation logic.
-      </span>
+      </p>
 
       <Card>
         <CardContent>
@@ -423,37 +419,37 @@ export default function Home() {
         </CardContent>
       </Card>
 
-      <h1 className="text-3xl font-bold text-center">Comments</h1>
+      <h1 className="text-3xl font-bold">Comments</h1>
 
-      <span>
+      <p>
         Other than the issue body, comments are how a user will drive your
         IssueOps flow. You should define keywords that your workflow looks for
         to trigger certain actions. Suppose you have a workflow where a user can
         create a new repository. After the issue has been validated, the user
         can comment on the issue with a keyword such as <code>.submit</code> to
         trigger the creation of their repo.
-      </span>
+      </p>
 
-      <span>
+      <p>
         You can also use them to communicate information back to the user. For
         example, if the issue body contains invalid or incorrect information,
         you can reply to the issue stating what needs to be corrected. For
         example, in the screenshot, you can see that a comment was added to the
         issue because the request was missing information.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Reactions</h1>
+      <h1 className="text-3xl font-bold">Reactions</h1>
 
-      <span>
+      <p>
         Though they don&apos;t convey as much information as a comment, adding
         reactions to issues and comments are a nice way to let the user know
         that their input has been received and is being processed. If needed,
         you can follow up with a comment when processing is complete.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Example issue form</h1>
+      <h1 className="text-3xl font-bold">Example issue form</h1>
 
-      <h1 className="text-2xl font-bold text-center">Issue form template</h1>
+      <h1 className="text-2xl font-bold">Issue form template</h1>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -488,7 +484,7 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-2xl font-bold text-center">Rendered output</h1>
+      <h1 className="text-2xl font-bold">Rendered output</h1>
 
       <Card className="max-w-[800px] p-4">
         <CardContent>
@@ -510,12 +506,12 @@ export default function Home() {
                   </FormItem>
                 )}
               />
-              <span>
+              <p>
                 Welcome to GitHub! Please fill out the information below to
                 request to be added to a GitHub Team. Once submitted, your
                 request will be reviewed by the admin team. Once approved, you
                 will be added automatically!
-              </span>
+              </p>
               <br />
               <br />
               <FormField
@@ -538,23 +534,21 @@ export default function Home() {
         </CardContent>
       </Card>
 
-      <h1 className="text-4xl font-bold text-center">Pull requests</h1>
+      <h1 className="text-4xl font-bold">Pull requests</h1>
 
-      <span>
+      <p>
         Pull requests add extra features and metadata on top of issues. Many
         GitHub APIs support interacting with both at the same time! These
         additional features, along with examples of how to use them in IssueOps
         workflows, are listed in the following sections.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">
-        Pull request permissions
-      </h1>
+      <h1 className="text-3xl font-bold">Pull request permissions</h1>
 
-      <span>
+      <p>
         In order to create a pull request, the required permissions will differ
         based on the location of the branch you wish to merge.
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -577,9 +571,9 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <h1 className="text-3xl font-bold text-center">Reviews and approvals</h1>
+      <h1 className="text-3xl font-bold">Reviews and approvals</h1>
 
-      <span>
+      <p>
         Unlike issues, PRs support reviews and approvals out of the box. When
         changes are ready to be merged, you can assign individuals or teams as
         reviewers.{' '}
@@ -590,49 +584,47 @@ export default function Home() {
         </Link>{' '}
         can also be used to enforce required reviewers and other checks before a
         PR can be merged.
-      </span>
+      </p>
 
-      <span>
+      <p>
         When your IssueOps workflow includes changes to the contents of a
         repository, using PRs instead of issues is a great option to enforce
         specific approval settings without having to include additional
         workflows for tracking approvals as comments.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Status checks</h1>
+      <h1 className="text-3xl font-bold">Status checks</h1>
 
-      <span>
+      <p>
         Status checks run any time a PR is created or updated. These can range
         from code quality checks to security scans and more. You can use status
         checks to ensure that the changes in a PR meet your organization&apos;s
         standards before they are merged.
-      </span>
+      </p>
 
-      <span>
+      <p>
         In an IssueOps workflow, there are two ways you can use status checks:
         to validate the contents of the PR, and to validate the contents of the
         issue.
-      </span>
+      </p>
 
-      <span>
+      <p>
         Validation is a <b>critical</b> aspect to consider when designing your
         workflow. If your workflow is best suited for PRs, status checks can be
         used to run your validation workflow any time the PR is updated.
         Combined with branch protection rules specifying required status checks,
         you can ensure that validation rules pass before a PR can change states.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">
-        Deployments and Environments
-      </h1>
+      <h1 className="text-3xl font-bold">Deployments and Environments</h1>
 
-      <span>
+      <p>
         When a GitHub Actions workflow runs that specifies an environment, a
         deployment is created. Deployments track the successful/failed status of
         a workflow run, and link it to the targeted environment.
-      </span>
+      </p>
 
-      <span>
+      <p>
         A great example of an IssueOps workflow that uses PRs, deployments, and
         environments is the branch deploy model. A detailed explanation can be
         found in the{' '}
@@ -642,7 +634,7 @@ export default function Home() {
           reference
         </Link>
         .
-      </span>
+      </p>
     </div>
   )
 }

@@ -19,15 +19,15 @@ import dedent from 'ts-dedent'
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">GitHub App</h1>
+      <h1 className="text-5xl font-bold pt-[20px]">GitHub App</h1>
 
-      <span>
+      <p>
         If your IssueOps workflow requires access to anything outside of the
         repository it is running in, you will need to provide it with a token.
         This token is used to authenticate with the GitHub API and should be
         scoped to the minimum permissions needed to do the job. Tokens can be
         provided two ways:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>
@@ -46,12 +46,12 @@ export default function Home() {
         </li>
       </ul>
 
-      <span>
+      <p>
         Since PATs are scoped to a single user, they are not recommended for use
         in IssueOps workflows. GitHub Apps are a better choice because they can
         be scoped to a repository or organization to provide access to the APIs
         you need.
-      </span>
+      </p>
 
       <Alert>
         <Ban className="h-4 w-4" />
@@ -64,20 +64,20 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-4xl font-bold text-center">Ownership</h1>
+      <h1 className="text-4xl font-bold">Ownership</h1>
 
-      <span>
+      <p>
         When creating a GitHub App, you have the option to specify your personal
         account or an organization as the owner. Choosing an organization as the
         owner allows you to grant access to multiple repositories in the
         organization and simplifies permissions management.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Setup</h1>
+      <h1 className="text-4xl font-bold">Setup</h1>
 
-      <h1 className="text-3xl font-bold text-center">Create a GitHub App</h1>
+      <h1 className="text-3xl font-bold">Create a GitHub App</h1>
 
-      <span>
+      <p>
         For instructions on how to create a GitHub App, see{' '}
         <Link
           href="https://docs.github.com/en/apps/creating-github-apps/about-creating-github-apps/about-creating-github-apps"
@@ -85,11 +85,11 @@ export default function Home() {
           Creating GitHub Apps
         </Link>
         .
-      </span>
+      </p>
 
-      <span>
+      <p>
         The following settings are a good starting point for IssueOps workflows:
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -132,9 +132,9 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <h1 className="text-3xl font-bold text-center">Create a private key</h1>
+      <h1 className="text-3xl font-bold">Create a private key</h1>
 
-      <span>
+      <p>
         For instructions on how to create a private key, see{' '}
         <Link
           href="https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps"
@@ -142,7 +142,7 @@ export default function Home() {
           Managing private keys for GitHub Apps
         </Link>
         .
-      </span>
+      </p>
 
       <Alert>
         <Lock className="h-4 w-4" />
@@ -152,22 +152,20 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold text-center">
-        Create GitHub Actions secrets
-      </h1>
+      <h1 className="text-3xl font-bold">Create GitHub Actions secrets</h1>
 
-      <span>
+      <p>
         After creating your GitHub App, you will need to create secrets that
         your IssueOps workflows can use to authenticate with the GitHub API. You
         can create these at the organization, repository, or environment level
         depending on your needs.
-      </span>
+      </p>
 
-      <span>
+      <p>
         You will need to create the following secrets. Make sure to note the
         names you give them as you will need to reference them in your
         workflows.
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -200,9 +198,7 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <span>
-        For instructions on how to create secrets, see the following links:
-      </span>
+      <p>For instructions on how to create secrets, see the following links:</p>
 
       <ul className="list-disc list-inside">
         <li>
@@ -228,17 +224,15 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-4xl font-bold text-center">Usage</h1>
+      <h1 className="text-4xl font-bold">Usage</h1>
 
-      <h1 className="text-3xl font-bold text-center">
-        Update the workflow permissions
-      </h1>
+      <h1 className="text-3xl font-bold">Update the workflow permissions</h1>
 
-      <span>
+      <p>
         In any workflow that needs to authenticate as a GitHub App, the
         following permissions <b>must</b> be specified at the workflow or job
         level.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -250,11 +244,11 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-3xl font-bold text-center">
+      <h1 className="text-3xl font-bold">
         Generate the installation access token
       </h1>
 
-      <span>
+      <p>
         There are various examples and open source actions available to create
         installation access tokens for GitHub Actions workflows. In this
         documentation, we will use the{' '}
@@ -266,12 +260,12 @@ export default function Home() {
           </code>
         </Link>{' '}
         action.
-      </span>
+      </p>
 
-      <span>
+      <p>
         Within any workflow job that needs to authenticate as your GitHub App,
         you will need to include the following step.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -287,7 +281,7 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>Make sure to update the following:</span>
+      <p>Make sure to update the following:</p>
 
       <ul className="list-disc list-inside">
         <li>
@@ -310,16 +304,14 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-3xl font-bold text-center">
-        Use the token in your workflow
-      </h1>
+      <h1 className="text-3xl font-bold">Use the token in your workflow</h1>
 
-      <span>
+      <p>
         Now that the token is being generated, you can reference it in your
         workflows as an output from the token generation step! This can be
         referenced as <code>{`\${{ steps.<step-id>.outputs.token }}`}</code>{' '}
         (e.g. <code>{`\${{ steps.token.outputs.token }}`}</code>).
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -351,12 +343,12 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-4xl font-bold text-center">Example</h1>
+      <h1 className="text-4xl font-bold">Example</h1>
 
-      <span>
+      <p>
         The following can be used as a starting point for your own workflows.
         Make sure to update secret names and action versions.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>

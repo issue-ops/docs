@@ -7,25 +7,23 @@ import dedent from 'ts-dedent'
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">
-        Issue Workflow
-      </h1>
+      <h1 className="text-5xl font-bold pt-[20px]">Issue Workflow</h1>
 
-      <span>
+      <p>
         Once a user submits your issue form, its time for GitHub Actions to run
         the show! The issue workflow is responsible for performing any initial
         processing of the issue such as adding labels, validating the contents,
         adding comments, etc. The following sections will walk through the core
         structure of an issue workflow.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Event triggers</h1>
+      <h1 className="text-4xl font-bold">Event triggers</h1>
 
-      <span>
+      <p>
         Most of the time, this workflow will only be run when an issue is opened
         or edited, however there are some cases where you may want to run this
         workflow when an issue is reopened.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -40,20 +38,20 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <h1 className="text-4xl font-bold text-center">Jobs</h1>
+      <h1 className="text-4xl font-bold">Jobs</h1>
 
-      <span>
+      <p>
         Different request types may have different inputs. For example, a new
         repository request may have different inputs than a repository transfer
         request. If you decide to create multiple jobs to parse different types
         of requests in the same workflow, you can use labels to control which
         jobs run for which types of requests.
-      </span>
+      </p>
 
-      <span>
+      <p>
         You should also consider how you plan to handle processing of multiple
         requests in the same workflow.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>
@@ -76,7 +74,7 @@ export default function Home() {
         </SyntaxHighlighter>
       </div>
 
-      <span>
+      <p>
         Depending on the complexity of your workflow, you may want to isolate
         each type of request to separate jobs entirely, or you may want to have
         jobs that handle common tasks across multiple request types. For
@@ -85,7 +83,7 @@ export default function Home() {
         data and perform the same validation steps. In this case, you may want
         to create a job that handles the common tasks, and then have separate
         jobs for the unique tasks.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>

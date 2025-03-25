@@ -19,9 +19,9 @@ import dedent from 'ts-dedent'
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">Repository</h1>
+      <h1 className="text-5xl font-bold pt-[20px]">Repository</h1>
 
-      <span>
+      <p>
         This page outlines recommended configuration settings for IssueOps
         repositories. For instructions on how to create a repository, see the{' '}
         <Link
@@ -30,16 +30,16 @@ export default function Home() {
           GitHub documentation
         </Link>
         .
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Visibility</h1>
+      <h1 className="text-4xl font-bold">Visibility</h1>
 
-      <span>
+      <p>
         IssueOps works best when your repository is accessible to users who need
         to submit requests. Depending on if the repository is owned by an
         organization or a user account, you can set the visibility to one of the
         following:
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -67,7 +67,7 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <span>
+      <p>
         Alternatively, if you only want to allow specific users to submit
         requests, you can set the visibility to <code>private</code> and add
         those users as{' '}
@@ -77,27 +77,27 @@ export default function Home() {
           collaborators
         </Link>
         .
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Permissions</h1>
+      <h1 className="text-4xl font-bold">Permissions</h1>
 
-      <span>
+      <p>
         Users only need <code>read</code> access to open issues! Unless there is
         a specific reason to do otherwise, you should only ever need to grant{' '}
         <code>read</code> access.
-      </span>
+      </p>
 
-      <span>
+      <p>
         The primary reason to grant <code>write</code> access is if your
         IssueOps flow uses pull requests instead of issues, but only if you want
         users to create pull requests from branches in the <i>same</i>{' '}
         repository. As an alternative, you can allow forking of your repository
         and users can create pull requests from their forked repository instead.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Branch protection</h1>
+      <h1 className="text-4xl font-bold">Branch protection</h1>
 
-      <span>
+      <p>
         <Link
           href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches"
           className="text-blue-500 hover:underline">
@@ -106,12 +106,12 @@ export default function Home() {
         are a good idea regardless of what your repository is being used for!
         You should always protect your default branch (usually <code>main</code>
         ) and any other branches that you want to prevent accidental changes to.
-      </span>
+      </p>
 
-      <span>
+      <p>
         For an IssueOps repository, you should create a branch protection rule
         for <code>main</code> that enables the following:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>Require a pull request before merging</li>
@@ -126,19 +126,17 @@ export default function Home() {
         </li>
       </ul>
 
-      <h1 className="text-4xl font-bold text-center">GitHub Actions</h1>
+      <h1 className="text-4xl font-bold">GitHub Actions</h1>
 
-      <h1 className="text-3xl font-bold text-center">
-        Fork pull request workflows
-      </h1>
+      <h1 className="text-3xl font-bold">Fork pull request workflows</h1>
 
-      <span>
+      <p>
         If your IssueOps workflow uses pull requests instead of issues, you must
         be careful about the configuration of GitHub Actions and what
         permissions are allowed for fork pull requests. The following settings
         can be enabled for fork pull requests, with a description of the risks
         involved.
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -183,11 +181,11 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <span>
+      <p>
         As you can guess, the safest option is to not allow fork pull requests
         to run workflows at all. However, this may not be practical for your
         workflow. Here are some recommended settings:
-      </span>
+      </p>
 
       <Tabs defaultValue="token-do" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
@@ -241,69 +239,69 @@ export default function Home() {
         </TabsContent>
       </Tabs>
 
-      <span>
+      <p>
         One alternative to consider is to &quot;wrap&quot; the creation of the
         PR into part of your IssueOps flow. If the content of the PR will follow
         a known format, you can use a GitHub Action to create the PR on behalf
         of the user. This will allow you to remove the need to allow any GitHub
         Actions access to fork pull requests.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Workflow permissions</h1>
+      <h1 className="text-3xl font-bold">Workflow permissions</h1>
 
-      <span>
+      <p>
         In the repository settings, it is best to keep the base workflow
         permissions limited to{' '}
         <i>Read repository contents and packages permissions</i>. Within each
         IssueOps workflow, you can increase the permissions as needed for
         specific jobs.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Environments</h1>
+      <h1 className="text-4xl font-bold">Environments</h1>
 
-      <span>
+      <p>
         If your IssueOps workflow involves deployments or interaction with
         environments, you should consider adding enviroment-specific rules to
         restrict deployments to only the <code>main</code> branch. A common
         exception to this rule is if you are running IssueOps workflows from
         pull requests, as these will be run from branches other than{' '}
         <code>main</code>.
-      </span>
+      </p>
 
-      <span>
+      <p>
         This is also a good opportunity to further restrict access to secrets
         and variables by defining them at the environment level!
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">Other considerations</h1>
+      <h1 className="text-4xl font-bold">Other considerations</h1>
 
-      <span>
+      <p>
         A few common questions and answers about repository setup. Most of the
         time, the answer is &quot;it depends!&quot;, but these are some things
         to consider.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">
+      <h1 className="text-3xl font-bold">
         Multiple IssueOps workflows in one repository
       </h1>
 
-      <span>
+      <p>
         There are some tradeoffs to consider when using one or multiple
         repositories to host different IssueOps workflows. For example, suppose
         you have the following workflows:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>Team membership requests</li>
         <li>New repository creation requests</li>
       </ul>
 
-      <span>
+      <p>
         If you use a single repository, one challenge you may run into is
         ensuring that jobs for the team membership requests don&apos;t affect
         new repository requests. This is where labels are particularly helpful!
         You can use labels to scope jobs to specific requests.
-      </span>
+      </p>
 
       <div className="overflow-auto max-w-full">
         <SyntaxHighlighter language="yaml" style={vscDarkPlus} showLineNumbers>

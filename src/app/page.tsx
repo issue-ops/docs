@@ -48,17 +48,17 @@ const carouselItems = [
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-4xl sm:text-5xl font-bold pt-[20px] text-center">
+      <h1 className="text-4xl sm:text-5xl font-bold pt-[20px]">
         The one stop shop for all things IssueOps
       </h1>
 
-      <span>
+      <p>
         If you landed on this page, you&apos;re probably trying to find the
         answer to the question <i>What is IssueOps?</i> If so, you came to the
         right place! The goal of this site is to provide education, best
         practices, examples, and resources for building IssueOps workflows on
         GitHub.
-      </span>
+      </p>
 
       <Alert>
         <Construction className="h-4 w-4" />
@@ -79,11 +79,9 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h2 className="text-xl sm:text-2xl font-bold text-center">
-        What is IssueOps?
-      </h2>
+      <h2 className="text-xl sm:text-2xl font-bold">What is IssueOps?</h2>
 
-      <span>
+      <p>
         IssueOps is a loose collection of tools, workflows, and concepts that
         can be applied to{' '}
         <Link
@@ -96,18 +94,18 @@ export default function Home() {
         a friendly interface to drive behind-the-scenes automation. In this
         case, issues and pull requests (PRs) are the interface, and GitHub
         Actions is the automation engine.
-      </span>
+      </p>
 
-      <span>
+      <p>
         IssueOps isn&apos;t just a DevOps tool! You can run anything from
         complex CI/CD pipelines to a bed and breakfast reservation system. If
         you can interact with it via an API, there&apos;s a good chance you can
         build it with IssueOps!
-      </span>
+      </p>
 
       {/* TODO: Animation of IssueOps example */}
 
-      <h2 className="text-xl sm:text-2xl font-bold text-center">
+      <h2 className="text-xl sm:text-2xl font-bold">
         Why should I use IssueOps?
       </h2>
 
@@ -135,16 +133,14 @@ export default function Home() {
         <CarouselNext />
       </Carousel>
 
-      <h2 className="text-xl sm:text-2xl font-bold text-center">
-        How do I get started?
-      </h2>
+      <h2 className="text-xl sm:text-2xl font-bold">How do I get started?</h2>
 
-      <span>
+      <p>
         Check out the resources on this site to learn more about IssueOps and
         how to build your own workflows.
-      </span>
+      </p>
 
-      <span>
+      <p>
         If you&apos;re looking for inspiration and a practical demonstration,
         check out{' '}
         <Link
@@ -166,7 +162,7 @@ export default function Home() {
           issue-ops/demo-reservation-action
         </Link>{' '}
         repositories.
-      </span>
+      </p>
 
       <Alert>
         <Terminal className="h-4 w-4" />

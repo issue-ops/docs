@@ -26,11 +26,9 @@ import dedent from 'ts-dedent'
 export default function Home() {
   return (
     <div className="grid grid-rows-[0px_1fr_0px] grid-rows-[1fr] items-center justify-items-center sm:p-8 pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-5xl font-bold pt-[20px] text-center">
-        About IssueOps
-      </h1>
+      <h1 className="text-5xl font-bold pt-[20px]">About IssueOps</h1>
 
-      <span>
+      <p>
         In GitHub, a pull request (PR) can be interacted with in a lot of the
         same ways as an issue. For example, the{' '}
         <Link
@@ -39,9 +37,9 @@ export default function Home() {
           List repository issues
         </Link>{' '}
         REST API will return both issues and PRs for a repository.
-      </span>
+      </p>
 
-      <span>
+      <p>
         This means that many of the features of an issue are applicable to a PR.
         However, PRs have some extra functionality that can also be used in an
         IssueOps workflow. Depending on the use-case, you might want to select
@@ -54,9 +52,9 @@ export default function Home() {
           issue forms
         </Link>{' '}
         feature, you&apos;ll need to use an issue.
-      </span>
+      </p>
 
-      <span>
+      <p>
         For more information on their structure and usage in IssueOps, see{' '}
         <Link
           href="/introduction/issues-and-prs"
@@ -64,9 +62,9 @@ export default function Home() {
           Issues and PRs
         </Link>
         .
-      </span>
+      </p>
 
-      <span>
+      <p>
         Think of IssueOps as a{' '}
         <Link
           href="https://en.wikipedia.org/wiki/State_diagram"
@@ -78,19 +76,19 @@ export default function Home() {
         <i>actions</i> may be performed as part of the <i>transition</i>{' '}
         (provided any <i>guard</i> conditions are met). Once an <i>end state</i>{' '}
         is reached, the issue is considered complete and can be closed.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">State Diagrams</h1>
+      <h1 className="text-4xl font-bold">State Diagrams</h1>
 
-      <span>
+      <p>
         The following sections contain definitions and examples of common terms
         used in state diagrams. These terms are used throughout this
         documentation.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Action</h1>
+      <h1 className="text-3xl font-bold">Action</h1>
 
-      <span>An atomic task that is performed when a transition is taken.</span>
+      <p>An atomic task that is performed when a transition is taken.</p>
 
       <Card>
         <CardHeader>
@@ -106,9 +104,9 @@ export default function Home() {
         </CardHeader>
       </Card>
 
-      <h1 className="text-3xl font-bold text-center">Event</h1>
+      <h1 className="text-3xl font-bold">Event</h1>
 
-      <span>An external occurrence that triggers a state change.</span>
+      <p>An external occurrence that triggers a state change.</p>
 
       <Card>
         <CardHeader>
@@ -122,38 +120,38 @@ export default function Home() {
         </CardHeader>
       </Card>
 
-      <h1 className="text-3xl font-bold text-center">Guard</h1>
+      <h1 className="text-3xl font-bold">Guard</h1>
 
-      <span>
+      <p>
         A condition that is evaluated when a trigger event occurs. A transition
         is taken only if all associated guard conditions are met.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">State</h1>
+      <h1 className="text-3xl font-bold">State</h1>
 
-      <span>
+      <p>
         A point in an object&apos;s lifecycle that satisfies certain
         condition(s).
-      </span>
+      </p>
 
       <StateLabel status="issueOpened" sx={{ backgroundColor: 'green' }}>
         Open
       </StateLabel>
 
-      <h1 className="text-3xl font-bold text-center">Transition</h1>
+      <h1 className="text-3xl font-bold">Transition</h1>
 
-      <span>
+      <p>
         A link between two states that, when traversed by an object, will cause
         certain action(s) to be performed.
-      </span>
+      </p>
 
-      <h1 className="text-4xl font-bold text-center">IssueOps workflow</h1>
+      <h1 className="text-4xl font-bold">IssueOps workflow</h1>
 
-      <span>
+      <p>
         In general, an IssueOps workflow will follow the same basic pattern:
-      </span>
+      </p>
 
-      <span>
+      <p>
         <ol className="list-decimal list-inside">
           <li>
             A user opens an issue and provides information about a request
@@ -167,32 +165,30 @@ export default function Home() {
           </li>
           <li>The request is processed and the issue is closed</li>
         </ol>
-      </span>
+      </p>
 
-      <span>Let&apos;s use a more practical example...</span>
+      <p>Let&apos;s use a more practical example...</p>
 
-      <h1 className="text-3xl font-bold text-center">
-        Example: GitHub team membership
-      </h1>
+      <h1 className="text-3xl font-bold">Example: GitHub team membership</h1>
 
-      <span>
+      <p>
         <b>
           <i>User Story:</i>
         </b>{' '}
         As a developer, I should be able to request membership to various teams
         and, if approved by administrators, be granted membership.
-      </span>
+      </p>
 
-      <span>
+      <p>
         Suppose you are an admin of an organization and would like to reduce the
         overhead of managing team membership. You can use IssueOps to build an
         automated membership request and approval process.
-      </span>
+      </p>
 
-      <span>
+      <p>
         We can assume the current, manual workflow looks something like this
         when rendered as a state diagram.
-      </span>
+      </p>
 
       <Alert>
         <IssueOpenedIcon className="h-4 w-4" />
@@ -229,19 +225,19 @@ export default function Home() {
         </CardContent>
       </Card>
 
-      <span>
+      <p>
         When creating an IssueOps workflow, you can use this diagram as a
         starting point to determine what events should trigger state changes,
         how to represent those events in issues, and what actions to take in
         response to state changes.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Event triggers</h1>
+      <h1 className="text-3xl font-bold">Event triggers</h1>
 
-      <span>
+      <p>
         In the membership request workflow, there are several events that
         trigger a change in the request state:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>A user submits a request</li>
@@ -251,7 +247,7 @@ export default function Home() {
         <li>A user is notified</li>
       </ul>
 
-      <span>
+      <p>
         In GitHub, there are many ways to trigger events. For a full list, see{' '}
         <Link
           href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows"
@@ -259,19 +255,19 @@ export default function Home() {
           Events that trigger workflows
         </Link>
         . Here, we will focus on the events that are most relevant to IssueOps.
-      </span>
+      </p>
 
-      <h1 className="text-2xl font-bold text-center">Issues</h1>
+      <h1 className="text-2xl font-bold">Issues</h1>
 
-      <span>
+      <p>
         Events related to issues seem like a good fit for <i>Issue</i>Ops!
         Issues are the entrypoint to the worflow. In particular, the issue being
         <i>opened</i>. You can think of this as someone coming to you and saying
         <i>Can you add me to this team?</i> Until this event occurs,
         there&apos;s nothing to do!
-      </span>
+      </p>
 
-      <span>
+      <p>
         However, this is not the only issue event that can be used in a
         workflow. The following table lists other{' '}
         <Link
@@ -280,7 +276,7 @@ export default function Home() {
           issue events
         </Link>{' '}
         and example use-cases.
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -428,14 +424,14 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-2xl font-bold text-center">Issue Comments</h1>
+      <h1 className="text-2xl font-bold">Issue Comments</h1>
 
-      <span>
+      <p>
         After an issue is opened, other events must take place that change the
         state and drive it through the workflow. In the membership request
         workflow, for example, commenting on an issue is a great way to handle
         state changes such as an administrator approving or denying the request.
-      </span>
+      </p>
 
       <Alert>
         <Check className="h-4 w-4" />
@@ -453,7 +449,7 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <span>
+      <p>
         Currently there are only three{' '}
         <Link
           href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#issue_comment"
@@ -461,7 +457,7 @@ export default function Home() {
           <code className="text-blue-500 hover:underline">issue_comment</code>
         </Link>{' '}
         events that can trigger workflows:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>
@@ -475,15 +471,15 @@ export default function Home() {
         </li>
       </ul>
 
-      <span>
+      <p>
         In all three cases, the <i>context</i> of the comment should be taken
         into account to determine how to transition the request state. For
         example, if only authorized administrators are allowed to approve team
         membership requests, how should an IssueOps workflow react if someone
         else comments with approval?
-      </span>
+      </p>
 
-      <span>
+      <p>
         All GitHub Actions workflow runs include important{' '}
         <Link
           href="https://docs.github.com/en/actions/learn-github-actions/contexts"
@@ -501,18 +497,18 @@ export default function Home() {
         created the comment using the{' '}
         <code>github.event.comment.user.login</code> property. We can then use
         this to determine if the user is authorized to approve the request.
-      </span>
+      </p>
 
-      <h1 className="text-2xl font-bold text-center">Labels</h1>
+      <h1 className="text-2xl font-bold">Labels</h1>
 
-      <span>
+      <p>
         Labels are a great way to track the state of a request. You can think of
         these as the nodes in a state diagram, while the transitions are the
         actions that are taken as the request changes state. You can also use
         labels to classify the types of requests when your repository supports
         more than one IssueOps workflow. For example, in the membership request
         workflow, you might have the following labels:
-      </span>
+      </p>
 
       <TableContainer component={Paper}>
         <Table>
@@ -541,7 +537,7 @@ export default function Home() {
         </Table>
       </TableContainer>
 
-      <span>
+      <p>
         Looking at this list, you may ask{' '}
         <i>
           why there aren&apos;t labels for <code>approved</code>,{' '}
@@ -553,9 +549,9 @@ export default function Home() {
         state, regardless of whether it was approved or denied. If this workflow
         had more steps, such as requiring multiple approvals, additional states
         would need to be tracked.
-      </span>
+      </p>
 
-      <span>
+      <p>
         As with <code>issue_comment</code> events, there are only three{' '}
         <Link
           href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#label"
@@ -563,7 +559,7 @@ export default function Home() {
           <code className="text-blue-500 hover:underline">label</code>
         </Link>{' '}
         events available:
-      </span>
+      </p>
 
       <ul className="list-disc list-inside">
         <li>
@@ -577,11 +573,11 @@ export default function Home() {
         </li>
       </ul>
 
-      <span>
+      <p>
         These, however, refer to the actual creation and modification of the
         label itself, so they may not apply to your workflow. You will generally
         use the <code>issue {'=>'} labeled</code> event instead.
-      </span>
+      </p>
 
       <Alert>
         <TriangleAlert className="h-4 w-4" />
@@ -599,16 +595,16 @@ export default function Home() {
         </AlertDescription>
       </Alert>
 
-      <h1 className="text-4xl font-bold text-center">GitHub features</h1>
+      <h1 className="text-4xl font-bold">GitHub features</h1>
 
-      <span>
+      <p>
         You can leverage other GitHub features to dramatically increase the
         value of IssueOps.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">Secrets</h1>
+      <h1 className="text-3xl font-bold">Secrets</h1>
 
-      <span>
+      <p>
         <Link
           href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions"
           className="text-blue-500 hover:underline">
@@ -620,13 +616,11 @@ export default function Home() {
         Secrets are encrypted and only exposed to runners at runtime. You can
         use secrets to store information such as API keys, passwords, or tokens
         that can be used to access external resources from your workflows.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">
-        Projects and milestones
-      </h1>
+      <h1 className="text-3xl font-bold">Projects and milestones</h1>
 
-      <span>
+      <p>
         Keeping track of requests, especially when you have an approval process
         in place, is important.
         <Link
@@ -638,9 +632,9 @@ export default function Home() {
         automatically add issues as they are opened, and use lifecycle rules to
         keep track of the state of requests without having to manually move them
         around your project board.
-      </span>
+      </p>
 
-      <span>
+      <p>
         You can also combine this with{' '}
         <Link
           href="https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-milestones"
@@ -651,9 +645,9 @@ export default function Home() {
         repository includes workflows for multiple types of requests, you can
         add issues for each request type to a corresponding milestone. That way
         they are automatically categorized in your project.
-      </span>
+      </p>
 
-      <span>
+      <p>
         <Link
           href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/viewing-insights-from-your-project"
           className="text-blue-500 hover:underline">
@@ -662,11 +656,11 @@ export default function Home() {
         give you a visual snapshot of how requests are being processed. You can
         create custom graphs of to see when and how teams are using your
         workflows.
-      </span>
+      </p>
 
-      <h1 className="text-3xl font-bold text-center">GitHub Apps</h1>
+      <h1 className="text-3xl font-bold">GitHub Apps</h1>
 
-      <span>
+      <p>
         One of the most important things to consider when creating workflows
         that interact with the GitHub APIs is permissions. GitHub Actions
         workflows can only interact with the repository in which they run. For
@@ -682,9 +676,9 @@ export default function Home() {
         and installing it in your IssueOps repository. That way, you can use the
         permissions of the app to interact with other resources in your
         organization.
-      </span>
+      </p>
 
-      <span>
+      <p>
         For more information, see{' '}
         <Link
           href="/setup/github-app"
@@ -692,7 +686,7 @@ export default function Home() {
           GitHub App
         </Link>{' '}
         in the setup documentation.
-      </span>
+      </p>
     </div>
   )
 }
