@@ -30,7 +30,7 @@
     "@emotion/styled": "^11.14.0",
     "@hookform/resolvers": "^5.0.1",
     "@lightenna/react-mermaid-diagram": "^1.0.17",
-    "@mui/material": "^6.4.7",
+    "@mui/material": "^7.0.1",
     "@primer/octicons-react": "^19.15.1",
     "@primer/react": "^37.17.0",
     "@radix-ui/react-avatar": "^1.1.3",
