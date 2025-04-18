@@ -34,13 +34,13 @@ export default function Home() {
             <TableRow>
               <TableCell>
                 <Link
-                  href="https://github.com/casa-vega/issue-ops"
+                  href="https://github.com/issue-ops/self-service"
                   className="text-blue-500 hover:underline">
-                  GitHub Issue Operations via Actions
+                  Self-Service IssueOps Template
                 </Link>
               </TableCell>
               <TableCell>
-                A self-service approach for managing github components/settings
+                A self-service approach for managing GitHub components/settings
                 across multiple instances of GitHub and GitHub Enterprise.
               </TableCell>
             </TableRow>
