@@ -28,7 +28,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@hookform/resolvers": "^5.0.1",
+    "@hookform/resolvers": "^5.1.1",
     "@lightenna/react-mermaid-diagram": "^1.0.21",
     "@mui/material": "^7.1.1",
     "@primer/octicons-react": "^19.15.3",
