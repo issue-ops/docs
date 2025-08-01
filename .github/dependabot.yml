@@ -1,16 +1,9 @@
 version: 2
-
 updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: monthly
-    labels:
-      - dependabot
-      - actions
-    open-pull-requests-limit: 10
-    reviewers:
-      - issue-ops/maintainers
+      interval: weekly
     groups:
       actions-minor:
         update-types:
@@ -20,13 +13,7 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: monthly
-    labels:
-      - dependabot
-      - npm
-    open-pull-requests-limit: 10
-    reviewers:
-      - issue-ops/maintainers
+      interval: weekly
     groups:
       npm-development:
         dependency-type: development
