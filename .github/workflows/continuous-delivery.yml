@@ -65,7 +65,7 @@ jobs:
 
       - name: Upload Pages Artifact
         id: upload
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./out
 
