@@ -30,7 +30,7 @@
     "@emotion/styled": "^11.14.1",
     "@hookform/resolvers": "^5.2.2",
     "@lightenna/react-mermaid-diagram": "^1.0.21",
-    "@mui/material": "^7.3.2",
+    "@mui/material": "^7.3.4",
     "@primer/octicons-react": "^19.18.0",
     "@primer/react": "^37.31.0",
     "@radix-ui/react-avatar": "^1.1.10",
@@ -57,7 +57,7 @@
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
     "ts-dedent": "^2.2.0",
-    "zod": "^4.1.11"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
