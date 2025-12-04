@@ -1,7 +1,7 @@
 {
   "editor.inlineSuggest.enabled": true,
   "editor.rulers": [80],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "prettier.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "editor.codeActionsOnSave": {
@@ -12,7 +12,7 @@
   "markdown.extension.italic.indicator": "_",
   "markdown.extension.orderedList.marker": "one",
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "prettier.prettier-vscode"
   },
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
