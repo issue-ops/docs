@@ -47,7 +47,7 @@ jobs:
       # prettier-ignore
       - name: Restore Cache
         id: cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: .next/cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
